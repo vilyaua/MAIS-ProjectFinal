@@ -91,6 +91,11 @@ def _handle_interrupt(
                 "configurable": {"thread_id": thread_id},
                 "recursion_limit": 100,
                 "callbacks": [langfuse_handler],
+                "metadata": {
+                    "langfuse_session_id": SESSION_ID,
+                    "langfuse_user_id": USER_ID,
+                    "langfuse_tags": ["dev-team", "cli"],
+                },
             }
 
             result = graph.invoke(
@@ -110,6 +115,11 @@ def _run_pipeline(user_story: str, graph, langfuse_handler: CallbackHandler):
         "configurable": {"thread_id": thread_id},
         "recursion_limit": 100,
         "callbacks": [langfuse_handler],
+        "metadata": {
+            "langfuse_session_id": SESSION_ID,
+            "langfuse_user_id": USER_ID,
+            "langfuse_tags": ["dev-team", "cli"],
+        },
     }
 
     initial_state = {
