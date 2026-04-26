@@ -3,11 +3,37 @@
 Tests that QA catches real issues and provides actionable feedback.
 """
 
+import os
+import shutil
+
 import pytest
 
 from agents.qa import run_qa
+from config import Settings
 from schemas import CodeOutput, SpecOutput
 from tests.conftest import llm_judge
+
+settings = Settings()
+
+
+def _write_code_to_workspace(code: CodeOutput) -> None:
+    """Write code files to workspace/ so QA can read/run them."""
+    for filepath in code.files_created:
+        full_path = os.path.join(settings.workspace_dir, filepath)
+        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+        with open(full_path, "w") as f:
+            f.write(code.source_code)
+
+
+def _clean_workspace() -> None:
+    """Remove all files from workspace/."""
+    if os.path.exists(settings.workspace_dir):
+        for item in os.listdir(settings.workspace_dir):
+            path = os.path.join(settings.workspace_dir, item)
+            if os.path.isdir(path):
+                shutil.rmtree(path)
+            else:
+                os.remove(path)
 
 
 def _make_spec() -> SpecOutput:
@@ -43,6 +69,8 @@ def test_qa_catches_bad_code():
         files_created=["register.py"],
     )
 
+    _clean_workspace()
+    _write_code_to_workspace(bad_code)
     review = run_qa(spec, bad_code)
 
     # QA should not approve code with no validation
@@ -89,6 +117,8 @@ def test_qa_approves_good_code():
         files_created=["register.py"],
     )
 
+    _clean_workspace()
+    _write_code_to_workspace(good_code)
     review = run_qa(spec, good_code)
 
     # QA should generally approve good code, but may still have minor suggestions

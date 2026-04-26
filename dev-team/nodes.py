@@ -2,6 +2,7 @@
 
 import logging
 
+from langchain_core.runnables import RunnableConfig
 from langgraph.types import interrupt
 
 from agents.ba import run_ba
@@ -12,7 +13,7 @@ from state import DevTeamState
 logger = logging.getLogger("nodes")
 
 
-def ba_node(state: DevTeamState, config: dict | None = None) -> dict:
+def ba_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     """Business Analyst: analyze user story and produce SpecOutput."""
     logger.info("BA Agent: analyzing user story")
     callbacks = config.get("callbacks", []) if config else []
@@ -48,7 +49,7 @@ def hitl_gate(state: DevTeamState) -> dict:
     return {"spec_approved": approved, "spec_feedback": feedback}
 
 
-def dev_node(state: DevTeamState, config: dict | None = None) -> dict:
+def dev_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     """Developer: write code based on spec (and QA feedback if revision)."""
     iteration = state.get("iteration", 0)
     callbacks = config.get("callbacks", []) if config else []
@@ -66,7 +67,7 @@ def dev_node(state: DevTeamState, config: dict | None = None) -> dict:
     return {"code": code}
 
 
-def qa_node(state: DevTeamState, config: dict | None = None) -> dict:
+def qa_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     """QA Engineer: review code, run tests, return ReviewOutput."""
     iteration = state.get("iteration", 0)
     callbacks = config.get("callbacks", []) if config else []
