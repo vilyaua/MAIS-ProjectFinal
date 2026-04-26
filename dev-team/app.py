@@ -585,7 +585,7 @@ function loadFiles() {
 }
 
 function addCard(html) {
-  $('empty').style.display = 'none';
+  if($('empty')) $('empty').style.display = 'none';
   const div = document.createElement('div');
   div.innerHTML = html;
   content.appendChild(div.firstElementChild);
@@ -790,8 +790,8 @@ function run() {
   if (!q) return;
   input.value = '';
   btnRun.disabled = true;
-  content.innerHTML = '';
-  $('empty').style.display = 'none';
+  content.querySelectorAll('.card').forEach(c => c.remove());
+  if($('empty')) $('empty').style.display = 'none';
   resetSteps();
   setStep('ba', 'active');
   setStatus('running', 'Business Analyst analyzing user story...');
@@ -831,8 +831,8 @@ function viewFile(path) {
 
 function resetSession() {
   fetch('/api/reset', {method:'POST'}).then(() => {
-    content.innerHTML = '';
-    $('empty').style.display = 'flex';
+    content.querySelectorAll('.card').forEach(c => c.remove());
+    if($('empty')) $('empty').style.display = 'flex';
     resetSteps();
     setStatus('idle', 'Ready');
     loadFiles();
