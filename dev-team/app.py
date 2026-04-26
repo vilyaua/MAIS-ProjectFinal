@@ -27,6 +27,7 @@ from langgraph.types import Command
 
 from config import APP_VERSION, Settings
 from graph import build_graph
+from output_manager import clean_workspace, package_results
 
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(
@@ -49,6 +50,7 @@ current_session_id: str = str(uuid.uuid4())
 pending_interrupt: dict | None = None
 
 USER_ID = "web-user"
+_last_user_story: str = ""
 
 
 def _make_config(thread_id: str, handler: CallbackHandler) -> dict:
@@ -99,9 +101,12 @@ def _serialize_state(result: dict) -> dict:
     return out
 
 
+_last_result: dict = {}
+
+
 def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
     """Run graph.stream synchronously, yielding SSE events."""
-    global pending_interrupt
+    global pending_interrupt, _last_result
     config = _make_config(thread_id, handler)
 
     # Map node names to pipeline stages
@@ -127,6 +132,10 @@ def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
                         }
                         yield {"type": "interrupt", "data": intr.value}
                     return
+
+                # Track raw state for output packaging
+                if node_output is not None:
+                    _last_result.update(node_output)
 
                 stage_info = stage_map.get(node_name)
                 if stage_info and node_output is not None:
@@ -160,13 +169,28 @@ def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
 
                     yield event
 
-    yield {"type": "done"}
+    # Package results if pipeline completed (has code)
+    if _last_result.get("code"):
+        output_path = package_results(
+            user_story=_last_user_story,
+            session_id=current_session_id,
+            spec=_last_result.get("spec"),
+            code=_last_result.get("code"),
+            review=_last_result.get("review"),
+            iteration=_last_result.get("iteration", 0),
+            review_history=_last_result.get("review_history", []),
+        )
+        yield {"type": "done", "output_path": output_path}
+    else:
+        yield {"type": "done"}
 
 
 async def _sse_generator(user_story: str):
-    global current_thread_id
+    global current_thread_id, _last_user_story
     current_thread_id = str(uuid.uuid4())
+    _last_user_story = user_story
     handler = CallbackHandler()
+    clean_workspace()
 
     loop = asyncio.get_event_loop()
     queue: asyncio.Queue = asyncio.Queue()
@@ -309,6 +333,29 @@ async def read_file(filepath: str):
     if not target.exists():
         raise HTTPException(404, "File not found")
     return PlainTextResponse(target.read_text(encoding="utf-8"))
+
+
+@app.get("/api/outputs")
+async def list_outputs():
+    """List all output folders."""
+    out = Path(settings.output_dir)
+    if not out.exists():
+        return []
+    folders = sorted(
+        (d for d in out.iterdir() if d.is_dir()),
+        key=lambda d: d.name,
+        reverse=True,
+    )
+    results = []
+    for d in folders:
+        readme = d / "README.md"
+        files = [f.name for f in d.rglob("*") if f.is_file() and f.name != "README.md"]
+        results.append({
+            "name": d.name,
+            "has_readme": readme.exists(),
+            "files": files,
+        })
+    return results
 
 
 @app.post("/api/reset")
@@ -517,6 +564,13 @@ UI_HTML = """\
     </div>
   </div>
 
+  <div class="sidebar-section">
+    <h3>Saved Outputs</h3>
+    <div class="files-list" id="outputs-list">
+      <span style="font-size:12px;color:var(--text2)">No outputs yet</span>
+    </div>
+  </div>
+
   <div class="sidebar-footer">
     <button class="btn-reset" onclick="resetSession()">New Session</button>
   </div>
@@ -580,6 +634,16 @@ function loadFiles() {
     if(!files.length) { el.innerHTML = '<span style="font-size:12px;color:var(--text2)">No files yet</span>'; return; }
     el.innerHTML = files.map(f =>
       `<div class="file-item" onclick="viewFile('${f.path}')"><span class="file-icon">&#x1f4c4;</span>${f.path}</div>`
+    ).join('');
+  });
+}
+
+function loadOutputs() {
+  fetch('/api/outputs').then(r=>r.json()).then(outputs => {
+    const el = $('outputs-list');
+    if(!outputs.length) { el.innerHTML = '<span style="font-size:12px;color:var(--text2)">No outputs yet</span>'; return; }
+    el.innerHTML = outputs.map(o =>
+      `<div class="file-item" title="${o.files.join(', ')}"><span class="file-icon">&#x1f4c1;</span>${o.name}</div>`
     ).join('');
   });
 }
@@ -739,7 +803,7 @@ function handleEvent(ev) {
         setStep('dev', 'done');
         addCard(makeCodeCard(ev.code));
         Prism.highlightAll();
-        loadFiles();
+        loadFiles(); loadOutputs();
       }
     }
     if (ev.stage === 'qa') {
@@ -778,10 +842,15 @@ function handleEvent(ev) {
   }
 
   if (ev.type === 'done') {
-    setStatus('done', 'Pipeline complete');
+    const msg = ev.output_path ? `Pipeline complete — saved to ${ev.output_path}` : 'Pipeline complete';
+    setStatus('done', msg);
+    if (ev.output_path) {
+      addCard(`<div class="card"><div class="card-header"><span class="icon">&#x1f4be;</span><h3>Results Saved</h3></div>
+        <div class="card-body"><p style="font-size:13px;color:var(--green)">Output saved to: <code>${ev.output_path}</code></p></div></div>`);
+    }
     btnRun.disabled = false;
     input.focus();
-    loadFiles();
+    loadFiles(); loadOutputs();
   }
 }
 
@@ -835,7 +904,7 @@ function resetSession() {
     if($('empty')) $('empty').style.display = 'flex';
     resetSteps();
     setStatus('idle', 'Ready');
-    loadFiles();
+    loadFiles(); loadOutputs();
     fetch('/api/info').then(r=>r.json()).then(d => {
       $('meta').innerHTML = `v${d.version}<br>Model: <b>${d.model}</b><br>Session: <code>${d.session_id}</code><br>Max QA: ${d.max_qa_iterations}`;
     });
@@ -843,7 +912,7 @@ function resetSession() {
   });
 }
 
-loadFiles();
+loadFiles(); loadOutputs();
 </script>
 </body>
 </html>
