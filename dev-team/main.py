@@ -14,6 +14,7 @@ from langgraph.types import Command, Interrupt
 
 from config import APP_VERSION, Settings
 from graph import build_graph
+from output_manager import clean_workspace, package_results
 
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(
@@ -133,6 +134,8 @@ def _run_pipeline(user_story: str, graph, langfuse_handler: CallbackHandler):
         "review_history": [],
     }
 
+    clean_workspace()
+
     print("\n  Starting pipeline...")
     print("  [1/3] Business Analyst analyzing user story...")
 
@@ -153,8 +156,9 @@ def _run_pipeline(user_story: str, graph, langfuse_handler: CallbackHandler):
             if result is None:
                 break
 
-    # Print final results
+    # Package results and print
     _print_results(result)
+    _package_and_report(user_story, result)
 
 
 def _print_results(result: dict):
@@ -191,6 +195,21 @@ def _print_results(result: dict):
                 print(f"    - {sug}")
 
     print("\n" + "=" * 60)
+
+
+def _package_and_report(user_story: str, result: dict):
+    """Package workspace files into timestamped output folder."""
+    output_path = package_results(
+        user_story=user_story,
+        session_id=SESSION_ID,
+        spec=result.get("spec"),
+        code=result.get("code"),
+        review=result.get("review"),
+        iteration=result.get("iteration", 0),
+        review_history=result.get("review_history", []),
+    )
+    if output_path:
+        print(f"\n  Results saved to: {output_path}")
 
 
 def main():
