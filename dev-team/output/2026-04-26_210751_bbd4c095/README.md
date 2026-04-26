@@ -27,6 +27,19 @@
 5. Given the player chooses to restart after a game, then the board is reset and a new game begins.
 6. Given the player chooses to quit after a game, then the application exits cleanly.
 
+## How to Run
+
+```bash
+pip install -r requirements.txt
+python src/main.py
+```
+
+Run tests:
+
+```bash
+python -m pytest tests/test_main.py -v
+```
+
 ## Generated Code
 
 A console-based 3x3 Tic-Tac-Toe game for two human players. Key features:
