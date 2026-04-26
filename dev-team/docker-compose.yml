@@ -1,0 +1,39 @@
+services:
+  dev-team:
+    image: dev-team:latest
+    build: .
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    volumes:
+      - ./workspace:/app/workspace
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./index:/app/index
+    entrypoint: ["python", "main.py"]
+
+  # One-off ingestion — run with: docker compose --profile tools run --rm ingest
+  ingest:
+    image: dev-team:latest
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./index:/app/index
+    entrypoint: ["python", "ingest.py"]
+    profiles: ["tools"]
+
+  # Run tests — docker compose --profile tools run --rm test
+  test:
+    image: dev-team:latest
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./workspace:/app/workspace
+      - ./output:/app/output
+    entrypoint: ["python", "-m", "pytest", "tests/", "-v"]
+    profiles: ["tools"]
