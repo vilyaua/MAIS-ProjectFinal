@@ -432,7 +432,7 @@ UI_HTML = """\
   .sidebar-footer { padding: 16px 20px; margin-top: auto; }
 
   /* ── Main area ── */
-  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 
   /* Input bar */
   .input-area { padding: 20px 24px; border-bottom: 1px solid var(--border); background: var(--surface); }
