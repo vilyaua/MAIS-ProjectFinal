@@ -1,0 +1,8 @@
+[
+  "tests/test_todo_cli.py::test_add_and_list",
+  "tests/test_todo_cli.py::test_add_empty_description",
+  "tests/test_todo_cli.py::test_complete_and_delete",
+  "tests/test_todo_cli.py::test_corrupted_file",
+  "tests/test_todo_cli.py::test_file_not_found_creates_file",
+  "tests/test_todo_cli.py::test_invalid_task_id"
+]
