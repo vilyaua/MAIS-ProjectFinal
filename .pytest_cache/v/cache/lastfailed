@@ -1,0 +1,4 @@
+{
+  "tests/test_main.py::test_malformed_expression": true,
+  "tests/test_app.py": true
+}
