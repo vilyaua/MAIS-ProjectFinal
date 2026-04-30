@@ -1,0 +1,8 @@
+2026-04-30 21:50:04,487 - ERROR - Unexpected error during evaluation: pop from empty list
+Traceback (most recent call last):
+  File "/app/workspace/src/calculator.py", line 178, in evaluate
+    Calculator.apply_operator(operators, values)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/app/workspace/src/calculator.py", line 115, in apply_operator
+    left = values.pop()
+IndexError: pop from empty list
