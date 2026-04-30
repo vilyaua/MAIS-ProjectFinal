@@ -2518,3 +2518,4 @@ Traceback (most recent call last):
 openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 2798. Please try again in 839ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
 During task with name 'model' and id '3e45cd71-21d9-7f93-5ed4-2ae6606b162a'
 During task with name 'qa_node' and id 'edaf76ba-00b3-8f4a-86d1-78739b7e937b'
+19:48:04 [INFO] Dev Team graph compiled successfully
