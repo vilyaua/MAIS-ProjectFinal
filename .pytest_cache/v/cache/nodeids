@@ -1,0 +1,17 @@
+[
+  "tests/test_calculator.py::test_division_by_zero",
+  "tests/test_calculator.py::test_empty_input",
+  "tests/test_calculator.py::test_invalid_characters",
+  "tests/test_calculator.py::test_mismatched_parentheses",
+  "tests/test_calculator.py::test_operator_precedence",
+  "tests/test_calculator.py::test_valid_expressions",
+  "tests/test_cli_todo.py::test_add_and_list",
+  "tests/test_cli_todo.py::test_complete_and_delete",
+  "tests/test_cli_todo.py::test_error_handling",
+  "tests/test_todo_cli.py::test_add_and_list",
+  "tests/test_todo_cli.py::test_add_empty_description",
+  "tests/test_todo_cli.py::test_complete_and_delete",
+  "tests/test_todo_cli.py::test_corrupted_file",
+  "tests/test_todo_cli.py::test_file_not_found_creates_file",
+  "tests/test_todo_cli.py::test_invalid_task_id"
+]
