@@ -10,26 +10,28 @@ from schemas import SpecOutput
 from tools import BA_TOOLS
 
 settings = Settings()
+_ba_agent = None
 
 
-def create_ba_agent():
-    """Create the BA agent with structured SpecOutput."""
-    system_prompt = get_system_prompt("ba-prompt")
-    model = init_chat_model(settings.model_fast, max_retries=8)
-
-    agent = create_agent(
-        model=model,
-        tools=BA_TOOLS,
-        system_prompt=system_prompt,
-        response_format=ToolStrategy(SpecOutput),
-        name="business-analyst",
-    )
-    return agent
+def _get_ba_agent():
+    """Get or create the cached BA agent."""
+    global _ba_agent
+    if _ba_agent is None:
+        system_prompt = get_system_prompt("ba-prompt")
+        model = init_chat_model(settings.model_fast, max_retries=8)
+        _ba_agent = create_agent(
+            model=model,
+            tools=BA_TOOLS,
+            system_prompt=system_prompt,
+            response_format=ToolStrategy(SpecOutput),
+            name="business-analyst",
+        )
+    return _ba_agent
 
 
 def run_ba(user_story: str, feedback: str | None = None, callbacks=None) -> SpecOutput:
     """Run the BA agent on a user story. Returns structured SpecOutput."""
-    agent = create_ba_agent()
+    agent = _get_ba_agent()
 
     if feedback:
         prompt = (

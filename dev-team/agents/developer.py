@@ -10,21 +10,23 @@ from schemas import CodeOutput, ReviewOutput, SpecOutput
 from tools import DEVELOPER_TOOLS
 
 settings = Settings()
+_dev_agent = None
 
 
-def create_developer_agent():
-    """Create the Developer agent with structured CodeOutput."""
-    system_prompt = get_system_prompt("developer-prompt")
-    model = init_chat_model(settings.model_fast, max_retries=8)
-
-    agent = create_agent(
-        model=model,
-        tools=DEVELOPER_TOOLS,
-        system_prompt=system_prompt,
-        response_format=ToolStrategy(CodeOutput),
-        name="developer",
-    )
-    return agent
+def _get_dev_agent():
+    """Get or create the cached Developer agent."""
+    global _dev_agent
+    if _dev_agent is None:
+        system_prompt = get_system_prompt("developer-prompt")
+        model = init_chat_model(settings.model_fast, max_retries=8)
+        _dev_agent = create_agent(
+            model=model,
+            tools=DEVELOPER_TOOLS,
+            system_prompt=system_prompt,
+            response_format=ToolStrategy(CodeOutput),
+            name="developer",
+        )
+    return _dev_agent
 
 
 def run_developer(
@@ -34,7 +36,7 @@ def run_developer(
     callbacks=None,
 ) -> CodeOutput:
     """Run the Developer agent. Returns structured CodeOutput."""
-    agent = create_developer_agent()
+    agent = _get_dev_agent()
 
     prompt_parts = [
         "## Specification",

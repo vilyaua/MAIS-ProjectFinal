@@ -5,7 +5,7 @@ Graph:
                                       |- NO  -> ba_node (with feedback)
                                       +- YES -> dev_node -> qa_node -> (verdict?)
                                                                         |- REVISION_NEEDED & iter<5 -> dev_node
-                                                                        +- APPROVED or iter>=5 -> END
+                                                                        +- APPROVED or iter>=5 -> github_node -> END
 """
 
 import logging

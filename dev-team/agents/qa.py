@@ -10,24 +10,26 @@ from schemas import CodeOutput, ReviewOutput, SpecOutput
 from tools import QA_TOOLS
 
 settings = Settings()
+_qa_agent = None
 
 
-def create_qa_agent():
-    """Create the QA agent with structured ReviewOutput."""
-    system_prompt = get_system_prompt(
-        "qa-prompt",
-        max_iterations=str(settings.max_qa_iterations),
-    )
-    model = init_chat_model(settings.model_fast, max_retries=8)
-
-    agent = create_agent(
-        model=model,
-        tools=QA_TOOLS,
-        system_prompt=system_prompt,
-        response_format=ToolStrategy(ReviewOutput),
-        name="qa-engineer",
-    )
-    return agent
+def _get_qa_agent():
+    """Get or create the cached QA agent."""
+    global _qa_agent
+    if _qa_agent is None:
+        system_prompt = get_system_prompt(
+            "qa-prompt",
+            max_iterations=str(settings.max_qa_iterations),
+        )
+        model = init_chat_model(settings.model_fast, max_retries=8)
+        _qa_agent = create_agent(
+            model=model,
+            tools=QA_TOOLS,
+            system_prompt=system_prompt,
+            response_format=ToolStrategy(ReviewOutput),
+            name="qa-engineer",
+        )
+    return _qa_agent
 
 
 def run_qa(
@@ -37,7 +39,7 @@ def run_qa(
     callbacks=None,
 ) -> ReviewOutput:
     """Run the QA agent on code against spec. Returns structured ReviewOutput."""
-    agent = create_qa_agent()
+    agent = _get_qa_agent()
 
     prompt_parts = [
         "## Specification to verify against",
@@ -58,18 +60,13 @@ def run_qa(
         f"**Description:** {code.description}",
         f"**Files created:** {', '.join(code.files_created)}",
         "",
-        "```python",
-        code.source_code,
-        "```",
-        "",
         f"This is review iteration {iteration + 1}/{settings.max_qa_iterations}.",
         "",
         "Please:",
-        "1. Read the created files using file_read to verify they exist and are correct",
-        "2. Run the code using python_repl to test basic functionality",
-        "3. Test edge cases",
-        "4. Check compliance with all requirements and acceptance criteria",
-        "5. Return your ReviewOutput with verdict, issues, suggestions, and score",
+        "1. Read each file using file_read",
+        "2. Run the code using python_repl to test basic functionality and edge cases",
+        "3. Check compliance with all requirements and acceptance criteria",
+        "4. Return your ReviewOutput with verdict, issues, suggestions, and score",
     ])
 
     prompt = "\n".join(prompt_parts)
