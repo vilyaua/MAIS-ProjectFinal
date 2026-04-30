@@ -1,0 +1,7 @@
+{
+  "tests/test_ascii_art_generator.py::test_no_args_should_prompt": true,
+  "tests/test_todo_cli.py::test_handles_corrupted_file": true,
+  "tests/test_todo_cli.py::test_add_list_delete_complete": true,
+  "tests/test_calculator.py::test_nested_parentheses": true,
+  "tests/test_calculator.py": true
+}
