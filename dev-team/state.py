@@ -16,3 +16,4 @@ class DevTeamState(TypedDict, total=False):
     review: ReviewOutput | None
     iteration: int
     review_history: list[ReviewOutput]
+    pr_url: str | None

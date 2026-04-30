@@ -115,6 +115,7 @@ def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
         "hitl_gate": {"stage": "hitl", "label": "Spec Review"},
         "dev_node": {"stage": "dev", "label": "Developer"},
         "qa_node": {"stage": "qa", "label": "QA Engineer"},
+        "github_node": {"stage": "github", "label": "GitHub PR"},
     }
 
     with propagate_attributes(
@@ -166,6 +167,10 @@ def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
                             "suggestions": r.suggestions,
                         }
                         event["iteration"] = node_output.get("iteration", 0)
+                    elif node_name == "github_node":
+                        pr_url = node_output.get("pr_url")
+                        if pr_url:
+                            event["pr_url"] = pr_url
 
                     yield event
 
@@ -180,7 +185,10 @@ def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
             iteration=_last_result.get("iteration", 0),
             review_history=_last_result.get("review_history", []),
         )
-        yield {"type": "done", "output_path": output_path}
+        done_event = {"type": "done", "output_path": output_path}
+        if _last_result.get("pr_url"):
+            done_event["pr_url"] = _last_result["pr_url"]
+        yield done_event
     else:
         yield {"type": "done"}
 
@@ -554,6 +562,10 @@ UI_HTML = """\
         <span class="label">QA Engineer</span>
         <span class="badge" id="qa-badge" style="display:none"></span>
       </div>
+      <div class="pipeline-step" id="step-github">
+        <div class="dot"></div>
+        <span class="label">GitHub PR</span>
+      </div>
     </div>
   </div>
 
@@ -623,7 +635,7 @@ function setStep(id, cls) {
 }
 
 function resetSteps() {
-  ['ba','hitl','dev','qa'].forEach(s => setStep(s, ''));
+  ['ba','hitl','dev','qa','github'].forEach(s => setStep(s, ''));
   const qb = $('qa-badge');
   qb.style.display = 'none';
 }
@@ -826,6 +838,20 @@ function handleEvent(ev) {
         }
       }
     }
+    if (ev.stage === 'github') {
+      setStep('qa', 'done');
+      setStep('github', 'active');
+      setStatus('running', 'Creating GitHub PR...');
+      if (ev.pr_url) {
+        setStep('github', 'done');
+        addCard(`<div class="card">
+          <div class="card-header"><span class="icon">&#x1f517;</span><h3>Pull Request Created</h3></div>
+          <div class="card-body"><p style="font-size:14px"><a href="${ev.pr_url}" target="_blank" style="color:var(--blue)">${ev.pr_url}</a></p></div>
+        </div>`);
+      } else {
+        setStep('github', 'done');
+      }
+    }
   }
 
   if (ev.type === 'interrupt') {
@@ -843,10 +869,15 @@ function handleEvent(ev) {
 
   if (ev.type === 'done') {
     const msg = ev.output_path ? `Pipeline complete — saved to ${ev.output_path}` : 'Pipeline complete';
+    setStep('github', 'done');
     setStatus('done', msg);
     if (ev.output_path) {
+      let savedHtml = `<p style="font-size:13px;color:var(--green)">Output saved to: <code>${ev.output_path}</code></p>`;
+      if (ev.pr_url) {
+        savedHtml += `<p style="font-size:13px;margin-top:8px">PR: <a href="${ev.pr_url}" target="_blank" style="color:var(--blue)">${ev.pr_url}</a></p>`;
+      }
       addCard(`<div class="card"><div class="card-header"><span class="icon">&#x1f4be;</span><h3>Results Saved</h3></div>
-        <div class="card-body"><p style="font-size:13px;color:var(--green)">Output saved to: <code>${ev.output_path}</code></p></div></div>`);
+        <div class="card-body">${savedHtml}</div></div>`);
     }
     btnRun.disabled = false;
     input.focus();

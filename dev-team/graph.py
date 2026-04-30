@@ -14,7 +14,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, StateGraph
 
 from config import Settings
-from nodes import ba_node, dev_node, hitl_gate, qa_node
+from nodes import ba_node, dev_node, github_node, hitl_gate, qa_node
 from state import DevTeamState
 
 logger = logging.getLogger("graph")
@@ -34,15 +34,15 @@ def _route_after_qa(state: DevTeamState) -> str:
     iteration = state.get("iteration", 0)
 
     if review and review.verdict == "APPROVED":
-        logger.info("QA APPROVED — finishing pipeline")
-        return END
+        logger.info("QA APPROVED — proceeding to GitHub")
+        return "github_node"
 
     if iteration >= settings.max_qa_iterations:
         logger.warning(
-            "Max QA iterations (%d) reached — finishing with last review",
+            "Max QA iterations (%d) reached — proceeding to GitHub",
             settings.max_qa_iterations,
         )
-        return END
+        return "github_node"
 
     logger.info("QA REVISION_NEEDED — returning to Developer (iteration %d)", iteration)
     return "dev_node"
@@ -57,6 +57,7 @@ def build_graph() -> StateGraph:
     graph.add_node("hitl_gate", hitl_gate)
     graph.add_node("dev_node", dev_node)
     graph.add_node("qa_node", qa_node)
+    graph.add_node("github_node", github_node)
 
     # Edges
     graph.set_entry_point("ba_node")
@@ -71,11 +72,14 @@ def build_graph() -> StateGraph:
     # Dev -> QA
     graph.add_edge("dev_node", "qa_node")
 
-    # QA: conditional routing (loop or end)
+    # QA: conditional routing (loop, or proceed to GitHub)
     graph.add_conditional_edges("qa_node", _route_after_qa, {
         "dev_node": "dev_node",
-        END: END,
+        "github_node": "github_node",
     })
+
+    # GitHub -> END
+    graph.add_edge("github_node", END)
 
     # Compile with checkpointer for HITL interrupt/resume
     checkpointer = InMemorySaver()

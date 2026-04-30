@@ -21,6 +21,7 @@ def create_developer_agent():
         system_prompt=system_prompt,
         response_format=ToolStrategy(CodeOutput),
         name="developer",
+        model_kwargs={"max_retries": 8},
     )
     return agent
 

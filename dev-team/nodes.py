@@ -8,6 +8,7 @@ from langgraph.types import interrupt
 from agents.ba import run_ba
 from agents.developer import run_developer
 from agents.qa import run_qa
+from github_integration import create_pr
 from state import DevTeamState
 
 logger = logging.getLogger("nodes")
@@ -90,3 +91,23 @@ def qa_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
         "iteration": iteration + 1,
         "review_history": review_history,
     }
+
+
+def github_node(state: DevTeamState) -> dict:
+    """Push approved code to GitHub and open a PR."""
+    logger.info("GitHub: creating PR")
+    try:
+        pr_url = create_pr(
+            spec=state["spec"],
+            code=state["code"],
+            review=state.get("review"),
+            iteration=state.get("iteration", 0),
+        )
+        if pr_url:
+            logger.info("GitHub: PR created — %s", pr_url)
+        else:
+            logger.info("GitHub: skipped (not configured)")
+        return {"pr_url": pr_url}
+    except Exception as e:
+        logger.error("GitHub: PR creation failed — %s", e)
+        return {"pr_url": None}

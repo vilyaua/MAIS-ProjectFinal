@@ -3,14 +3,17 @@
 Tools:
   - web_search      (BA, Developer)
   - knowledge_search (BA)
+  - docs_search     (BA, Developer) — Context7 MCP
   - python_repl     (Developer, QA)
   - file_write      (Developer)
   - file_read       (Developer, QA)
 """
 
+import asyncio
 import logging
 import os
 import re
+import shutil
 import subprocess
 import textwrap
 from concurrent.futures import ThreadPoolExecutor
@@ -196,9 +199,97 @@ def file_read(filepath: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Context7 MCP — library documentation search
+# ---------------------------------------------------------------------------
+
+
+async def _context7_query(library_name: str, query: str) -> str:
+    """Call Context7 MCP server to resolve library and query docs."""
+    from mcp.client.session import ClientSession
+    from mcp.client.stdio import StdioServerParameters, stdio_client
+    from mcp.types import TextContent
+
+    # Find context7-mcp binary
+    c7_bin = shutil.which("context7-mcp")
+    if not c7_bin:
+        return "Context7 MCP server not installed (context7-mcp not found)."
+
+    server_params = StdioServerParameters(command=c7_bin, args=[])
+
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+
+            # Step 1: resolve library ID
+            resolve_result = await session.call_tool(
+                "resolve-library-id",
+                {"libraryName": library_name, "query": query},
+            )
+            resolve_text = ""
+            for block in resolve_result.content:
+                if isinstance(block, TextContent):
+                    resolve_text += block.text
+
+            if not resolve_text.strip():
+                return f"No library found for '{library_name}'."
+
+            # Extract library ID (format: /org/project)
+            library_id = None
+            for line in resolve_text.splitlines():
+                stripped = line.strip()
+                if stripped.startswith("/") and "/" in stripped[1:]:
+                    # Take first token that looks like /org/project
+                    candidate = stripped.split()[0] if stripped.split() else stripped
+                    if candidate.startswith("/"):
+                        library_id = candidate
+                        break
+
+            if not library_id:
+                return f"Could not resolve library ID from: {resolve_text[:500]}"
+
+            # Step 2: query documentation
+            docs_result = await session.call_tool(
+                "query-docs",
+                {"libraryId": library_id, "query": query},
+            )
+            docs_text = ""
+            for block in docs_result.content:
+                if isinstance(block, TextContent):
+                    docs_text += block.text
+
+            if len(docs_text) > settings.max_url_content_length:
+                docs_text = docs_text[: settings.max_url_content_length] + "\n\n[... truncated]"
+
+            return docs_text if docs_text.strip() else "No documentation found."
+
+
+@tool
+def docs_search(library_name: str, query: str) -> str:
+    """Search up-to-date library documentation via Context7 MCP.
+
+    Use this to look up current API signatures, configuration options,
+    and usage examples for any library or framework (e.g. Flask, FastAPI,
+    pytest, SQLAlchemy, Pydantic, etc.).
+
+    Args:
+        library_name: Name of the library (e.g. 'Flask', 'FastAPI', 'pytest')
+        query: What to search for (e.g. 'how to create routes', 'middleware setup')
+    """
+    try:
+        loop = asyncio.new_event_loop()
+        try:
+            return loop.run_until_complete(_context7_query(library_name, query))
+        finally:
+            loop.close()
+    except Exception as e:
+        logger.warning("docs_search failed: %s", e)
+        return f"Docs search error: {e}"
+
+
+# ---------------------------------------------------------------------------
 # Tool groupings per agent
 # ---------------------------------------------------------------------------
 
-BA_TOOLS = [web_search, knowledge_search]
-DEVELOPER_TOOLS = [web_search, python_repl, file_write, file_read]
+BA_TOOLS = [web_search, knowledge_search, docs_search]
+DEVELOPER_TOOLS = [web_search, docs_search, python_repl, file_write, file_read]
 QA_TOOLS = [python_repl, file_read]

@@ -41,4 +41,9 @@ class Settings(BaseSettings):
     max_qa_iterations: int = 5
     repl_timeout: int = 30
 
+    # GitHub integration (optional)
+    github_token: SecretStr | None = None
+    github_repo: str | None = None  # e.g. "vilyaua/MAIS-ProjectFinal"
+    github_base_branch: str = "main"
+
     model_config = {"env_file": ".env"}

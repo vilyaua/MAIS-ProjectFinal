@@ -16,11 +16,12 @@ def create_ba_agent():
     system_prompt = get_system_prompt("ba-prompt")
 
     agent = create_agent(
-        model=settings.model_powerful,
+        model=settings.model_fast,
         tools=BA_TOOLS,
         system_prompt=system_prompt,
         response_format=ToolStrategy(SpecOutput),
         name="business-analyst",
+        model_kwargs={"max_retries": 8},
     )
     return agent
 

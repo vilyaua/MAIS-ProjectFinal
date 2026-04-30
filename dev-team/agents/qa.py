@@ -19,11 +19,12 @@ def create_qa_agent():
     )
 
     agent = create_agent(
-        model=settings.model_powerful,
+        model=settings.model_fast,
         tools=QA_TOOLS,
         system_prompt=system_prompt,
         response_format=ToolStrategy(ReviewOutput),
         name="qa-engineer",
+        model_kwargs={"max_retries": 8},
     )
     return agent
 
