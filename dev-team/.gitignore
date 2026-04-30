@@ -7,3 +7,4 @@ index/
 dist/
 build/
 .pytest_cache/
+workspace/
