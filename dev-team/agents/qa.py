@@ -2,6 +2,7 @@
 
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
+from langchain.chat_models import init_chat_model
 
 from config import Settings
 from langfuse_prompts import get_system_prompt
@@ -17,14 +18,14 @@ def create_qa_agent():
         "qa-prompt",
         max_iterations=str(settings.max_qa_iterations),
     )
+    model = init_chat_model(settings.model_fast, max_retries=8)
 
     agent = create_agent(
-        model=settings.model_fast,
+        model=model,
         tools=QA_TOOLS,
         system_prompt=system_prompt,
         response_format=ToolStrategy(ReviewOutput),
         name="qa-engineer",
-        model_kwargs={"max_retries": 8},
     )
     return agent
 

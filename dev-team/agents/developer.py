@@ -2,6 +2,7 @@
 
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
+from langchain.chat_models import init_chat_model
 
 from config import Settings
 from langfuse_prompts import get_system_prompt
@@ -14,14 +15,14 @@ settings = Settings()
 def create_developer_agent():
     """Create the Developer agent with structured CodeOutput."""
     system_prompt = get_system_prompt("developer-prompt")
+    model = init_chat_model(settings.model_fast, max_retries=8)
 
     agent = create_agent(
-        model=settings.model_powerful,
+        model=model,
         tools=DEVELOPER_TOOLS,
         system_prompt=system_prompt,
         response_format=ToolStrategy(CodeOutput),
         name="developer",
-        model_kwargs={"max_retries": 8},
     )
     return agent
 

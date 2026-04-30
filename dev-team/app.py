@@ -28,6 +28,7 @@ from langgraph.types import Command
 from config import APP_VERSION, Settings
 from graph import build_graph
 from output_manager import clean_workspace, package_results
+from token_tracker import TokenTrackingHandler, pipeline_usage
 
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(
@@ -57,7 +58,7 @@ def _make_config(thread_id: str, handler: CallbackHandler) -> dict:
     return {
         "configurable": {"thread_id": thread_id},
         "recursion_limit": 100,
-        "callbacks": [handler],
+        "callbacks": [handler, TokenTrackingHandler(pipeline_usage)],
         "metadata": {
             "langfuse_session_id": current_session_id,
             "langfuse_user_id": USER_ID,
@@ -174,6 +175,9 @@ def _sync_stream(thread_id: str, input_data, handler: CallbackHandler):
 
                     yield event
 
+    # Log final cost summary
+    logger.info("Pipeline total: %s", pipeline_usage.summary())
+
     # Package results if pipeline completed (has code)
     if _last_result.get("code"):
         output_path = package_results(
@@ -198,6 +202,7 @@ async def _sse_generator(user_story: str):
     current_thread_id = str(uuid.uuid4())
     _last_user_story = user_story
     handler = CallbackHandler()
+    pipeline_usage.reset()
     clean_workspace()
 
     loop = asyncio.get_event_loop()
@@ -440,10 +445,10 @@ UI_HTML = """\
   .sidebar-footer { padding: 16px 20px; margin-top: auto; }
 
   /* ── Main area ── */
-  .main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .main { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
 
   /* Input bar */
-  .input-area { padding: 20px 24px; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .input-area { padding: 20px 24px; border-bottom: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
   .input-row { display: flex; gap: 10px; }
   .input-row input { flex: 1; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border);
                      border-radius: 10px; color: var(--text); font-size: 14px; outline: none; }
@@ -456,11 +461,11 @@ UI_HTML = """\
   .btn-run:hover:not(:disabled) { opacity: 0.9; }
 
   /* Content area */
-  .content { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .content { flex: 1; min-height: 0; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
 
   /* Cards */
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-          overflow: hidden; animation: fadeIn 0.3s ease; }
+          overflow: hidden; animation: fadeIn 0.3s ease; flex-shrink: 0; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .card-header { padding: 14px 18px; border-bottom: 1px solid var(--border);
                  display: flex; align-items: center; gap: 10px; }
@@ -496,7 +501,7 @@ UI_HTML = """\
                 font-weight: 600; font-size: 13px; }
 
   /* Code card */
-  .code-block { border-radius: 8px; overflow: hidden; }
+  .code-block { border-radius: 8px; overflow: auto; max-height: 400px; }
   .code-block pre { margin: 0 !important; font-size: 13px !important; }
   .code-block code { font-family: 'SF Mono', 'Fira Code', monospace !important; }
   .code-files { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
@@ -520,7 +525,7 @@ UI_HTML = """\
 
   /* Status bar */
   .status-bar { padding: 8px 24px; background: var(--surface); border-top: 1px solid var(--border);
-                font-size: 12px; color: var(--text2); display: flex; align-items: center; gap: 8px; }
+                font-size: 12px; color: var(--text2); display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .status-dot { width: 8px; height: 8px; border-radius: 50%; }
   .status-dot.idle { background: var(--text2); }
   .status-dot.running { background: var(--blue); animation: pulse 1.5s infinite; }
@@ -840,16 +845,13 @@ function handleEvent(ev) {
     }
     if (ev.stage === 'github') {
       setStep('qa', 'done');
-      setStep('github', 'active');
-      setStatus('running', 'Creating GitHub PR...');
+      setStep('github', 'done');
+      console.log('GitHub event:', JSON.stringify(ev));
       if (ev.pr_url) {
-        setStep('github', 'done');
         addCard(`<div class="card">
           <div class="card-header"><span class="icon">&#x1f517;</span><h3>Pull Request Created</h3></div>
           <div class="card-body"><p style="font-size:14px"><a href="${ev.pr_url}" target="_blank" style="color:var(--blue)">${ev.pr_url}</a></p></div>
         </div>`);
-      } else {
-        setStep('github', 'done');
       }
     }
   }

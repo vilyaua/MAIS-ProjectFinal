@@ -10,6 +10,7 @@ from agents.developer import run_developer
 from agents.qa import run_qa
 from github_integration import create_pr
 from state import DevTeamState
+from token_tracker import pipeline_usage
 
 logger = logging.getLogger("nodes")
 
@@ -26,6 +27,7 @@ def ba_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     )
 
     logger.info("BA Agent: produced spec '%s' (%s)", spec.title, spec.estimated_complexity)
+    logger.info("BA Agent cost: %s", pipeline_usage.summary())
     return {"spec": spec, "spec_approved": False, "spec_feedback": ""}
 
 
@@ -65,6 +67,7 @@ def dev_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     )
 
     logger.info("Developer Agent: created %d files", len(code.files_created))
+    logger.info("Developer cost: %s", pipeline_usage.summary())
     return {"code": code}
 
 
@@ -86,6 +89,7 @@ def qa_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     review_history = [*review_history, review]
 
     logger.info("QA Agent: verdict=%s, score=%.2f", review.verdict, review.score)
+    logger.info("QA cost: %s", pipeline_usage.summary())
     return {
         "review": review,
         "iteration": iteration + 1,
