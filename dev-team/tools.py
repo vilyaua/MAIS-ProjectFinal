@@ -287,9 +287,100 @@ def docs_search(library_name: str, query: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Terminal — run shell commands in workspace
+# ---------------------------------------------------------------------------
+
+# Allowed command prefixes for the terminal tool
+_ALLOWED_COMMANDS = [
+    "python", "python3", "pip", "pytest", "ls", "cat", "head", "tail",
+    "wc", "diff", "find", "echo", "mkdir", "touch", "tree",
+]
+
+
+@tool
+def run_command(command: str) -> str:
+    """Run a shell command in the workspace/ directory. Returns stdout + stderr.
+
+    Use this to run files, execute tests, install packages, or inspect the workspace.
+    Prefer this over python_repl when running existing files:
+      - run_command("python src/main.py")
+      - run_command("python -m pytest tests/ -v")
+      - run_command("pip install -r requirements.txt")
+      - run_command("ls -la src/")
+
+    Only safe commands are allowed (python, pytest, pip, ls, cat, etc.).
+    """
+    if not command.strip():
+        return "Error: empty command."
+
+    first_word = command.strip().split()[0]
+    if first_word not in _ALLOWED_COMMANDS:
+        return f"BLOCKED: Command '{first_word}' is not allowed. Allowed: {', '.join(_ALLOWED_COMMANDS)}"
+
+    # Block dangerous patterns
+    for pattern in _DANGEROUS_PATTERNS:
+        if re.search(pattern, command):
+            return f"BLOCKED: Command contains dangerous pattern matching '{pattern}'."
+
+    workspace = Path(settings.workspace_dir).resolve()
+    workspace.mkdir(parents=True, exist_ok=True)
+
+    try:
+        result = subprocess.run(  # noqa: S603
+            command,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=settings.repl_timeout,
+            cwd=str(workspace),
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+        )
+        output = ""
+        if result.stdout:
+            output += result.stdout
+        if result.stderr:
+            output += "\n[STDERR]\n" + result.stderr
+        if not output.strip():
+            output = "(no output)"
+        if len(output) > 5000:
+            output = output[:5000] + "\n\n[... output truncated at 5000 chars]"
+        return output
+    except subprocess.TimeoutExpired:
+        return f"TIMEOUT: Command exceeded {settings.repl_timeout}s limit."
+    except Exception as e:
+        return f"Execution error: {e}"
+
+
+# ---------------------------------------------------------------------------
+# Notion — read pages as user stories
+# ---------------------------------------------------------------------------
+
+
+@tool
+def read_notion_page(page_url: str) -> str:
+    """Read a Notion page and return its text content.
+
+    Use this to fetch user stories or requirements from Notion.
+    Accepts a Notion page URL (e.g. https://www.notion.so/My-Page-abc123).
+    """
+    try:
+        content = trafilatura.fetch_url(page_url)
+        if not content:
+            return f"Could not fetch Notion page: {page_url}"
+        text = trafilatura.extract(content, include_comments=False, include_tables=True)
+        if not text:
+            return f"Could not extract text from Notion page: {page_url}"
+        if len(text) > settings.max_url_content_length:
+            text = text[: settings.max_url_content_length] + "\n\n[... truncated]"
+        return text
+    except Exception as e:
+        return f"Notion page error: {e}"
+
+
+# ---------------------------------------------------------------------------
 # Tool groupings per agent
 # ---------------------------------------------------------------------------
 
-BA_TOOLS = [web_search, knowledge_search, docs_search]
-DEVELOPER_TOOLS = [web_search, docs_search, python_repl, file_write, file_read]
-QA_TOOLS = [python_repl, file_read]
+BA_TOOLS = [web_search, knowledge_search, docs_search, read_notion_page]
+DEVELOPER_TOOLS = [web_search, docs_search, python_repl, run_command, file_write, file_read]
+QA_TOOLS = [python_repl, run_command, file_read]

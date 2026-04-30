@@ -10,7 +10,7 @@ from schemas import CodeOutput, ReviewOutput, SpecOutput
 from tools import QA_TOOLS
 
 settings = Settings()
-_qa_agent = None
+_qa_agent = None  # Reset on restart — picks up new tools
 
 
 def _get_qa_agent():
@@ -64,9 +64,10 @@ def run_qa(
         "",
         "Please:",
         "1. Read each file using file_read",
-        "2. Run the code using python_repl to test basic functionality and edge cases",
-        "3. Check compliance with all requirements and acceptance criteria",
-        "4. Return your ReviewOutput with verdict, issues, suggestions, and score",
+        "2. Run files using run_command (e.g. 'python src/main.py', 'python -m pytest tests/ -v')",
+        "3. Only use python_repl for quick inline checks if needed",
+        "4. Check compliance with all requirements and acceptance criteria",
+        "5. Return your ReviewOutput with verdict, issues, suggestions, and score",
     ])
 
     prompt = "\n".join(prompt_parts)
