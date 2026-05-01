@@ -125,13 +125,19 @@ def _build_readme(
         if code.description:
             lines.extend([code.description, ""])
         lines.append("```bash")
+        lines.append("python -m venv .venv && source .venv/bin/activate")
         if has_requirements:
             lines.append("pip install -r requirements.txt")
         if main_file:
-            lines.append(f"python {main_file} <args>  # see description above")
+            lines.append(f"python {main_file}")
         lines.append("```")
         if test_file:
-            lines.extend(["", "Run tests:", "", "```bash", f"python -m pytest {test_file} -v", "```"])
+            lines.extend([
+                "", "Run tests:", "",
+                "```bash",
+                f"python -m pytest {test_file} -v",
+                "```",
+            ])
         lines.append("")
 
     # Code

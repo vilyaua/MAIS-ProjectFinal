@@ -31,15 +31,56 @@ from output_manager import clean_workspace, package_results
 from token_tracker import TokenTrackingHandler, pipeline_usage
 
 Path("logs").mkdir(exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%H:%M:%S",
-    handlers=[
-        logging.StreamHandler(),
-        RotatingFileHandler("logs/web.log", maxBytes=5_000_000, backupCount=3),
-    ],
-)
+
+_LOG_COLORS = {
+    "DEBUG": "\033[90m",     # gray
+    "INFO": "\033[36m",      # cyan
+    "WARNING": "\033[33m",   # yellow
+    "ERROR": "\033[31m",     # red
+    "CRITICAL": "\033[1;31m",  # bold red
+}
+_RESET = "\033[0m"
+
+
+class ColorFormatter(logging.Formatter):
+    """Colored console formatter."""
+
+    def format(self, record):
+        color = _LOG_COLORS.get(record.levelname, "")
+        msg = super().format(record)
+        if color:
+            # Color the [LEVEL] part
+            msg = msg.replace(f"[{record.levelname}]", f"{color}[{record.levelname}]{_RESET}", 1)
+            # Highlight key metrics
+            if "cost:" in msg or "tokens:" in msg:
+                msg = f"\033[32m{msg}{_RESET}"  # green for cost lines
+            elif "APPROVED" in msg:
+                msg = f"\033[1;32m{msg}{_RESET}"  # bold green
+            elif "REVISION_NEEDED" in msg:
+                msg = f"\033[1;33m{msg}{_RESET}"  # bold yellow
+            elif "ERROR" in record.levelname:
+                msg = f"{color}{msg}{_RESET}"
+        return msg
+
+
+class FlushingFileHandler(RotatingFileHandler):
+    """RotatingFileHandler that flushes after every emit."""
+
+    def emit(self, record):
+        super().emit(record)
+        self.flush()
+
+
+_fmt = "%(asctime)s [%(levelname)s] %(message)s"
+_datefmt = "%H:%M:%S"
+
+_console = logging.StreamHandler()
+_console.setFormatter(ColorFormatter(_fmt, datefmt=_datefmt))
+
+_file = FlushingFileHandler("logs/web.log", maxBytes=5_000_000, backupCount=3)
+_file.setFormatter(logging.Formatter(_fmt, datefmt=_datefmt))
+
+logging.basicConfig(level=logging.INFO, handlers=[_console, _file], force=True)
 logger = logging.getLogger("web")
 
 settings = Settings()
@@ -506,7 +547,10 @@ UI_HTML = """\
   .code-block code { font-family: 'SF Mono', 'Fira Code', monospace !important; }
   .code-files { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
   .code-file-tag { font-size: 11px; padding: 3px 8px; background: var(--surface2);
-                   border-radius: 4px; color: var(--text2); font-family: monospace; }
+                   border-radius: 4px; color: var(--blue); font-family: monospace;
+                   cursor: pointer; transition: background 0.2s; }
+  .code-file-tag:hover { background: var(--border); color: var(--text); }
+  .code-file-tag.active { background: var(--blue); color: #fff; }
 
   /* Review card */
   .review-score { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
@@ -704,7 +748,9 @@ function makeSpecCard(spec, showActions) {
 }
 
 function makeCodeCard(code) {
-  const escaped = code.source_code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const filesTags = code.files_created.map(f =>
+    `<span class="code-file-tag" onclick="loadCodeFile(this, '${f}')">${f}</span>`
+  ).join('');
   return `<div class="card" id="code-card">
     <div class="card-header">
       <span class="icon">&#x1f4bb;</span>
@@ -713,10 +759,27 @@ function makeCodeCard(code) {
     </div>
     <div class="card-body">
       <p style="font-size:13px;color:var(--text2);margin-bottom:12px">${code.description}</p>
-      <div class="code-files">${code.files_created.map(f => `<span class="code-file-tag">${f}</span>`).join('')}</div>
-      <div class="code-block"><pre><code class="language-python">${escaped}</code></pre></div>
+      <div class="code-files">${filesTags}</div>
+      <div class="code-block" id="code-viewer"><p style="font-size:12px;color:var(--text2);padding:12px">Click a file above to view its contents</p></div>
     </div>
   </div>`;
+}
+
+function loadCodeFile(el, path) {
+  // Toggle active state
+  document.querySelectorAll('.code-file-tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+
+  fetch('/api/files/' + encodeURIComponent(path))
+    .then(r => r.text())
+    .then(text => {
+      const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const ext = path.split('.').pop();
+      const lang = ext === 'py' ? 'python' : ext === 'txt' ? 'plaintext' : ext;
+      const viewer = document.getElementById('code-viewer');
+      viewer.innerHTML = `<pre><code class="language-${lang}">${escaped}</code></pre>`;
+      Prism.highlightAll();
+    });
 }
 
 function makeReviewCard(review, iteration) {
