@@ -1,5 +1,25 @@
 # Dev Log
 
+## 2026-05-02, v2.2.0 — model upgrade + prompt tuning + polish
+
+- Model upgrade: BA=gpt-4.1-mini, Dev=gpt-5.5 (500k TPM), QA=gpt-5.4 (500k TPM)
+  - gpt-5.5 writes code in 3-4 calls (was 10-13), QA approves 0.95-0.97 first try
+  - Zero revision loops — eliminates the #1 cost driver
+  - $0.10-0.12 per run, 24-30k tokens, 7-8 LLM calls
+- Prompt tuning (all prompts in Langfuse, version 3):
+  - BA: "Do NOT search. Produce spec directly." + removed web_search/docs_search tools
+  - Dev: explicit FIRST-TIME vs REVISION workflows, source_code left empty
+  - QA: strict 3-step process (read → test → verdict), no deviation
+- Removed SummarizationMiddleware (was silently burning 190k+ mini tokens)
+- Token tracker: verbose per-call logging (start/end/error for every LLM call)
+- RAG data expanded: 18 → 23 docs (added argparse, csv, sqlite3, secrets, Flask)
+- Workspace cleanup: removes ALL files including .pytest_cache
+- UI: clickable file tabs in Generated Code card, colored console logs,
+  flushing file handler, HITL step turns green, no duplicate PR link
+- GitHub: InputGitTreeElement for single-commit PRs, skips cache dirs
+- Pre-commit hooks: ruff lint+format, trailing whitespace, security checks
+- Demo requests: 5 sample user stories at output/demo-requests.md
+
 ## 2026-05-01, architect-level optimizations
 
 - Token usage optimization (calculator test: 43k → 39k tokens, QA: 25k → 15k):

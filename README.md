@@ -17,15 +17,16 @@ graph TD
     GH --> E[END]
 
     subgraph Tools
-        BA -.-> WS[Web Search]
         BA -.-> RAG[Knowledge Search / RAG]
-        BA -.-> C7[Context7 MCP / Docs]
-        DEV -.-> WS2[Web Search]
-        DEV -.-> C72[Context7 MCP / Docs]
+        BA -.-> NP[Notion Page Reader]
+        DEV -.-> WS[Web Search]
+        DEV -.-> C7[Context7 MCP / Docs]
         DEV -.-> REPL[Python REPL]
+        DEV -.-> CMD[Run Command]
         DEV -.-> FW[File Write]
         DEV -.-> FR[File Read]
         QA -.-> REPL2[Python REPL]
+        QA -.-> CMD2[Run Command]
         QA -.-> FR2[File Read]
     end
 
@@ -38,6 +39,7 @@ graph TD
         LF[Langfuse Tracing]
         PM[Prompt Management]
         EV[LLM-as-a-Judge]
+        TT[Token Cost Tracking]
     end
 ```
 
@@ -54,15 +56,15 @@ graph TD
 
 | Agent | Role | Model | Tools | Structured Output |
 |-------|------|-------|-------|-------------------|
-| **Business Analyst** | Analyze user story, produce specification | gpt-4.1-mini | Web Search, RAG, Context7 Docs | `SpecOutput` |
-| **Developer** | Write code, create project files | gpt-4.1 | Web Search, Context7 Docs, Python REPL, File I/O | `CodeOutput` |
-| **QA Engineer** | Review code, run tests, verify quality | gpt-4.1-mini | Python REPL, File Read | `ReviewOutput` |
+| **Business Analyst** | Analyze user story, produce specification | gpt-4.1-mini | Knowledge Search, Notion Reader | `SpecOutput` |
+| **Developer** | Write code, create project files | gpt-5.5 | Web Search, Context7 Docs, Python REPL, Run Command, File I/O | `CodeOutput` |
+| **QA Engineer** | Review code, run tests, verify quality | gpt-5.4 | Python REPL, Run Command, File Read | `ReviewOutput` |
 
 ## Quick Start
 
 ### Prerequisites
 
-- Python 3.12+
+- Docker
 - OpenAI API key
 - Langfuse account (free tier works)
 - GitHub token (optional, for PR creation)
@@ -72,59 +74,48 @@ graph TD
 ```bash
 cd dev-team
 
-# Create virtual environment
-python -m venv .venv && source .venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
 # Configure environment
 cp .env.example .env
 # Edit .env with your API keys
 
-# Ingest RAG documents (optional, for BA's knowledge search)
-python ingest.py
-
-# Run
-python main.py
+# Build and run
+docker compose build
+docker compose up
 ```
 
-### Docker
+Open **http://localhost:8000** in your browser.
+
+### Docker Commands
 
 ```bash
-cd dev-team
-docker compose build
+# Run web UI (foreground, with colored logs)
+docker compose up
 
-# Ingest documents for RAG
+# Run in background
+docker compose up -d
+docker compose logs -f
+
+# Ingest RAG documents
 docker compose --profile tools run --rm ingest
 
-# Run web UI (http://localhost:8000)
-docker compose up
+# Run LLM-as-a-Judge tests
+docker compose --profile tools run --rm test
 
 # Run interactive CLI
 docker compose --profile cli run --rm cli
 
-# Run tests
-docker compose --profile tools run --rm test
+# Rebuild after code changes
+docker compose build && docker compose up
 ```
 
-### Running Tests
-
-```bash
-cd dev-team
-python -m pytest tests/ -v
-```
-
-## Tools
-
-### Agent Tools
+## Tools (8 total)
 
 | Tool | Used By | Description |
 |------|---------|-------------|
-| `web_search` | BA, Developer | DuckDuckGo search (no API key needed) |
 | `knowledge_search` | BA | Hybrid RAG (FAISS + BM25 + cross-encoder reranking) |
-| `docs_search` | BA, Developer | Context7 MCP — up-to-date library documentation |
 | `read_notion_page` | BA | Read user stories from Notion pages |
+| `web_search` | Developer | DuckDuckGo search (no API key needed) |
+| `docs_search` | Developer | Context7 MCP — up-to-date library documentation |
 | `python_repl` | Developer, QA | Sandboxed Python execution (30s timeout, dangerous ops blocked) |
 | `run_command` | Developer, QA | Run shell commands in workspace (python, pytest, ls, etc.) |
 | `file_write` | Developer | Write files to `workspace/` directory |
@@ -132,10 +123,9 @@ python -m pytest tests/ -v
 
 ### Context7 MCP Integration
 
-The `docs_search` tool connects to the [Context7](https://context7.com) MCP server to fetch current library documentation. Instead of relying on training data, agents can look up exact API signatures, configuration options, and usage examples for any library (Flask, FastAPI, pytest, etc.).
+The `docs_search` tool connects to the [Context7](https://context7.com) MCP server via the Model Context Protocol to fetch current library documentation.
 
-**How it works:**
-1. MCP Python SDK spawns the `@upstash/context7-mcp` server
+1. MCP Python SDK spawns `@upstash/context7-mcp` server
 2. Resolves library name to Context7 library ID
 3. Queries documentation with the specific question
 4. Returns relevant docs and code examples
@@ -144,35 +134,48 @@ The `docs_search` tool connects to the [Context7](https://context7.com) MCP serv
 
 After QA approval (or max iterations), the pipeline automatically:
 1. Creates a branch `dev-team/<spec-title-slug>`
-2. Commits all workspace files to the branch
+2. Commits all workspace files in a single commit (Git Trees API)
 3. Opens a pull request with spec, requirements, and QA review in the body
 
-**Configuration** (optional — leave blank to skip):
-```
-GITHUB_TOKEN=ghp_...
-GITHUB_REPO=owner/repo
-GITHUB_BASE_BRANCH=main
-```
+## Token Optimization
+
+Optimized through iterative profiling with per-call token logging:
+
+- **Model selection**: gpt-5.5 for Dev (better code, fewer calls), gpt-5.4 for QA (thorough reviews), gpt-4.1-mini for BA (cheap spec generation)
+- **BA tool reduction**: removed web_search/docs_search from BA — produces specs directly in 1 LLM call (~800 tokens)
+- **QA strict process**: "read files → run tests → verdict" in 3 calls, no deviation
+- **Dev revision guidance**: reads existing files and patches instead of rewriting from scratch
+- **run_command tool**: agents run `python src/main.py` instead of pasting code inline (~10 tokens vs ~400)
+- **Token cost logging**: per-step delta tracking with model-aware pricing
+
+### Benchmark
+
+| Metric | v0.1 (baseline) | v2.2 (current) |
+|--------|-----------------|----------------|
+| BA tokens | 5-9k (5-6 calls) | **~800 (1 call)** |
+| Dev tokens | 14-42k (10-13 calls) | **12-18k (3-4 calls)** |
+| QA tokens | 25-66k (8 calls) | **11-12k (3 calls)** |
+| QA score | 0.30-0.60 (revisions) | **0.95-0.97 (first try)** |
+| Total | 43-147k (often crashed) | **24-30k** |
+| Cost | $0.12-crash | **$0.10-0.12** |
+| Revisions | 1-2+ | **0** |
 
 ## Structured Output Contracts
 
 ```python
-# Business Analyst -> Developer
-class SpecOutput:
+class SpecOutput(BaseModel):
     title: str
     requirements: list[str]
     acceptance_criteria: list[str]
-    estimated_complexity: "simple" | "medium" | "complex"
+    estimated_complexity: Literal["simple", "medium", "complex"]
 
-# Developer -> QA
-class CodeOutput:
-    source_code: str
+class CodeOutput(BaseModel):
+    source_code: str = ""  # optional, code is in workspace files
     description: str
     files_created: list[str]
 
-# QA -> Developer (or END)
-class ReviewOutput:
-    verdict: "APPROVED" | "REVISION_NEEDED"
+class ReviewOutput(BaseModel):
+    verdict: Literal["APPROVED", "REVISION_NEEDED"]
     issues: list[str]
     suggestions: list[str]
     score: float  # 0.0 - 1.0
@@ -187,30 +190,13 @@ class ReviewOutput:
 
 ### Langfuse Prompts
 
-Upload these prompts to Langfuse (label: `production`):
+All prompts managed in Langfuse (label: `production`). Upload with `python upload_prompts.py`.
 
 | Prompt Name | Agent | Template Variables |
 |-------------|-------|--------------------|
 | `ba-prompt` | Business Analyst | — |
 | `developer-prompt` | Developer | — |
 | `qa-prompt` | QA Engineer | `{{max_iterations}}` |
-
-## Token Optimization
-
-Several optimizations reduce token usage and cost per pipeline run:
-
-- **QA SummarizationMiddleware** — compresses conversation history after 4k tokens, preventing context balloon on tool loops (QA: 25k → 15k tokens, -39%)
-- **BA skip-search instruction** — BA produces specs directly for standard Python tasks without unnecessary web/docs searches (BA: 8k → 937 tokens)
-- **run_command tool** — agents run `python src/main.py` instead of pasting code inline into python_repl (~10 tokens vs ~400)
-- **No duplicate code in QA** — QA reads files via tools only, source_code not sent in prompt
-- **Token cost logging** — per-step delta tracking with model-aware pricing
-
-### Benchmark (stack-based calculator)
-
-| Version | BA | Dev | QA | Total | Cost |
-|---------|-----|------|------|-------|------|
-| v1 (baseline) | ~5k | ~14k | ~25k | 43,515 | $0.117 |
-| v4 (optimized) | 936 | 23,305 | 15,220 | 39,461 | $0.111 |
 
 ## LLM-as-a-Judge Tests
 
@@ -223,10 +209,11 @@ Several optimizations reduce token usage and cost per pipeline run:
 
 ## RAG Knowledge Base
 
-18 documents in `data/`:
-- Python stdlib docs (typing, dataclasses, pathlib, unittest, logging, collections, itertools, functools, contextlib, json, re)
+23 documents in `data/`:
+- Python stdlib: typing, dataclasses, pathlib, unittest, logging, collections, itertools, functools, contextlib, json, re, argparse, csv, sqlite3, secrets
 - PEP 8, Google Python Style Guide
 - Design patterns, error handling, abc, async/await, Pydantic
+- Flask basics
 
 Run `python ingest.py` to build the FAISS + BM25 hybrid index.
 
@@ -234,26 +221,27 @@ Run `python ingest.py` to build the FAISS + BM25 hybrid index.
 
 ```
 dev-team/
-├── main.py                # REPL + HITL + Langfuse
+├── main.py                # Interactive CLI + HITL + Langfuse
 ├── app.py                 # FastAPI web UI with SSE streaming
 ├── graph.py               # LangGraph StateGraph
 ├── state.py               # State TypedDict
 ├── nodes.py               # Node functions (ba, hitl, dev, qa, github)
 ├── agents/                # BA, Developer, QA agents
 ├── schemas.py             # Pydantic models
-├── tools.py               # @tool functions (8 tools incl. Context7 MCP)
+├── tools.py               # 8 @tool functions (incl. Context7 MCP)
 ├── github_integration.py  # GitHub PR creation via Git Trees API
-├── token_tracker.py       # Token usage & cost tracking per step
-├── config.py              # Settings
+├── token_tracker.py       # Per-call token usage & cost tracking
+├── config.py              # Settings (pydantic-settings)
 ├── langfuse_prompts.py    # Langfuse prompt loader
+├── upload_prompts.py      # Upload prompts to Langfuse
 ├── retriever.py           # Hybrid RAG retrieval
 ├── ingest.py              # Document ingestion
-├── output_manager.py      # Output packaging
-├── tests/                 # LLM-as-a-Judge tests
-├── data/                  # RAG documents (18 files)
+├── output_manager.py      # Output packaging with README
+├── tests/                 # LLM-as-a-Judge tests (10 tests)
+├── data/                  # RAG documents (23 files)
 ├── index/                 # Persisted FAISS + BM25 (gitignored)
 ├── workspace/             # Generated code (gitignored)
-├── output/                # Final approved code packages
+├── output/                # Final approved code packages + demo requests
 ├── screenshots/           # Playwright-captured UI screenshots
 └── logs/                  # Agent logs with token costs
 ```
@@ -261,26 +249,27 @@ dev-team/
 ## Environment Variables
 
 ```
-OPENAI_API_KEY=sk-...
-LANGFUSE_SECRET_KEY=sk-lf-...
-LANGFUSE_PUBLIC_KEY=pk-lf-...
-LANGFUSE_BASE_URL=https://us.cloud.langfuse.com
-MODEL_POWERFUL=openai:gpt-4.1
-MODEL_FAST=openai:gpt-4.1-mini
-# Optional
-GITHUB_TOKEN=ghp_...
-GITHUB_REPO=owner/repo
 GITHUB_BASE_BRANCH=main
+GITHUB_REPO=owner/repo
+GITHUB_TOKEN=ghp_...
+LANGFUSE_BASE_URL=https://us.cloud.langfuse.com
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+MODEL_FAST=openai:gpt-4.1-mini
+MODEL_MID=openai:gpt-5.4
+MODEL_POWERFUL=openai:gpt-5.5
+OPENAI_API_KEY=sk-...
 ```
 
 ## Tech Stack
 
-- **LangChain** — agent creation, tool definitions
-- **LangGraph** — StateGraph with conditional edges, HITL interrupts
-- **Langfuse** — tracing, prompt management, evaluators
+- **LangChain** — `create_agent`, `ToolStrategy`, `init_chat_model`
+- **LangGraph** — `StateGraph` with conditional edges, `interrupt()` for HITL
+- **Langfuse v4** — tracing via `propagate_attributes()`, prompt management
 - **MCP** — Model Context Protocol for Context7 docs integration
-- **FAISS + BM25** — hybrid retrieval for RAG
-- **PyGithub** — GitHub API for automatic PR creation
+- **FAISS + BM25** — hybrid retrieval with cross-encoder reranking for RAG
+- **PyGithub** — GitHub API, Git Trees for single-commit PRs
 - **Pydantic** — structured output contracts
-- **FastAPI** — web UI with SSE streaming
-- **DuckDuckGo** — web search (no API key needed)
+- **FastAPI** — web UI with SSE streaming, colored logs
+- **Playwright** — automated UI testing and screenshot capture
+- **Ruff** — linting and formatting via pre-commit hooks
