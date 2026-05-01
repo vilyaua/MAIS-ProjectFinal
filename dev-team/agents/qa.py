@@ -1,6 +1,7 @@
 """QA Engineer Agent — reviews code, runs tests, returns ReviewOutput."""
 
 from langchain.agents import create_agent
+from langchain.agents.middleware import SummarizationMiddleware
 from langchain.agents.structured_output import ToolStrategy
 from langchain.chat_models import init_chat_model
 
@@ -10,7 +11,7 @@ from schemas import CodeOutput, ReviewOutput, SpecOutput
 from tools import QA_TOOLS
 
 settings = Settings()
-_qa_agent = None  # Reset on restart — picks up new tools
+_qa_agent = None
 
 
 def _get_qa_agent():
@@ -28,6 +29,13 @@ def _get_qa_agent():
             system_prompt=system_prompt,
             response_format=ToolStrategy(ReviewOutput),
             name="qa-engineer",
+            middleware=[
+                SummarizationMiddleware(
+                    model=settings.model_fast,
+                    trigger=("tokens", 4000),
+                    keep=("messages", 6),
+                ),
+            ],
         )
     return _qa_agent
 
