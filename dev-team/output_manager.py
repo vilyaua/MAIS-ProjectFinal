@@ -66,12 +66,11 @@ def clean_workspace() -> None:
     workspace = Path(settings.workspace_dir)
     if workspace.exists():
         for item in workspace.iterdir():
-            if item.name.startswith("."):
-                continue
             if item.is_dir():
                 shutil.rmtree(item)
             else:
                 item.unlink()
+    workspace.mkdir(parents=True, exist_ok=True)
     logger.info("Workspace cleaned")
 
 
