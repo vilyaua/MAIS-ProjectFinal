@@ -5003,3 +5003,105 @@ During task with name 'qa_node' and id '0a398a74-e571-b822-447e-5ef7126128e1'
 21:32:52 [INFO] Pipeline total: tokens: 65,337 (in: 60,042, out: 5,295) | cost: $0.2301 | calls: 13
 21:32:52 [INFO] Results packaged to output/2026-05-01_213252_b50650e9
 21:45:11 [INFO] Dev Team graph compiled successfully
+22:01:25 [INFO] Dev Team graph compiled successfully
+22:10:28 [INFO] Dev Team graph compiled successfully
+22:10:46 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit, 
+22:10:46 [INFO] Workspace cleaned
+22:10:46 [INFO] BA Agent: analyzing user story
+22:10:47 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)
+22:10:49 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+22:11:04 [INFO] LLM call #1 done: in=429 out=325 model=gpt-4.1-mini-2025-04-14 | running total: 754
+22:11:04 [INFO] BA Agent: produced spec 'Temperature Conversion Function' (simple)
+22:11:04 [INFO] BA Agent: tokens: 754 (in: 429, out: 325) | cost: $0.0035 | calls: 1
+22:11:07 [INFO] HITL decision: approved=True feedback=
+22:11:07 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+22:11:07 [INFO] HITL gate: APPROVED
+22:11:07 [INFO] Developer Agent: writing code (iteration 0)
+22:11:08 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 3)
+22:11:08 [INFO] LLM call #1 started (model=gpt-5.5)
+22:11:29 [INFO] LLM call #1 done: in=1194 out=2021 model=gpt-5.5-2026-04-23 | running total: 3969
+22:11:29 [INFO] LLM call #2 started (model=gpt-5.5)
+22:11:30 [INFO] LLM call #2 done: in=3246 out=24 model=gpt-5.5-2026-04-23 | running total: 7239
+22:11:33 [INFO] LLM call #3 started (model=gpt-5.5)
+22:11:36 [INFO] LLM call #3 done: in=4136 out=132 model=gpt-5.5-2026-04-23 | running total: 11507
+22:11:36 [INFO] Developer Agent: created 4 files
+22:11:36 [INFO] Developer: tokens: 10,753 (in: 8,576, out: 2,177) | cost: $0.0519 | calls: 3
+22:11:36 [INFO] QA Agent: reviewing code (iteration 0)
+22:11:37 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 3)
+22:11:37 [INFO] LLM call #4 started (model=gpt-5.4)
+22:11:38 [INFO] LLM call #4 done: in=1188 out=88 model=gpt-5.4-2026-03-05 | running total: 12783
+22:11:38 [INFO] LLM call #5 started (model=gpt-5.4)
+22:11:40 [INFO] LLM call #5 done: in=4058 out=24 model=gpt-5.4-2026-03-05 | running total: 16865
+22:11:42 [INFO] LLM call #6 started (model=gpt-5.4)
+22:11:44 [INFO] LLM call #6 done: in=4950 out=79 model=gpt-5.4-2026-03-05 | running total: 21894
+22:11:44 [INFO] QA Agent: verdict=APPROVED, score=0.98
+22:11:44 [INFO] QA: tokens: 10,387 (in: 10,196, out: 191) | cost: $0.0274 | calls: 3
+22:11:44 [INFO] QA APPROVED — proceeding to GitHub
+22:11:44 [INFO] GitHub: creating PR
+22:11:46 [WARNING] Branch dev-team/temperature-conversion-function already exists — appending suffix
+22:11:47 [INFO] Created branch: dev-team/temperature-conversion-function-4b57ed
+22:11:57 [INFO] Committed 4 files to dev-team/temperature-conversion-function-4b57ed (single commit)
+22:11:59 [INFO] Created PR #20: https://github.com/vilyaua/MAIS-ProjectFinal/pull/20
+22:11:59 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/20
+22:11:59 [INFO] Pipeline total: tokens: 21,894 (in: 19,201, out: 2,693) | cost: $0.0827 | calls: 7
+22:11:59 [INFO] Results packaged to output/2026-05-01_221159_1484ba05
+22:13:52 [INFO] Dev Team graph compiled successfully
+22:14:12 [INFO] User story: Build a REST API with Flask that manages a book collection - CRUD endpoints, sea
+22:14:12 [INFO] Workspace cleaned
+22:14:12 [INFO] BA Agent: analyzing user story
+22:14:13 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)
+22:14:14 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+22:14:15 [INFO] LLM call #1 done: in=439 out=24 model=gpt-4.1-mini-2025-04-14 | running total: 463
+22:14:15 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+22:14:47 [INFO] LLM call #2 done: in=490 out=369 model=gpt-4.1-mini-2025-04-14 | running total: 1322
+22:14:47 [INFO] BA Agent: produced spec 'Book Collection Management REST API' (medium)
+22:14:47 [INFO] BA Agent: tokens: 1,322 (in: 929, out: 393) | cost: $0.0050 | calls: 2
+22:15:05 [INFO] HITL decision: approved=True feedback=
+22:15:05 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+22:15:05 [INFO] HITL gate: APPROVED
+22:15:05 [INFO] Developer Agent: writing code (iteration 0)
+22:15:06 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 3)
+22:15:06 [INFO] LLM call #1 started (model=gpt-5.5)
+22:15:10 [INFO] LLM call #1 done: in=1243 out=122 model=gpt-5.5-2026-04-23 | running total: 2687
+22:15:10 [INFO] LLM call #2 started (model=gpt-5.5)
+22:15:56 [INFO] LLM call #2 done: in=1347 out=4267 model=gpt-5.5-2026-04-23 | running total: 8301
+22:15:56 [INFO] LLM call #3 started (model=gpt-5.5)
+22:16:00 [INFO] LLM call #3 done: in=5282 out=106 model=gpt-5.5-2026-04-23 | running total: 13689
+22:16:03 [INFO] LLM call #4 started (model=gpt-5.5)
+22:16:06 [INFO] LLM call #4 done: in=5631 out=66 model=gpt-5.5-2026-04-23 | running total: 19386
+22:16:14 [INFO] LLM call #5 started (model=gpt-5.5)
+22:16:17 [INFO] LLM call #5 done: in=6630 out=24 model=gpt-5.5-2026-04-23 | running total: 26040
+22:16:19 [INFO] LLM call #6 started (model=gpt-5.5)
+22:16:25 [INFO] LLM call #6 done: in=7706 out=227 model=gpt-5.5-2026-04-23 | running total: 33973
+22:16:25 [INFO] LLM call #7 started (model=gpt-5.5)
+22:16:30 [INFO] LLM call #7 done: in=7800 out=103 model=gpt-5.5-2026-04-23 | running total: 41876
+22:16:30 [INFO] LLM call #8 started (model=gpt-5.5)
+22:16:52 [INFO] LLM call #8 done: in=10149 out=2321 model=gpt-5.5-2026-04-23 | running total: 54346
+22:16:52 [INFO] LLM call #9 started (model=gpt-5.5)
+22:16:56 [INFO] LLM call #9 done: in=12208 out=24 model=gpt-5.5-2026-04-23 | running total: 66578
+22:16:58 [INFO] LLM call #10 started (model=gpt-5.5)
+22:17:00 [INFO] LLM call #10 done: in=12683 out=21 model=gpt-5.5-2026-04-23 | running total: 79282
+22:17:00 [INFO] LLM call #11 started (model=gpt-5.5)
+22:17:05 [INFO] LLM call #11 done: in=12887 out=164 model=gpt-5.5-2026-04-23 | running total: 92333
+22:17:05 [INFO] Developer Agent: created 6 files
+22:17:05 [INFO] Developer: tokens: 91,011 (in: 83,566, out: 7,445) | cost: $0.3400 | calls: 11
+22:17:05 [INFO] QA Agent: reviewing code (iteration 0)
+22:17:06 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 3)
+22:17:06 [INFO] LLM call #12 started (model=gpt-5.4)
+22:17:08 [INFO] LLM call #12 done: in=1269 out=121 model=gpt-5.4-2026-03-05 | running total: 93723
+22:17:08 [INFO] LLM call #13 started (model=gpt-5.4)
+22:17:10 [INFO] LLM call #13 done: in=6098 out=21 model=gpt-5.4-2026-03-05 | running total: 99842
+22:17:10 [INFO] LLM call #14 started (model=gpt-5.4)
+22:17:11 [INFO] LLM call #14 done: in=8452 out=24 model=gpt-5.4-2026-03-05 | running total: 108318
+22:17:13 [INFO] LLM call #15 started (model=gpt-5.4)
+22:17:15 [INFO] LLM call #15 done: in=8929 out=73 model=gpt-5.4-2026-03-05 | running total: 117320
+22:17:15 [INFO] QA Agent: verdict=APPROVED, score=0.96
+22:17:15 [INFO] QA: tokens: 24,987 (in: 24,748, out: 239) | cost: $0.0643 | calls: 4
+22:17:15 [INFO] QA APPROVED — proceeding to GitHub
+22:17:15 [INFO] GitHub: creating PR
+22:17:18 [INFO] Created branch: dev-team/book-collection-management-rest-api
+22:17:31 [INFO] Committed 6 files to dev-team/book-collection-management-rest-api (single commit)
+22:17:33 [INFO] Created PR #21: https://github.com/vilyaua/MAIS-ProjectFinal/pull/21
+22:17:33 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/21
+22:17:33 [INFO] Pipeline total: tokens: 117,320 (in: 109,243, out: 8,077) | cost: $0.4093 | calls: 17
+22:17:33 [INFO] Results packaged to output/2026-05-01_221733_adca8d37
