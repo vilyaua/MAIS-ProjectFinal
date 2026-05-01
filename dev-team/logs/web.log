@@ -2520,3 +2520,391 @@ During task with name 'model' and id '3e45cd71-21d9-7f93-5ed4-2ae6606b162a'
 During task with name 'qa_node' and id 'edaf76ba-00b3-8f4a-86d1-78739b7e937b'
 19:48:04 [INFO] Dev Team graph compiled successfully
 21:15:14 [INFO] Dev Team graph compiled successfully
+21:27:23 [INFO] User story: Write a CLI todo app in Python with add, list, complete, and delete commands usi
+21:27:23 [INFO] Workspace cleaned
+21:27:23 [INFO] BA Agent: analyzing user story
+21:27:24 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+21:27:36 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Python%20argparse%20usage%20example%20CLI%20todo%20app 200
+21:27:36 [INFO] response: https://grokipedia.com/api/typeahead?query=Python+argparse+usage+example+CLI+todo+app&limit=1 200
+21:27:37 [INFO] response: https://consent.yahoo.com/v2/collectConsent?sessionId=3_cc-session_416ec6ba-37f7-43d6-9cd0-8c6cd563a082 200
+21:27:39 [INFO] response: https://html.duckduckgo.com/html/ 200
+21:27:49 [INFO] BA Agent: produced spec 'Python CLI Todo App with JSON Storage' (medium)
+21:27:49 [INFO] BA Agent cost: tokens: 8,134 (in: 7,548, out: 586) | cost: $0.0198 | calls: 6
+21:27:50 [INFO] HITL decision: approved=True feedback=
+21:27:50 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+21:27:50 [INFO] HITL gate: APPROVED
+21:27:50 [INFO] Developer Agent: writing code (iteration 0)
+21:27:51 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+21:29:31 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:33 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:34 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:35 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:37 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:38 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:40 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:41 [INFO] Retrying request to /chat/completions in 1.149000 seconds
+21:29:43 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 62, in dev_node
+    code = run_developer(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/developer.py", line 76, in run_developer
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 3832. Please try again in 1.149s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id 'f6f914a0-f037-b363-ad09-18fe7764654b'
+During task with name 'dev_node' and id 'b1a1c453-545c-1b7c-4b5b-90bc84affdbb'
+21:37:53 [INFO] User story: Create a Python script that generates ASCII art from text input
+21:37:53 [INFO] Workspace cleaned
+21:37:53 [INFO] BA Agent: analyzing user story
+21:37:55 [INFO] response: https://grokipedia.com/api/typeahead?query=python+libraries+for+ASCII+art+generation&limit=1 200
+21:37:55 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=python%20libraries%20for%20ASCII%20art%20generation 200
+21:37:56 [INFO] response: https://yandex.com/search/site/?text=python+libraries+for+ASCII+art+generation&web=1&searchid=8341651 200
+21:38:02 [INFO] BA Agent: produced spec 'ASCII Art Text Generator Script' (simple)
+21:38:02 [INFO] BA Agent cost: tokens: 2,252 (in: 1,831, out: 421) | cost: $0.0070 | calls: 2
+21:38:03 [INFO] HITL decision: approved=True feedback=
+21:38:03 [INFO] HITL gate: APPROVED
+21:38:03 [INFO] Developer Agent: writing code (iteration 0)
+21:38:10 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=pyfiglet%20usage%20example 200
+21:38:10 [INFO] response: https://grokipedia.com/api/typeahead?query=pyfiglet+usage+example&limit=1 200
+21:38:10 [INFO] response: https://search.yahoo.com/search;_ylt=aXCw4BaPWCubMQul8jo5IX_-;_ylu=olv_X7Kfp19Mf9dK1STFD_5ABe33uX_CIutakcbb4bPsqko?p=pyfiglet+usage+example 200
+21:38:13 [INFO] response: https://grokipedia.com/api/typeahead?query=pyfiglet+list+available+fonts&limit=1 200
+21:38:13 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=pyfiglet%20list%20available%20fonts 200
+21:38:14 [INFO] response: https://search.brave.com/search?q=pyfiglet+list+available+fonts&source=web 200
+21:38:39 [INFO] Retrying request to /chat/completions in 0.777000 seconds
+21:38:41 [INFO] Retrying request to /chat/completions in 0.777000 seconds
+21:38:42 [INFO] Retrying request to /chat/completions in 0.113000 seconds
+21:38:49 [INFO] Developer Agent: created 3 files
+21:38:49 [INFO] Developer cost: tokens: 35,265 (in: 32,734, out: 2,531) | cost: $0.0857 | calls: 12
+21:38:49 [INFO] QA Agent: reviewing code (iteration 0)
+21:38:50 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+21:38:55 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:38:56 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:38:57 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:38:58 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:38:59 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:39:00 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:39:02 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:39:02 [INFO] Retrying request to /chat/completions in 0.730000 seconds
+21:39:04 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 81, in qa_node
+    review = run_qa(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/qa.py", line 79, in run_qa
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 2435. Please try again in 730ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id '39f84744-4965-48ba-fb77-5678d552032d'
+During task with name 'qa_node' and id '9ecad175-d0ae-29fe-6852-9a05f81d6c4e'
+21:48:53 [INFO] User story: Implement a stack-based calculator that supports +, -, *, / and parentheses with
+21:48:53 [INFO] Workspace cleaned
+21:48:53 [INFO] BA Agent: analyzing user story
+21:48:56 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=stack-based%20calculator%20algorithm%20with%20parentheses%20support 200
+21:48:57 [INFO] response: https://grokipedia.com/api/typeahead?query=stack-based+calculator+algorithm+with+parentheses+support&limit=1 200
+21:48:59 [INFO] response: https://www.mojeek.com/search?q=stack-based+calculator+algorithm+with+parentheses+support 200
+21:49:02 [INFO] response: https://grokipedia.com/api/typeahead?query=Python+exception+handling+best+practices&limit=1 200
+21:49:02 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Python%20exception%20handling%20best%20practices 200
+21:49:03 [INFO] response: https://search.brave.com/search?q=Python+exception+handling+best+practices&source=web 200
+21:49:07 [INFO] BA Agent: produced spec 'Stack-based Calculator with Parentheses and Error Handling' (medium)
+21:49:07 [INFO] BA Agent cost: tokens: 5,711 (in: 5,286, out: 425) | cost: $0.0140 | calls: 4
+21:49:09 [INFO] HITL decision: approved=True feedback=
+21:49:09 [INFO] HITL gate: APPROVED
+21:49:09 [INFO] Developer Agent: writing code (iteration 0)
+21:49:51 [INFO] Developer Agent: created 2 files
+21:49:51 [INFO] Developer cost: tokens: 19,559 (in: 15,485, out: 4,074) | cost: $0.0636 | calls: 8
+21:49:51 [INFO] QA Agent: reviewing code (iteration 0)
+21:50:09 [INFO] QA Agent: verdict=APPROVED, score=0.90
+21:50:09 [INFO] QA cost: tokens: 40,279 (in: 35,594, out: 4,685) | cost: $0.1087 | calls: 13
+21:50:09 [INFO] QA APPROVED — proceeding to GitHub
+21:50:09 [INFO] GitHub: creating PR
+21:50:12 [INFO] Created branch: dev-team/stack-based-calculator-with-parentheses-and-error-
+21:50:24 [INFO] Committed 7 files to dev-team/stack-based-calculator-with-parentheses-and-error-
+21:50:27 [INFO] Created PR #10: https://github.com/vilyaua/MAIS-ProjectFinal/pull/10
+21:50:27 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/10
+21:50:27 [INFO] Pipeline total: tokens: 40,279 (in: 35,594, out: 4,685) | cost: $0.1087 | calls: 13
+21:50:27 [INFO] Results packaged to output/2026-04-30_215027_4383096e
