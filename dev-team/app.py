@@ -14,29 +14,27 @@ Endpoints:
 import asyncio
 import json
 import logging
-import os
 import uuid
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
+from config import APP_VERSION, Settings
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse, StreamingResponse
+from graph import build_graph
 from langfuse import propagate_attributes
 from langfuse.langchain import CallbackHandler
 from langgraph.types import Command
-
-from config import APP_VERSION, Settings
-from graph import build_graph
 from output_manager import clean_workspace, package_results
 from token_tracker import TokenTrackingHandler, pipeline_usage
 
 Path("logs").mkdir(exist_ok=True)
 
 _LOG_COLORS = {
-    "DEBUG": "\033[90m",     # gray
-    "INFO": "\033[36m",      # cyan
-    "WARNING": "\033[33m",   # yellow
-    "ERROR": "\033[31m",     # red
+    "DEBUG": "\033[90m",  # gray
+    "INFO": "\033[36m",  # cyan
+    "WARNING": "\033[33m",  # yellow
+    "ERROR": "\033[31m",  # red
     "CRITICAL": "\033[1;31m",  # bold red
 }
 _RESET = "\033[0m"
@@ -266,9 +264,7 @@ async def _sse_generator(user_story: str):
                     loop.call_soon_threadsafe(queue.put_nowait, event)
             except Exception as e:
                 logger.exception("Pipeline error")
-                loop.call_soon_threadsafe(
-                    queue.put_nowait, {"type": "error", "message": str(e)}
-                )
+                loop.call_soon_threadsafe(queue.put_nowait, {"type": "error", "message": str(e)})
             finally:
                 loop.call_soon_threadsafe(queue.put_nowait, None)
 
@@ -306,9 +302,7 @@ async def _sse_resume(resume_data: dict):
                     loop.call_soon_threadsafe(queue.put_nowait, event)
             except Exception as e:
                 logger.exception("Resume error")
-                loop.call_soon_threadsafe(
-                    queue.put_nowait, {"type": "error", "message": str(e)}
-                )
+                loop.call_soon_threadsafe(queue.put_nowait, {"type": "error", "message": str(e)})
             finally:
                 loop.call_soon_threadsafe(queue.put_nowait, None)
 
@@ -332,6 +326,7 @@ async def _sse_resume(resume_data: dict):
 
 # ── API endpoints ──────────────────────────────────────────
 
+
 @app.get("/", response_class=HTMLResponse)
 async def index():
     return UI_HTML
@@ -342,7 +337,11 @@ async def info():
     return {
         "app": settings.app_name,
         "version": APP_VERSION,
-        "models": {"ba": settings.model_fast, "dev": settings.model_powerful, "qa": settings.model_mid},
+        "models": {
+            "ba": settings.model_fast,
+            "dev": settings.model_powerful,
+            "qa": settings.model_mid,
+        },
         "session_id": current_session_id[:8],
         "max_qa_iterations": settings.max_qa_iterations,
     }
@@ -404,11 +403,13 @@ async def list_outputs():
     for d in folders:
         readme = d / "README.md"
         files = [f.name for f in d.rglob("*") if f.is_file() and f.name != "README.md"]
-        results.append({
-            "name": d.name,
-            "has_readme": readme.exists(),
-            "files": files,
-        })
+        results.append(
+            {
+                "name": d.name,
+                "has_readme": readme.exists(),
+                "files": files,
+            }
+        )
     return results
 
 

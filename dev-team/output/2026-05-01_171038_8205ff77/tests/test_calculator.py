@@ -51,5 +51,5 @@ def test_syntax_errors():
     assert "Error" in evaluate_expression("(()")
 
 
-if __name__ == '__main__':
-    pytest.main(['-v'])
+if __name__ == "__main__":
+    pytest.main(["-v"])

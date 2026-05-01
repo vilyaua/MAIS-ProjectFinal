@@ -1,5 +1,4 @@
 import pytest
-
 from src.temperature import convert_temperature
 
 

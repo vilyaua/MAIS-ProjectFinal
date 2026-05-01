@@ -1,10 +1,9 @@
 """Business Analyst Agent — analyzes user story, produces SpecOutput."""
 
+from config import Settings
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
 from langchain.chat_models import init_chat_model
-
-from config import Settings
 from langfuse_prompts import get_system_prompt
 from schemas import SpecOutput
 from tools import BA_TOOLS

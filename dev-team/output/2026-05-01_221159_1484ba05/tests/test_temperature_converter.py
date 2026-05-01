@@ -5,7 +5,6 @@ from __future__ import annotations
 import math
 
 import pytest
-
 from src.temperature_converter import convert_temperature
 
 
@@ -91,9 +90,7 @@ def test_temperatures_below_absolute_zero_raise_exception(
 
 
 def test_extremely_high_temperature_within_physical_range() -> None:
-    assert convert_temperature(1_000_000, "Celsius", "Kelvin") == pytest.approx(
-        1_000_273.15
-    )
+    assert convert_temperature(1_000_000, "Celsius", "Kelvin") == pytest.approx(1_000_273.15)
 
 
 def test_absolute_zero_boundary_is_allowed() -> None:

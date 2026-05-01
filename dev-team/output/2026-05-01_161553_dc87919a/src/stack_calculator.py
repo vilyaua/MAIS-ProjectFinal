@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import List, Union
 
 
 class CalculatorError(Exception):
@@ -6,29 +6,29 @@ class CalculatorError(Exception):
 
 
 def precedence(op: str) -> int:
-    if op in ('+', '-'):
+    if op in ("+", "-"):
         return 1
-    if op in ('*', '/'):
+    if op in ("*", "/"):
         return 2
     return 0
 
 
 def apply_op(op: str, b: Union[int, float], a: Union[int, float]) -> Union[int, float]:
-    if op == '+':
+    if op == "+":
         return a + b
-    if op == '-':
+    if op == "-":
         return a - b
-    if op == '*':
+    if op == "*":
         return a * b
-    if op == '/':
+    if op == "/":
         if b == 0:
-            raise CalculatorError('Division by zero error')
+            raise CalculatorError("Division by zero error")
         return a / b
-    raise CalculatorError(f'Unknown operator: {op}')
+    raise CalculatorError(f"Unknown operator: {op}")
 
 
 def is_operator(c: str) -> bool:
-    return c in '+-*/'
+    return c in "+-*/"
 
 
 def tokenize(expression: str) -> List[str]:
@@ -48,19 +48,19 @@ def tokenize(expression: str) -> List[str]:
                 i += 1
             tokens.append(num)
             continue
-        elif c in '+-*/()':
+        elif c in "+-*/()":
             tokens.append(c)
             i += 1
             continue
         else:
-            raise CalculatorError(f'Invalid character found: {c}')
+            raise CalculatorError(f"Invalid character found: {c}")
     return tokens
 
 
 def evaluate(expression: str) -> Union[int, float]:
     expression = expression.strip()
     if not expression:
-        raise CalculatorError('Empty expression')
+        raise CalculatorError("Empty expression")
     tokens = tokenize(expression)
 
     values: List[Union[int, float]] = []
@@ -68,7 +68,7 @@ def evaluate(expression: str) -> Union[int, float]:
 
     def process_operator():
         if not ops or len(values) < 2:
-            raise CalculatorError('Invalid syntax: insufficient values for operation')
+            raise CalculatorError("Invalid syntax: insufficient values for operation")
         op = ops.pop()
         b = values.pop()
         a = values.pop()
@@ -82,29 +82,29 @@ def evaluate(expression: str) -> Union[int, float]:
 
         if token.isdigit():
             values.append(int(token))
-        elif token == '(':  # Push '(' to ops stack
+        elif token == "(":  # Push '(' to ops stack
             ops.append(token)
-        elif token == ')':  # Solve entire bracket
-            while ops and ops[-1] != '(':  # Process until matching '('
+        elif token == ")":  # Solve entire bracket
+            while ops and ops[-1] != "(":  # Process until matching '('
                 process_operator()
             if not ops:
-                raise CalculatorError('Invalid syntax: unmatched parentheses')
+                raise CalculatorError("Invalid syntax: unmatched parentheses")
             ops.pop()  # Remove the matching '('
         elif is_operator(token):
-            while ops and ops[-1] != '(' and precedence(ops[-1]) >= precedence(token):
+            while ops and ops[-1] != "(" and precedence(ops[-1]) >= precedence(token):
                 process_operator()
             ops.append(token)
         else:
-            raise CalculatorError(f'Invalid token found: {token}')
+            raise CalculatorError(f"Invalid token found: {token}")
         i += 1
 
     while ops:
-        if ops[-1] == '(' or ops[-1] == ')':
-            raise CalculatorError('Invalid syntax: unmatched parentheses')
+        if ops[-1] == "(" or ops[-1] == ")":
+            raise CalculatorError("Invalid syntax: unmatched parentheses")
         process_operator()
 
     if len(values) != 1:
-        raise CalculatorError('Invalid syntax: multiple values left without operators')
+        raise CalculatorError("Invalid syntax: multiple values left without operators")
 
     result = values[0]
     # Return int if whole number
@@ -113,12 +113,12 @@ def evaluate(expression: str) -> Union[int, float]:
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        expr = input('Enter expression to evaluate: ')
+        expr = input("Enter expression to evaluate: ")
         result = evaluate(expr)
-        print('Result:', result)
+        print("Result:", result)
     except CalculatorError as e:
-        print('Error:', e)
+        print("Error:", e)
     except Exception as e:
-        print('Unexpected error:', e)
+        print("Unexpected error:", e)

@@ -3,17 +3,18 @@
 Tests the complete flow: user story -> BA -> Developer -> QA -> final code.
 """
 
-import pytest
-
 from agents.ba import run_ba
 from agents.developer import run_developer
 from agents.qa import run_qa
+
 from tests.conftest import llm_judge
 
 
 def test_e2e_simple_feature():
     """Full pipeline: user story -> approved code."""
-    user_story = "As a user, I want a function that converts temperatures between Celsius and Fahrenheit"
+    user_story = (
+        "As a user, I want a function that converts temperatures between Celsius and Fahrenheit"
+    )
 
     # Step 1: BA
     spec = run_ba(user_story)

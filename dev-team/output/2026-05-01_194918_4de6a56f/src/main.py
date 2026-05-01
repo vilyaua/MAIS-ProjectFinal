@@ -1,14 +1,14 @@
 import sys
-from typing import Optional
 
 try:
     from pyfiglet import Figlet, FontNotFound
-except ImportError as e:
+except ImportError:
     print("Error: pyfiglet package not installed. Please install it with 'pip install pyfiglet'.")
     sys.exit(1)
 
 MAX_INPUT_LENGTH = 100  # Limit to prevent console overflow
 FONT = "standard"
+
 
 def ascii_art_from_text(text: str, font: str = FONT) -> str:
     """
@@ -39,6 +39,7 @@ def ascii_art_from_text(text: str, font: str = FONT) -> str:
         raise ValueError(f"Failed to generate ASCII art. {e}")
     return output
 
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python src/main.py <text to convert>")
@@ -50,6 +51,7 @@ def main():
     except ValueError as err:
         print(f"Error: {err}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

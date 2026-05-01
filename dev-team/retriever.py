@@ -10,13 +10,12 @@ import logging
 import pickle
 from pathlib import Path
 
+from config import Settings
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from sentence_transformers import CrossEncoder
-
-from config import Settings
 
 logger = logging.getLogger("retriever")
 
@@ -35,13 +34,9 @@ def _get_components():
         model=settings.embedding_model,
         api_key=settings.openai_api_key.get_secret_value(),
     )
-    vectorstore = FAISS.load_local(
-        str(index_dir), embeddings, allow_dangerous_deserialization=True
-    )
+    vectorstore = FAISS.load_local(str(index_dir), embeddings, allow_dangerous_deserialization=True)
 
-    semantic_retriever = vectorstore.as_retriever(
-        search_kwargs={"k": settings.retrieval_top_k}
-    )
+    semantic_retriever = vectorstore.as_retriever(search_kwargs={"k": settings.retrieval_top_k})
 
     chunks_path = index_dir / "bm25_chunks.pkl"
     with open(chunks_path, "rb") as f:
@@ -81,9 +76,7 @@ def retrieve(query: str) -> list:
     pairs = [(query, doc.page_content) for doc in candidates]
     scores = reranker.predict(pairs)
 
-    scored_docs = sorted(
-        zip(scores, candidates, strict=False), key=lambda x: x[0], reverse=True
-    )
+    scored_docs = sorted(zip(scores, candidates, strict=False), key=lambda x: x[0], reverse=True)
     results = [doc for _score, doc in scored_docs[:top_n]]
 
     logger.info("Retrieved %d candidates, reranked to %d results", len(candidates), len(results))

@@ -8,7 +8,7 @@ from __future__ import annotations
 import argparse
 import string
 import sys
-from typing import Dict, Iterable, List, Mapping, Sequence, TextIO
+from typing import Dict, List, Mapping, Sequence, TextIO
 
 DEFAULT_FONT = "block"
 SUPPORTED_FONTS = ("block", "simple")
@@ -137,9 +137,7 @@ def validate_font(font: str) -> str:
     normalized = font.lower().strip()
     if normalized not in SUPPORTED_FONTS:
         available = ", ".join(SUPPORTED_FONTS)
-        raise ValueError(
-            f"Invalid font/style '{font}'. Available font/styles: {available}."
-        )
+        raise ValueError(f"Invalid font/style '{font}'. Available font/styles: {available}.")
     return normalized
 
 
@@ -165,8 +163,7 @@ def _render_simple_line(text: str) -> str:
     for char in text:
         if char not in allowed or char in {"\n", "\r", "\t"}:
             raise ValueError(
-                f"Unsupported character {char!r} (U+{ord(char):04X}) for the "
-                "simple font."
+                f"Unsupported character {char!r} (U+{ord(char):04X}) for the simple font."
             )
     if not text:
         return ""
@@ -242,8 +239,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 3
     except Exception as error:  # pragma: no cover - defensive CLI guard.
         print(
-            "Error: failed to generate ASCII art due to an unexpected problem. "
-            f"Details: {error}",
+            f"Error: failed to generate ASCII art due to an unexpected problem. Details: {error}",
             file=sys.stderr,
         )
         return 1

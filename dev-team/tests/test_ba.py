@@ -5,8 +5,8 @@ with testable acceptance criteria.
 """
 
 import pytest
-
 from agents.ba import run_ba
+
 from tests.conftest import llm_judge
 
 
@@ -27,7 +27,7 @@ def test_ba_spec_completeness(user_story: str):
         f"Title: {spec.title}\n"
         f"Complexity: {spec.estimated_complexity}\n"
         f"Requirements:\n" + "\n".join(f"- {r}" for r in spec.requirements) + "\n"
-        f"Acceptance Criteria:\n" + "\n".join(f"- {ac}" for ac in spec.acceptance_criteria)
+        "Acceptance Criteria:\n" + "\n".join(f"- {ac}" for ac in spec.acceptance_criteria)
     )
 
     result = llm_judge(

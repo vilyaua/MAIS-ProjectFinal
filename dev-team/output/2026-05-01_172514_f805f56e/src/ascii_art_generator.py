@@ -34,8 +34,9 @@ def generate_ascii_art(text: str, font: Optional[str] = None) -> str:
 
     # Validate characters: Allow basic printable ASCII except control chars
     if not all(32 <= ord(ch) <= 126 for ch in text):
-        raise ValueError("Text contains unsupported special characters."
-                         " Please use printable ASCII characters.")
+        raise ValueError(
+            "Text contains unsupported special characters. Please use printable ASCII characters."
+        )
 
     figlet = pyfiglet.Figlet(font=font) if font else pyfiglet.Figlet()
     return figlet.renderText(text)

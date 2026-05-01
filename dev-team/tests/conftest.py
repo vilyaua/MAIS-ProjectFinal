@@ -3,15 +3,16 @@
 import json
 
 import pytest
-from langchain_openai import ChatOpenAI
-
 from config import Settings
+from langchain_openai import ChatOpenAI
 from schemas import JudgeResult
 
 settings = Settings()
 
 
-def llm_judge(criteria: str, input_text: str, output_text: str, threshold: float = 0.6) -> JudgeResult:
+def llm_judge(
+    criteria: str, input_text: str, output_text: str, threshold: float = 0.6
+) -> JudgeResult:
     """Call LLM to evaluate output against criteria.
 
     Returns JudgeResult with score, reasoning, and pass/fail.

@@ -1093,9 +1093,9 @@ During task with name 'ba_node' and id '26fe3af0-604d-b731-2167-901f65e2f2a1'
 16:25:11 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/5
 16:25:11 [INFO] Pipeline total: tokens: 67,177 (in: 60,420, out: 6,757) | cost: $0.1749 | calls: 15
 16:25:11 [INFO] Results packaged to output/2026-04-30_162511_d1199ebe
-16:31:01 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit, 
+16:31:01 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit,
 16:34:16 [INFO] Dev Team graph compiled successfully
-16:34:43 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit, 
+16:34:43 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit,
 16:34:44 [INFO] Workspace cleaned
 16:34:44 [INFO] BA Agent: analyzing user story
 16:34:44 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
@@ -5005,7 +5005,7 @@ During task with name 'qa_node' and id '0a398a74-e571-b822-447e-5ef7126128e1'
 21:45:11 [INFO] Dev Team graph compiled successfully
 22:01:25 [INFO] Dev Team graph compiled successfully
 22:10:28 [INFO] Dev Team graph compiled successfully
-22:10:46 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit, 
+22:10:46 [INFO] User story: Write a Python function that converts temperatures between Celsius, Fahrenheit,
 22:10:46 [INFO] Workspace cleaned
 22:10:46 [INFO] BA Agent: analyzing user story
 22:10:47 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)

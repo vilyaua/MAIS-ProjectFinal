@@ -92,14 +92,16 @@ def _build_readme(
 
     # Specification
     if spec:
-        lines.extend([
-            f"## Specification: {spec.title}",
-            "",
-            f"**Complexity:** {spec.estimated_complexity}",
-            "",
-            "### Requirements",
-            "",
-        ])
+        lines.extend(
+            [
+                f"## Specification: {spec.title}",
+                "",
+                f"**Complexity:** {spec.estimated_complexity}",
+                "",
+                "### Requirements",
+                "",
+            ]
+        )
         for i, req in enumerate(spec.requirements, 1):
             lines.append(f"{i}. {req}")
         lines.extend(["", "### Acceptance Criteria", ""])
@@ -131,46 +133,56 @@ def _build_readme(
             lines.append(f"python {main_file}")
         lines.append("```")
         if test_file:
-            lines.extend([
-                "", "Run tests:", "",
-                "```bash",
-                f"python -m pytest {test_file} -v",
-                "```",
-            ])
+            lines.extend(
+                [
+                    "",
+                    "Run tests:",
+                    "",
+                    "```bash",
+                    f"python -m pytest {test_file} -v",
+                    "```",
+                ]
+            )
         lines.append("")
 
     # Code
     if code:
-        lines.extend([
-            "## Generated Code",
-            "",
-            f"{code.description}",
-            "",
-            "**Files:**",
-            "",
-        ])
+        lines.extend(
+            [
+                "## Generated Code",
+                "",
+                f"{code.description}",
+                "",
+                "**Files:**",
+                "",
+            ]
+        )
         for f in code.files_created:
             lines.append(f"- `{f}`")
-        lines.extend([
-            "",
-            "### Source",
-            "",
-            "```python",
-            code.source_code,
-            "```",
-            "",
-        ])
+        lines.extend(
+            [
+                "",
+                "### Source",
+                "",
+                "```python",
+                code.source_code,
+                "```",
+                "",
+            ]
+        )
 
     # QA Review
     if review:
-        lines.extend([
-            "## QA Review",
-            "",
-            f"**Verdict:** {review.verdict}",
-            f"**Score:** {review.score:.0%}",
-            f"**Iterations:** {iteration}",
-            "",
-        ])
+        lines.extend(
+            [
+                "## QA Review",
+                "",
+                f"**Verdict:** {review.verdict}",
+                f"**Score:** {review.score:.0%}",
+                f"**Iterations:** {iteration}",
+                "",
+            ]
+        )
         if review.issues:
             lines.append("### Issues")
             lines.append("")

@@ -2,13 +2,12 @@
 
 import logging
 
-from langchain_core.runnables import RunnableConfig
-from langgraph.types import interrupt
-
 from agents.ba import run_ba
 from agents.developer import run_developer
 from agents.qa import run_qa
 from github_integration import create_pr
+from langchain_core.runnables import RunnableConfig
+from langgraph.types import interrupt
 from state import DevTeamState
 from token_tracker import pipeline_usage
 
@@ -37,13 +36,15 @@ def hitl_gate(state: DevTeamState) -> dict:
     spec = state["spec"]
 
     # Present spec to user and wait for approval
-    result = interrupt({
-        "type": "spec_review",
-        "title": spec.title,
-        "requirements": spec.requirements,
-        "acceptance_criteria": spec.acceptance_criteria,
-        "estimated_complexity": spec.estimated_complexity,
-    })
+    result = interrupt(
+        {
+            "type": "spec_review",
+            "title": spec.title,
+            "requirements": spec.requirements,
+            "acceptance_criteria": spec.acceptance_criteria,
+            "estimated_complexity": spec.estimated_complexity,
+        }
+    )
 
     # result comes from Command(resume={"approved": bool, "feedback": str})
     approved = result.get("approved", False)

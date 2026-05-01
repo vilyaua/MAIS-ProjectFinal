@@ -3,10 +3,9 @@
 Tests that Developer produces code matching the specification.
 """
 
-import pytest
-
 from agents.developer import run_developer
 from schemas import SpecOutput
+
 from tests.conftest import llm_judge
 
 
@@ -17,12 +16,14 @@ def _make_spec(
 ) -> SpecOutput:
     return SpecOutput(
         title=title,
-        requirements=requirements or [
+        requirements=requirements
+        or [
             "Implement add, subtract, multiply, divide functions",
             "Handle division by zero with a clear error message",
             "Support both integer and float inputs",
         ],
-        acceptance_criteria=acceptance_criteria or [
+        acceptance_criteria=acceptance_criteria
+        or [
             "add(2, 3) returns 5",
             "divide(10, 0) raises ValueError with message",
             "multiply(2.5, 4) returns 10.0",

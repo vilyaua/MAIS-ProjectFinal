@@ -78,7 +78,7 @@ def validate_expression(expr: str) -> None:
     # Check for balanced parentheses
     stack = []
     for char in expr:
-        if char == '(': 
+        if char == '(':
             stack.append(char)
         elif char == ')':
             if not stack:

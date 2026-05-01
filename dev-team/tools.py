@@ -15,15 +15,13 @@ import os
 import re
 import shutil
 import subprocess
-import textwrap
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import trafilatura
+from config import Settings
 from ddgs import DDGS
 from langchain_core.tools import tool
-
-from config import Settings
 
 logger = logging.getLogger("tools")
 settings = Settings()
@@ -292,8 +290,20 @@ def docs_search(library_name: str, query: str) -> str:
 
 # Allowed command prefixes for the terminal tool
 _ALLOWED_COMMANDS = [
-    "python", "python3", "pytest", "ls", "cat", "head", "tail",
-    "wc", "diff", "find", "echo", "mkdir", "touch", "tree",
+    "python",
+    "python3",
+    "pytest",
+    "ls",
+    "cat",
+    "head",
+    "tail",
+    "wc",
+    "diff",
+    "find",
+    "echo",
+    "mkdir",
+    "touch",
+    "tree",
 ]
 
 
@@ -314,7 +324,8 @@ def run_command(command: str) -> str:
 
     first_word = command.strip().split()[0]
     if first_word not in _ALLOWED_COMMANDS:
-        return f"BLOCKED: Command '{first_word}' is not allowed. Allowed: {', '.join(_ALLOWED_COMMANDS)}"
+        allowed = ", ".join(_ALLOWED_COMMANDS)
+        return f"BLOCKED: Command '{first_word}' not allowed. Allowed: {allowed}"
 
     # Block dangerous patterns
     for pattern in _DANGEROUS_PATTERNS:

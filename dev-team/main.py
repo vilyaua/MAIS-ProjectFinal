@@ -8,12 +8,11 @@ import uuid
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
+from config import APP_VERSION, Settings
+from graph import build_graph
 from langfuse import propagate_attributes
 from langfuse.langchain import CallbackHandler
 from langgraph.types import Command, Interrupt
-
-from config import APP_VERSION, Settings
-from graph import build_graph
 from output_manager import clean_workspace, package_results
 
 Path("logs").mkdir(exist_ok=True)

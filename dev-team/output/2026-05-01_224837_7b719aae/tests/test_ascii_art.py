@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-
 from src.ascii_art import generate_ascii_art, main
 
 

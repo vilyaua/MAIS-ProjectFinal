@@ -113,8 +113,7 @@ def generate_ascii_art(
     if unsupported:
         unique_characters = "".join(dict.fromkeys(unsupported))
         warnings.warn(
-            "Unsupported characters were replaced with "
-            f"{placeholder_key!r}: {unique_characters!r}",
+            f"Unsupported characters were replaced with {placeholder_key!r}: {unique_characters!r}",
             UserWarning,
             stacklevel=2,
         )

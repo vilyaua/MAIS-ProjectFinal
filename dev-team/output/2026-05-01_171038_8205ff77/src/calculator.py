@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import List, Union
 
 
 class CalculatorError(Exception):
@@ -15,9 +15,9 @@ def validate_expression(expr: str) -> None:
     # Check for balanced parentheses
     stack = []
     for char in expr:
-        if char == '(': 
+        if char == "(":
             stack.append(char)
-        elif char == ')':
+        elif char == ")":
             if not stack:
                 raise CalculatorError("Mismatched parentheses detected.")
             stack.pop()
@@ -26,21 +26,21 @@ def validate_expression(expr: str) -> None:
 
 
 def precedence(op: str) -> int:
-    if op in ('+', '-'):
+    if op in ("+", "-"):
         return 1
-    if op in ('*', '/'):
+    if op in ("*", "/"):
         return 2
     return 0
 
 
 def apply_operator(op: str, b: float, a: float) -> float:
-    if op == '+':
+    if op == "+":
         return a + b
-    elif op == '-':
+    elif op == "-":
         return a - b
-    elif op == '*':
+    elif op == "*":
         return a * b
-    elif op == '/':
+    elif op == "/":
         if b == 0:
             raise CalculatorError("Division by zero is not allowed.")
         return a / b
@@ -59,7 +59,7 @@ def evaluate_expression(expression: str) -> Union[float, str]:
         float or str: The numerical result or error message.
     """
     try:
-        if not expression or expression.strip() == '':
+        if not expression or expression.strip() == "":
             raise CalculatorError("Input expression is empty or whitespace.")
 
         validate_expression(expression)
@@ -70,23 +70,25 @@ def evaluate_expression(expression: str) -> Union[float, str]:
         i = 0
         while i < len(expression):
             char = expression[i]
-            if char.isdigit() or char == '.':
+            if char.isdigit() or char == ".":
                 number_buffer.append(char)
             else:
                 if number_buffer:
-                    tokens.append(''.join(number_buffer))
+                    tokens.append("".join(number_buffer))
                     number_buffer.clear()
 
-                if char in '+-*/()':
+                if char in "+-*/()":
                     tokens.append(char)
                 elif char.isspace():
                     pass
                 else:
-                    raise CalculatorError(f"Invalid character detected during tokenization: '{char}'")
+                    raise CalculatorError(
+                        f"Invalid character detected during tokenization: '{char}'"
+                    )
             i += 1
 
         if number_buffer:
-            tokens.append(''.join(number_buffer))
+            tokens.append("".join(number_buffer))
 
         # Edge case: if expression is just a number
         if len(tokens) == 1:
@@ -113,23 +115,26 @@ def evaluate_expression(expression: str) -> Union[float, str]:
 
             if token.isdigit() or _is_float(token):  # number
                 values_stack.append(float(token))
-            elif token == '(':  # push '(' to operator stack
+            elif token == "(":  # push '(' to operator stack
                 operators_stack.append(token)
-            elif token == ')':  # until '(' pop and evaluate
-                while operators_stack and operators_stack[-1] != '(':  # apply until '('
+            elif token == ")":  # until '(' pop and evaluate
+                while operators_stack and operators_stack[-1] != "(":  # apply until '('
                     process_operator()
-                if not operators_stack or operators_stack[-1] != '(':  # unmatched
+                if not operators_stack or operators_stack[-1] != "(":  # unmatched
                     raise CalculatorError("Mismatched parentheses detected.")
                 operators_stack.pop()  # pop '('
             else:  # operator
-                while (operators_stack and operators_stack[-1] != '(' and
-                       precedence(operators_stack[-1]) >= precedence(token)):
+                while (
+                    operators_stack
+                    and operators_stack[-1] != "("
+                    and precedence(operators_stack[-1]) >= precedence(token)
+                ):
                     process_operator()
                 operators_stack.append(token)
             idx += 1
 
         while operators_stack:
-            if operators_stack[-1] == '(':  # unmatched
+            if operators_stack[-1] == "(":  # unmatched
                 raise CalculatorError("Mismatched parentheses detected.")
             process_operator()
 
@@ -152,7 +157,7 @@ def _is_float(token: str) -> bool:
         return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     expr = input("Enter expression: ")
     result = evaluate_expression(expr)
     print(result)

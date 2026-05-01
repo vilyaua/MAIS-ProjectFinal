@@ -9,7 +9,7 @@ import shlex
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Sequence, TextIO
+from typing import Sequence, TextIO
 
 
 class TodoError(Exception):
@@ -60,14 +60,10 @@ class TodoStore:
                 f"Storage file '{self.storage_path}' contains invalid JSON."
             ) from exc
         except OSError as exc:
-            raise StorageError(
-                f"Could not read storage file '{self.storage_path}': {exc}"
-            ) from exc
+            raise StorageError(f"Could not read storage file '{self.storage_path}': {exc}") from exc
 
         if not isinstance(raw_data, list):
-            raise StorageError(
-                f"Storage file '{self.storage_path}' must contain a JSON list."
-            )
+            raise StorageError(f"Storage file '{self.storage_path}' must contain a JSON list.")
 
         loaded_items: list[TodoItem] = []
         try:
@@ -97,9 +93,7 @@ class TodoStore:
 
         ids = [item.id for item in loaded_items]
         if len(ids) != len(set(ids)):
-            raise StorageError(
-                f"Storage file '{self.storage_path}' contains duplicate todo IDs."
-            )
+            raise StorageError(f"Storage file '{self.storage_path}' contains duplicate todo IDs.")
 
         self._items = loaded_items
 

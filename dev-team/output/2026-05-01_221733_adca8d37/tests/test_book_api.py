@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-
 from src.book_api import create_app
 
 
@@ -53,7 +52,9 @@ def test_get_book_by_id_returns_book_or_404(client):
 
 def test_search_books_by_partial_case_insensitive_title_and_author(client):
     create_book(client, title="Clean Code", author="Robert C. Martin", isbn="9780132350884")
-    create_book(client, title="The Clean Coder", author="Robert C. Martin", isbn="978-0-13-708107-3")
+    create_book(
+        client, title="The Clean Coder", author="Robert C. Martin", isbn="978-0-13-708107-3"
+    )
     create_book(client, title="Refactoring", author="Martin Fowler", isbn="978-0-201-48567-7")
 
     response = client.get("/books?title=clean&author=ROBERT")
@@ -76,10 +77,24 @@ def test_search_with_no_matches_returns_empty_list(client):
     "payload, expected_message",
     [
         ({"author": "Author", "publication_year": 2020, "isbn": "9780132350884"}, "title"),
-        ({"title": " ", "author": "Author", "publication_year": 2020, "isbn": "9780132350884"}, "title"),
+        (
+            {"title": " ", "author": "Author", "publication_year": 2020, "isbn": "9780132350884"},
+            "title",
+        ),
         ({"title": "Title", "publication_year": 2020, "isbn": "9780132350884"}, "author"),
-        ({"title": "Title", "author": "Author", "publication_year": "2020", "isbn": "9780132350884"}, "publication_year"),
-        ({"title": "Title", "author": "Author", "publication_year": 2020, "isbn": "invalid"}, "isbn"),
+        (
+            {
+                "title": "Title",
+                "author": "Author",
+                "publication_year": "2020",
+                "isbn": "9780132350884",
+            },
+            "publication_year",
+        ),
+        (
+            {"title": "Title", "author": "Author", "publication_year": 2020, "isbn": "invalid"},
+            "isbn",
+        ),
     ],
 )
 def test_create_book_rejects_invalid_input(client, payload, expected_message):

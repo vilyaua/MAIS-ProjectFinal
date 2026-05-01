@@ -114,8 +114,7 @@ def sanitize_text(text: str) -> SanitizedInput:
     if unsupported:
         unique_unsupported = sorted(set(unsupported))
         warnings.append(
-            "Warning: Unsupported characters replaced with '?': "
-            + ", ".join(unique_unsupported)
+            "Warning: Unsupported characters replaced with '?': " + ", ".join(unique_unsupported)
         )
 
     return SanitizedInput("".join(sanitized), tuple(warnings))
@@ -171,9 +170,7 @@ def read_input(arguments: Iterable[str], stdin: TextIO) -> str:
 def build_parser() -> argparse.ArgumentParser:
     """Build the command-line argument parser."""
 
-    parser = argparse.ArgumentParser(
-        description="Generate ASCII art from printable text."
-    )
+    parser = argparse.ArgumentParser(description="Generate ASCII art from printable text.")
     parser.add_argument(
         "text",
         nargs="*",

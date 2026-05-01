@@ -7,12 +7,11 @@ import logging
 import pickle
 from pathlib import Path
 
+from config import Settings
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
-from config import Settings
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("ingest")
@@ -51,8 +50,12 @@ def ingest():
         chunk_overlap=settings.chunk_overlap,
     )
     chunks = splitter.split_documents(docs)
-    logger.info("Split into %d chunks (size=%d, overlap=%d)",
-                len(chunks), settings.chunk_size, settings.chunk_overlap)
+    logger.info(
+        "Split into %d chunks (size=%d, overlap=%d)",
+        len(chunks),
+        settings.chunk_size,
+        settings.chunk_overlap,
+    )
 
     # Build FAISS index
     embeddings = OpenAIEmbeddings(

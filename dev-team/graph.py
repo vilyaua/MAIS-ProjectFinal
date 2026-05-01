@@ -4,16 +4,15 @@ Graph:
     START -> ba_node -> hitl_gate -> (approved?)
                                       |- NO  -> ba_node (with feedback)
                                       +- YES -> dev_node -> qa_node -> (verdict?)
-                                                                        |- REVISION_NEEDED & iter<5 -> dev_node
-                                                                        +- APPROVED or iter>=5 -> github_node -> END
+                                                |- REVISION & iter<5 -> dev_node
+                                                +- APPROVED/iter>=5 -> github_node -> END
 """
 
 import logging
 
+from config import Settings
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, StateGraph
-
-from config import Settings
 from nodes import ba_node, dev_node, github_node, hitl_gate, qa_node
 from state import DevTeamState
 
@@ -64,19 +63,27 @@ def build_graph() -> StateGraph:
     graph.add_edge("ba_node", "hitl_gate")
 
     # HITL gate: conditional routing
-    graph.add_conditional_edges("hitl_gate", _route_after_hitl, {
-        "ba_node": "ba_node",
-        "dev_node": "dev_node",
-    })
+    graph.add_conditional_edges(
+        "hitl_gate",
+        _route_after_hitl,
+        {
+            "ba_node": "ba_node",
+            "dev_node": "dev_node",
+        },
+    )
 
     # Dev -> QA
     graph.add_edge("dev_node", "qa_node")
 
     # QA: conditional routing (loop, or proceed to GitHub)
-    graph.add_conditional_edges("qa_node", _route_after_qa, {
-        "dev_node": "dev_node",
-        "github_node": "github_node",
-    })
+    graph.add_conditional_edges(
+        "qa_node",
+        _route_after_qa,
+        {
+            "dev_node": "dev_node",
+            "github_node": "github_node",
+        },
+    )
 
     # GitHub -> END
     graph.add_edge("github_node", END)

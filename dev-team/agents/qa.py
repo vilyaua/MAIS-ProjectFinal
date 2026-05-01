@@ -1,10 +1,9 @@
 """QA Engineer Agent — reviews code, runs tests, returns ReviewOutput."""
 
+from config import Settings
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
 from langchain.chat_models import init_chat_model
-
-from config import Settings
 from langfuse_prompts import get_system_prompt
 from schemas import CodeOutput, ReviewOutput, SpecOutput
 from tools import QA_TOOLS
@@ -54,15 +53,17 @@ def run_qa(
     for i, ac in enumerate(spec.acceptance_criteria, 1):
         prompt_parts.append(f"{i}. {ac}")
 
-    prompt_parts.extend([
-        "",
-        "## Code to review",
-        f"**Description:** {code.description}",
-        f"**Files to review:** {', '.join(code.files_created)}",
-        "",
-        f"Review iteration {iteration + 1}/{settings.max_qa_iterations}.",
-        "Follow your review process. Read ALL files listed above.",
-    ])
+    prompt_parts.extend(
+        [
+            "",
+            "## Code to review",
+            f"**Description:** {code.description}",
+            f"**Files to review:** {', '.join(code.files_created)}",
+            "",
+            f"Review iteration {iteration + 1}/{settings.max_qa_iterations}.",
+            "Follow your review process. Read ALL files listed above.",
+        ]
+    )
 
     prompt = "\n".join(prompt_parts)
 

@@ -10,13 +10,10 @@ from typing import Optional, Protocol, TextIO
 
 import pyfiglet
 
-
 DEFAULT_FONT = "standard"
 
 # Common ANSI escape sequence patterns, including CSI and OSC sequences.
-ANSI_ESCAPE_RE = re.compile(
-    r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1B\\))"
-)
+ANSI_ESCAPE_RE = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1B\\))")
 CONTROL_CHARS_RE = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]")
 WHITESPACE_TO_SPACE_RE = re.compile(r"[\t\r\n]+")
 
@@ -107,9 +104,7 @@ class AsciiArtGenerator:
 
 def build_parser() -> argparse.ArgumentParser:
     """Build the command-line argument parser."""
-    parser = argparse.ArgumentParser(
-        description="Generate ASCII art from text using pyfiglet."
-    )
+    parser = argparse.ArgumentParser(description="Generate ASCII art from text using pyfiglet.")
     parser.add_argument(
         "text",
         nargs="*",

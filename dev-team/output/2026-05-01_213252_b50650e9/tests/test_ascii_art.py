@@ -14,8 +14,8 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from ascii_art import (  # noqa: E402
-    AsciiArtError,
     FONT_HEIGHT,
+    AsciiArtError,
     generate_ascii_art_with_warnings,
     main,
     render_ascii_art,
@@ -56,7 +56,9 @@ def test_multi_word_input_preserves_spacing() -> None:
     assert "       " in single_space_art.splitlines()[0]
 
 
-def test_main_prints_art_to_stdout_for_command_line_text(capsys: pytest.CaptureFixture[str]) -> None:
+def test_main_prints_art_to_stdout_for_command_line_text(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     exit_code = main(["OK"])
     captured = capsys.readouterr()
 

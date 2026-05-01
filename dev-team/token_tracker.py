@@ -79,11 +79,7 @@ class TokenUsage:
         do_ = self.output_tokens - prev["output_tokens"]
         dc = self.total_cost - prev["total_cost"]
         dn = self.calls - prev["calls"]
-        return (
-            f"tokens: {dt:,} "
-            f"(in: {di:,}, out: {do_:,}) | "
-            f"cost: ${dc:.4f} | calls: {dn}"
-        )
+        return f"tokens: {dt:,} (in: {di:,}, out: {do_:,}) | cost: ${dc:.4f} | calls: {dn}"
 
     def reset(self) -> None:
         with self._lock:
@@ -119,7 +115,11 @@ class TokenTrackingHandler(BaseCallbackHandler):
             self.usage.add(input_tokens, output_tokens, model)
             logger.info(
                 "LLM call #%d done: in=%d out=%d model=%s | running total: %d",
-                self._call_count, input_tokens, output_tokens, model, self.usage.total_tokens,
+                self._call_count,
+                input_tokens,
+                output_tokens,
+                model,
+                self.usage.total_tokens,
             )
             return
 
@@ -137,14 +137,19 @@ class TokenTrackingHandler(BaseCallbackHandler):
                     self.usage.add(inp, out, m)
                     logger.info(
                         "LLM call #%d done (gen): in=%d out=%d model=%s | running total: %d",
-                        self._call_count, inp, out, m, self.usage.total_tokens,
+                        self._call_count,
+                        inp,
+                        out,
+                        m,
+                        self.usage.total_tokens,
                     )
                     return
 
         # Nothing captured
         logger.warning(
             "LLM call #%d done: NO token data. llm_output keys=%s",
-            self._call_count, list(llm_output.keys()),
+            self._call_count,
+            list(llm_output.keys()),
         )
 
     def on_llm_error(self, error, **kwargs):

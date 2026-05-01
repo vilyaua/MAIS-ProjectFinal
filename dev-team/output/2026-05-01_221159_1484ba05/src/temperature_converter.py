@@ -37,8 +37,7 @@ def _validate_temperature(value: Real) -> float:
     """Validate and return the temperature as a float."""
     if isinstance(value, bool) or not isinstance(value, Real):
         raise ValueError(
-            f"Invalid temperature value: expected a numeric value, got "
-            f"{type(value).__name__}."
+            f"Invalid temperature value: expected a numeric value, got {type(value).__name__}."
         )
 
     temperature = float(value)
@@ -91,8 +90,6 @@ def convert_temperature(
 
     kelvin_value = _to_kelvin(numeric_temperature, normalized_source)
     if kelvin_value < 0.0:
-        raise ValueError(
-            "Invalid temperature value: temperature is below absolute zero."
-        )
+        raise ValueError("Invalid temperature value: temperature is below absolute zero.")
 
     return float(_from_kelvin(kelvin_value, normalized_target))

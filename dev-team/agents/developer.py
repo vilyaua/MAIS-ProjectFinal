@@ -1,10 +1,9 @@
 """Developer Agent — receives spec, writes code, creates project files."""
 
+from config import Settings
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
 from langchain.chat_models import init_chat_model
-
-from config import Settings
 from langfuse_prompts import get_system_prompt
 from schemas import CodeOutput, ReviewOutput, SpecOutput
 from tools import DEVELOPER_TOOLS
@@ -53,13 +52,15 @@ def run_developer(
         prompt_parts.append(f"{i}. {ac}")
 
     if review and review.verdict == "REVISION_NEEDED":
-        prompt_parts.extend([
-            "",
-            f"## QA Feedback (iteration {iteration})",
-            f"**Score:** {review.score:.1f}",
-            "",
-            "**Issues to fix:**",
-        ])
+        prompt_parts.extend(
+            [
+                "",
+                f"## QA Feedback (iteration {iteration})",
+                f"**Score:** {review.score:.1f}",
+                "",
+                "**Issues to fix:**",
+            ]
+        )
         for issue in review.issues:
             prompt_parts.append(f"- {issue}")
         if review.suggestions:
@@ -67,7 +68,9 @@ def run_developer(
             for sug in review.suggestions:
                 prompt_parts.append(f"- {sug}")
         prompt_parts.append("")
-        prompt_parts.append("This is a REVISION. Follow the revision workflow from your instructions.")
+        prompt_parts.append(
+            "This is a REVISION. Follow the revision workflow from your instructions."
+        )
 
     prompt = "\n".join(prompt_parts)
 

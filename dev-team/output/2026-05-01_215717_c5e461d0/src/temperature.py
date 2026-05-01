@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-
 ABSOLUTE_ZERO_C = -273.15
 ABSOLUTE_ZERO_F = -459.67
 ABSOLUTE_ZERO_K = 0.0
@@ -49,15 +48,12 @@ def _validate_temperature(temperature: int | float) -> float:
 
 def _validate_unit(unit: str, parameter_name: str) -> str:
     if not isinstance(unit, str):
-        raise ValueError(
-            f"{parameter_name} must be one of 'C', 'F', or 'K' (case-insensitive)."
-        )
+        raise ValueError(f"{parameter_name} must be one of 'C', 'F', or 'K' (case-insensitive).")
 
     normalized = unit.strip().upper()
     if normalized not in ALLOWED_UNITS:
         raise ValueError(
-            f"Invalid unit '{unit}'. Unit must be one of 'C', 'F', or 'K' "
-            "(case-insensitive)."
+            f"Invalid unit '{unit}'. Unit must be one of 'C', 'F', or 'K' (case-insensitive)."
         )
     return normalized
 
@@ -70,9 +66,7 @@ def _validate_absolute_zero(value: float, unit: str) -> None:
     }
     minimum = minimums[unit]
     if value < minimum:
-        raise ValueError(
-            f"Temperature {value} {unit} is below absolute zero ({minimum} {unit})."
-        )
+        raise ValueError(f"Temperature {value} {unit} is below absolute zero ({minimum} {unit}).")
 
 
 def _to_celsius(value: float, unit: str) -> float:

@@ -6,11 +6,10 @@ Tests that QA catches real issues and provides actionable feedback.
 import os
 import shutil
 
-import pytest
-
 from agents.qa import run_qa
 from config import Settings
 from schemas import CodeOutput, SpecOutput
+
 from tests.conftest import llm_judge
 
 settings = Settings()
@@ -59,10 +58,10 @@ def test_qa_catches_bad_code():
 
     bad_code = CodeOutput(
         source_code=(
-            'def register(email, password):\n'
-            '    # No validation at all\n'
-            '    users = {}\n'
-            '    users[email] = password\n'
+            "def register(email, password):\n"
+            "    # No validation at all\n"
+            "    users = {}\n"
+            "    users[email] = password\n"
             '    return "ok"\n'
         ),
         description="Basic registration function",
@@ -104,12 +103,12 @@ def test_qa_approves_good_code():
 
     good_code = CodeOutput(
         source_code=(
-            'import re\n\n'
-            'def register(email: str, password: str) -> dict:\n'
+            "import re\n\n"
+            "def register(email: str, password: str) -> dict:\n"
             '    """Register a new user with email and password."""\n'
             '    if not re.match(r"^[\\w.+-]+@[\\w-]+\\.[\\w.]+$", email):\n'
             '        return {"error": "Invalid email format"}\n'
-            '    if len(password) < 8:\n'
+            "    if len(password) < 8:\n"
             '        return {"error": "Password must be at least 8 characters"}\n'
             '    return {"success": True, "email": email}\n'
         ),

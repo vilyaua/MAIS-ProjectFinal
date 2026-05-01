@@ -61,9 +61,7 @@ class BookRepository:
         return True
 
 
-ISBN_ALLOWED_PATTERN = re.compile(
-    r"^(?:ISBN(?:-1[03])?:?\s*)?[0-9Xx][0-9Xx\-\s]{8,20}[0-9Xx]$"
-)
+ISBN_ALLOWED_PATTERN = re.compile(r"^(?:ISBN(?:-1[03])?:?\s*)?[0-9Xx][0-9Xx\-\s]{8,20}[0-9Xx]$")
 
 
 def create_app() -> Flask:
@@ -214,7 +212,4 @@ def is_valid_isbn(value: str) -> bool:
             break
 
     compact = re.sub(r"[\s-]", "", candidate).upper()
-    return bool(
-        re.fullmatch(r"\d{9}[\dX]", compact)
-        or re.fullmatch(r"\d{13}", compact)
-    )
+    return bool(re.fullmatch(r"\d{9}[\dX]", compact) or re.fullmatch(r"\d{13}", compact))
