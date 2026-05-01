@@ -55,27 +55,41 @@ def create_pr(
     )
     logger.info("Created branch: %s", branch_name)
 
-    # Commit workspace files
+    # Commit all workspace files in a single commit via Git Trees API
     workspace = Path(settings.workspace_dir)
     if not workspace.exists():
         logger.warning("Workspace directory not found")
         return None
 
-    files_committed = 0
+    tree_items = []
     for filepath in sorted(workspace.rglob("*")):
         if not filepath.is_file() or filepath.name.startswith("."):
             continue
         rel_path = str(filepath.relative_to(workspace))
         content = filepath.read_text(encoding="utf-8", errors="replace")
-        repo.create_file(
-            path=rel_path,
-            message=f"Add {rel_path}",
-            content=content,
-            branch=branch_name,
-        )
-        files_committed += 1
+        blob = repo.create_git_blob(content, "utf-8")
+        tree_items.append({
+            "path": rel_path,
+            "mode": "100644",
+            "type": "blob",
+            "sha": blob.sha,
+        })
 
-    logger.info("Committed %d files to %s", files_committed, branch_name)
+    if not tree_items:
+        logger.warning("No files to commit")
+        return None
+
+    base_tree = repo.get_git_tree(base_branch.commit.sha)
+    new_tree = repo.create_git_tree(tree_items, base_tree)
+    commit = repo.create_git_commit(
+        message=f"Add {spec.title}",
+        tree=new_tree,
+        parents=[repo.get_git_commit(base_branch.commit.sha)],
+    )
+    ref = repo.get_git_ref(f"heads/{branch_name}")
+    ref.edit(commit.sha)
+
+    logger.info("Committed %d files to %s (single commit)", len(tree_items), branch_name)
 
     # Build PR body
     body_parts = [

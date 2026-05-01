@@ -21,7 +21,10 @@ class SpecOutput(BaseModel):
 class CodeOutput(BaseModel):
     """Structured output from the Developer agent."""
 
-    source_code: str = Field(description="Main source code of the implementation")
+    source_code: str = Field(
+        default="",
+        description="Optional summary or main entry point code. Full code is in workspace files.",
+    )
     description: str = Field(description="Brief description of what was implemented and how")
     files_created: list[str] = Field(description="List of file paths created in workspace/")
 

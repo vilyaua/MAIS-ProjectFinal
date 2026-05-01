@@ -60,6 +60,29 @@ class TokenUsage:
             f"cost: ${self.total_cost:.4f} | calls: {self.calls}"
         )
 
+    def snapshot(self) -> dict:
+        """Return a snapshot of current values for delta calculation."""
+        return {
+            "total_tokens": self.total_tokens,
+            "input_tokens": self.input_tokens,
+            "output_tokens": self.output_tokens,
+            "total_cost": self.total_cost,
+            "calls": self.calls,
+        }
+
+    def delta_summary(self, prev: dict) -> str:
+        """Return a summary of the delta since a previous snapshot."""
+        dt = self.total_tokens - prev["total_tokens"]
+        di = self.input_tokens - prev["input_tokens"]
+        do_ = self.output_tokens - prev["output_tokens"]
+        dc = self.total_cost - prev["total_cost"]
+        dn = self.calls - prev["calls"]
+        return (
+            f"tokens: {dt:,} "
+            f"(in: {di:,}, out: {do_:,}) | "
+            f"cost: ${dc:.4f} | calls: {dn}"
+        )
+
     def reset(self) -> None:
         with self._lock:
             self.input_tokens = 0

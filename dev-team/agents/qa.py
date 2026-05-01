@@ -22,7 +22,7 @@ def _get_qa_agent():
             "qa-prompt",
             max_iterations=str(settings.max_qa_iterations),
         )
-        model = init_chat_model(settings.model_fast, max_retries=8)
+        model = init_chat_model(settings.model_fast, max_retries=4)
         _qa_agent = create_agent(
             model=model,
             tools=QA_TOOLS,

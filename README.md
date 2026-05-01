@@ -124,7 +124,9 @@ python -m pytest tests/ -v
 | `web_search` | BA, Developer | DuckDuckGo search (no API key needed) |
 | `knowledge_search` | BA | Hybrid RAG (FAISS + BM25 + cross-encoder reranking) |
 | `docs_search` | BA, Developer | Context7 MCP — up-to-date library documentation |
+| `read_notion_page` | BA | Read user stories from Notion pages |
 | `python_repl` | Developer, QA | Sandboxed Python execution (30s timeout, dangerous ops blocked) |
+| `run_command` | Developer, QA | Run shell commands in workspace (python, pytest, ls, etc.) |
 | `file_write` | Developer | Write files to `workspace/` directory |
 | `file_read` | Developer, QA | Read files from `workspace/` directory |
 
@@ -193,6 +195,23 @@ Upload these prompts to Langfuse (label: `production`):
 | `developer-prompt` | Developer | — |
 | `qa-prompt` | QA Engineer | `{{max_iterations}}` |
 
+## Token Optimization
+
+Several optimizations reduce token usage and cost per pipeline run:
+
+- **QA SummarizationMiddleware** — compresses conversation history after 4k tokens, preventing context balloon on tool loops (QA: 25k → 15k tokens, -39%)
+- **BA skip-search instruction** — BA produces specs directly for standard Python tasks without unnecessary web/docs searches (BA: 8k → 937 tokens)
+- **run_command tool** — agents run `python src/main.py` instead of pasting code inline into python_repl (~10 tokens vs ~400)
+- **No duplicate code in QA** — QA reads files via tools only, source_code not sent in prompt
+- **Token cost logging** — per-step delta tracking with model-aware pricing
+
+### Benchmark (stack-based calculator)
+
+| Version | BA | Dev | QA | Total | Cost |
+|---------|-----|------|------|-------|------|
+| v1 (baseline) | ~5k | ~14k | ~25k | 43,515 | $0.117 |
+| v4 (optimized) | 936 | 23,305 | 15,220 | 39,461 | $0.111 |
+
 ## LLM-as-a-Judge Tests
 
 | Test | What it checks | Scenario |
@@ -222,8 +241,9 @@ dev-team/
 ├── nodes.py               # Node functions (ba, hitl, dev, qa, github)
 ├── agents/                # BA, Developer, QA agents
 ├── schemas.py             # Pydantic models
-├── tools.py               # @tool functions (incl. Context7 MCP)
-├── github_integration.py  # GitHub PR creation (PyGithub)
+├── tools.py               # @tool functions (8 tools incl. Context7 MCP)
+├── github_integration.py  # GitHub PR creation via Git Trees API
+├── token_tracker.py       # Token usage & cost tracking per step
 ├── config.py              # Settings
 ├── langfuse_prompts.py    # Langfuse prompt loader
 ├── retriever.py           # Hybrid RAG retrieval
@@ -234,8 +254,8 @@ dev-team/
 ├── index/                 # Persisted FAISS + BM25 (gitignored)
 ├── workspace/             # Generated code (gitignored)
 ├── output/                # Final approved code packages
-├── screenshots/           # Langfuse UI screenshots
-└── logs/                  # Agent logs
+├── screenshots/           # Playwright-captured UI screenshots
+└── logs/                  # Agent logs with token costs
 ```
 
 ## Environment Variables

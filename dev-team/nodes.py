@@ -19,6 +19,7 @@ def ba_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     """Business Analyst: analyze user story and produce SpecOutput."""
     logger.info("BA Agent: analyzing user story")
     callbacks = config.get("callbacks", []) if config else []
+    snap = pipeline_usage.snapshot()
 
     spec = run_ba(
         user_story=state["user_story"],
@@ -27,7 +28,7 @@ def ba_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     )
 
     logger.info("BA Agent: produced spec '%s' (%s)", spec.title, spec.estimated_complexity)
-    logger.info("BA Agent cost: %s", pipeline_usage.summary())
+    logger.info("BA Agent: %s", pipeline_usage.delta_summary(snap))
     return {"spec": spec, "spec_approved": False, "spec_feedback": ""}
 
 
@@ -56,6 +57,7 @@ def dev_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     """Developer: write code based on spec (and QA feedback if revision)."""
     iteration = state.get("iteration", 0)
     callbacks = config.get("callbacks", []) if config else []
+    snap = pipeline_usage.snapshot()
 
     logger.info("Developer Agent: writing code (iteration %d)", iteration)
 
@@ -67,7 +69,7 @@ def dev_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     )
 
     logger.info("Developer Agent: created %d files", len(code.files_created))
-    logger.info("Developer cost: %s", pipeline_usage.summary())
+    logger.info("Developer: %s", pipeline_usage.delta_summary(snap))
     return {"code": code}
 
 
@@ -75,6 +77,7 @@ def qa_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     """QA Engineer: review code, run tests, return ReviewOutput."""
     iteration = state.get("iteration", 0)
     callbacks = config.get("callbacks", []) if config else []
+    snap = pipeline_usage.snapshot()
 
     logger.info("QA Agent: reviewing code (iteration %d)", iteration)
 
@@ -89,7 +92,7 @@ def qa_node(state: DevTeamState, config: RunnableConfig | None = None) -> dict:
     review_history = [*review_history, review]
 
     logger.info("QA Agent: verdict=%s, score=%.2f", review.verdict, review.score)
-    logger.info("QA cost: %s", pipeline_usage.summary())
+    logger.info("QA: %s", pipeline_usage.delta_summary(snap))
     return {
         "review": review,
         "iteration": iteration + 1,
