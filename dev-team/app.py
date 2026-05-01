@@ -941,9 +941,7 @@ function handleEvent(ev) {
     setStatus('done', msg);
     if (ev.output_path) {
       let savedHtml = `<p style="font-size:13px;color:var(--green)">Output saved to: <code>${ev.output_path}</code></p>`;
-      if (ev.pr_url) {
-        savedHtml += `<p style="font-size:13px;margin-top:8px">PR: <a href="${ev.pr_url}" target="_blank" style="color:var(--blue)">${ev.pr_url}</a></p>`;
-      }
+      // PR link shown in separate card above
       addCard(`<div class="card"><div class="card-header"><span class="icon">&#x1f4be;</span><h3>Results Saved</h3></div>
         <div class="card-body">${savedHtml}</div></div>`);
     }
