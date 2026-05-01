@@ -301,7 +301,7 @@ async def info():
     return {
         "app": settings.app_name,
         "version": APP_VERSION,
-        "model": settings.model_powerful,
+        "models": {"ba": settings.model_fast, "dev": settings.model_powerful, "qa": settings.model_mid},
         "session_id": current_session_id[:8],
         "max_qa_iterations": settings.max_qa_iterations,
     }
@@ -624,7 +624,7 @@ let activeSource = null;
 
 // Load info
 fetch('/api/info').then(r=>r.json()).then(d => {
-  $('meta').innerHTML = `v${d.version}<br>Model: <b>${d.model}</b><br>Session: <code>${d.session_id}</code><br>Max QA: ${d.max_qa_iterations}`;
+  $('meta').innerHTML = `v${d.version}<br>BA: <b>${d.models.ba.split(':')[1]}</b><br>Dev: <b>${d.models.dev.split(':')[1]}</b><br>QA: <b>${d.models.qa.split(':')[1]}</b><br>Session: <code>${d.session_id}</code>`;
 });
 
 input.addEventListener('keydown', e => { if(e.key==='Enter' && !btnRun.disabled) run(); });
@@ -811,9 +811,13 @@ function handleEvent(ev) {
     }
     if (ev.stage === 'hitl') {
       setStep('ba', 'done');
-      setStep('hitl', 'active');
+      // Only set active if not already done (user may have approved already)
+      if (!$('step-hitl').classList.contains('done')) {
+        setStep('hitl', 'active');
+      }
     }
     if (ev.stage === 'dev') {
+      setStep('hitl', 'done');
       setStep('dev', 'active');
       setStatus('running', `Developer writing code (iter ${(ev.code?._iter||0)+1})...`);
       if (ev.code) {
@@ -871,7 +875,6 @@ function handleEvent(ev) {
 
   if (ev.type === 'done') {
     const msg = ev.output_path ? `Pipeline complete — saved to ${ev.output_path}` : 'Pipeline complete';
-    setStep('github', 'done');
     setStatus('done', msg);
     if (ev.output_path) {
       let savedHtml = `<p style="font-size:13px;color:var(--green)">Output saved to: <code>${ev.output_path}</code></p>`;
@@ -939,7 +942,7 @@ function resetSession() {
     setStatus('idle', 'Ready');
     loadFiles(); loadOutputs();
     fetch('/api/info').then(r=>r.json()).then(d => {
-      $('meta').innerHTML = `v${d.version}<br>Model: <b>${d.model}</b><br>Session: <code>${d.session_id}</code><br>Max QA: ${d.max_qa_iterations}`;
+      $('meta').innerHTML = `v${d.version}<br>BA: <b>${d.models.ba.split(':')[1]}</b><br>Dev: <b>${d.models.dev.split(':')[1]}</b><br>QA: <b>${d.models.qa.split(':')[1]}</b><br>Session: <code>${d.session_id}</code>`;
     });
     input.focus();
   });

@@ -380,6 +380,6 @@ def read_notion_page(page_url: str) -> str:
 # Tool groupings per agent
 # ---------------------------------------------------------------------------
 
-BA_TOOLS = [web_search, knowledge_search, docs_search, read_notion_page]
+BA_TOOLS = [knowledge_search, read_notion_page]
 DEVELOPER_TOOLS = [web_search, docs_search, python_repl, run_command, file_write, file_read]
 QA_TOOLS = [python_repl, run_command, file_read]

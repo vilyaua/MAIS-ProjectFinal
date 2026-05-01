@@ -1,7 +1,6 @@
 """QA Engineer Agent — reviews code, runs tests, returns ReviewOutput."""
 
 from langchain.agents import create_agent
-from langchain.agents.middleware import SummarizationMiddleware
 from langchain.agents.structured_output import ToolStrategy
 from langchain.chat_models import init_chat_model
 
@@ -22,20 +21,13 @@ def _get_qa_agent():
             "qa-prompt",
             max_iterations=str(settings.max_qa_iterations),
         )
-        model = init_chat_model(settings.model_fast, max_retries=4)
+        model = init_chat_model(settings.model_mid, max_retries=4)
         _qa_agent = create_agent(
             model=model,
             tools=QA_TOOLS,
             system_prompt=system_prompt,
             response_format=ToolStrategy(ReviewOutput),
             name="qa-engineer",
-            middleware=[
-                SummarizationMiddleware(
-                    model=settings.model_fast,
-                    trigger=("tokens", 4000),
-                    keep=("messages", 6),
-                ),
-            ],
         )
     return _qa_agent
 
@@ -66,16 +58,10 @@ def run_qa(
         "",
         "## Code to review",
         f"**Description:** {code.description}",
-        f"**Files created:** {', '.join(code.files_created)}",
+        f"**Files to review:** {', '.join(code.files_created)}",
         "",
-        f"This is review iteration {iteration + 1}/{settings.max_qa_iterations}.",
-        "",
-        "Please:",
-        "1. Read each file using file_read",
-        "2. Run files using run_command (e.g. 'python src/main.py', 'python -m pytest tests/ -v')",
-        "3. Only use python_repl for quick inline checks if needed",
-        "4. Check compliance with all requirements and acceptance criteria",
-        "5. Return your ReviewOutput with verdict, issues, suggestions, and score",
+        f"Review iteration {iteration + 1}/{settings.max_qa_iterations}.",
+        "Follow your review process. Read ALL files listed above.",
     ])
 
     prompt = "\n".join(prompt_parts)

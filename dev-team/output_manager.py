@@ -122,11 +122,13 @@ def _build_readme(
                 main_file = f
 
         lines.extend(["## How to Run", ""])
+        if code.description:
+            lines.extend([code.description, ""])
         lines.append("```bash")
         if has_requirements:
             lines.append("pip install -r requirements.txt")
         if main_file:
-            lines.append(f"python {main_file}")
+            lines.append(f"python {main_file} <args>  # see description above")
         lines.append("```")
         if test_file:
             lines.extend(["", "Run tests:", "", "```bash", f"python -m pytest {test_file} -v", "```"])

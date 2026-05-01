@@ -13,7 +13,8 @@ class Settings(BaseSettings):
 
     app_name: str = "AI Dev Team — Final Project"
     openai_api_key: SecretStr
-    model_powerful: str = "openai:gpt-4.1"
+    model_powerful: str = "openai:gpt-5.5"
+    model_mid: str = "openai:gpt-5.4"
     model_fast: str = "openai:gpt-4.1-mini"
 
     # Langfuse

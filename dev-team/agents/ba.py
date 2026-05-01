@@ -37,14 +37,10 @@ def run_ba(user_story: str, feedback: str | None = None, callbacks=None) -> Spec
         prompt = (
             f"User story: {user_story}\n\n"
             f"Previous spec was rejected. User feedback:\n{feedback}\n\n"
-            "Please revise the specification based on this feedback."
+            "Revise the specification based on this feedback."
         )
     else:
-        prompt = (
-            f"User story: {user_story}\n\n"
-            "Note: Only use search tools if the domain is unfamiliar. "
-            "For standard Python tasks, produce the spec directly without searching."
-        )
+        prompt = f"User story: {user_story}"
 
     config = {}
     if callbacks:

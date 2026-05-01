@@ -1,0 +1,2 @@
+# No third-party dependencies are required.
+# The ASCII art generator uses built-in deterministic fonts.
