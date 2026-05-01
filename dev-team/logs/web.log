@@ -3294,3 +3294,220 @@ During task with name 'ba_node' and id '99d9539a-f6da-5f20-8d21-79e78c13f888'
 16:15:53 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/11
 16:15:53 [INFO] Pipeline total: tokens: 35,349 (in: 31,652, out: 3,697) | cost: $0.0929 | calls: 13
 16:15:53 [INFO] Results packaged to output/2026-05-01_161553_dc87919a
+16:29:38 [INFO] Dev Team graph compiled successfully
+16:42:46 [INFO] Dev Team graph compiled successfully
+16:43:48 [INFO] User story: Implement a stack-based calculator that supports +, -, *, / and parentheses with
+16:43:49 [INFO] Workspace cleaned
+16:43:49 [INFO] BA Agent: analyzing user story
+16:43:50 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+16:43:57 [INFO] BA Agent: produced spec 'Stack-Based Calculator with Basic Operations and Parentheses' (medium)
+16:43:57 [INFO] BA Agent: tokens: 937 (in: 637, out: 300) | cost: $0.0037 | calls: 1
+16:43:58 [INFO] HITL decision: approved=True feedback=
+16:43:58 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+16:43:58 [INFO] HITL gate: APPROVED
+16:43:58 [INFO] Developer Agent: writing code (iteration 0)
+16:43:59 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+16:45:17 [INFO] Retrying request to /chat/completions in 1.174000 seconds
+16:45:18 [INFO] Retrying request to /chat/completions in 1.174000 seconds
+16:45:20 [INFO] Retrying request to /chat/completions in 0.699000 seconds
+16:45:46 [INFO] Retrying request to /chat/completions in 0.330000 seconds
+16:45:53 [INFO] Retrying request to /chat/completions in 0.576000 seconds
+16:45:54 [INFO] Retrying request to /chat/completions in 0.576000 seconds
+16:45:55 [INFO] Retrying request to /chat/completions in 0.576000 seconds
+16:45:56 [INFO] Retrying request to /chat/completions in 0.085000 seconds
+16:45:57 [INFO] Retrying request to /chat/completions in 0.232000 seconds
+16:46:06 [INFO] Retrying request to /chat/completions in 0.297000 seconds
+16:46:06 [INFO] Retrying request to /chat/completions in 0.556000 seconds
+16:46:19 [INFO] Retrying request to /chat/completions in 1.069000 seconds
+16:46:23 [INFO] Retrying request to /chat/completions in 0.573000 seconds
+16:46:35 [INFO] Retrying request to /chat/completions in 0.905000 seconds
+16:46:36 [INFO] Retrying request to /chat/completions in 0.413000 seconds
+16:47:45 [INFO] Retrying request to /chat/completions in 1.032000 seconds
+16:47:51 [INFO] Retrying request to /chat/completions in 1.710000 seconds
+16:47:53 [INFO] Retrying request to /chat/completions in 0.729000 seconds
+16:47:58 [INFO] Retrying request to /chat/completions in 1.005000 seconds
+16:48:00 [INFO] Retrying request to /chat/completions in 0.868000 seconds
+16:50:23 [INFO] Retrying request to /chat/completions in 0.940000 seconds
+16:50:25 [INFO] Retrying request to /chat/completions in 0.940000 seconds
+16:50:26 [INFO] Retrying request to /chat/completions in 0.373000 seconds
+16:50:27 [INFO] Retrying request to /chat/completions in 0.373000 seconds
+16:50:28 [INFO] Retrying request to /chat/completions in 0.373000 seconds
+16:50:28 [INFO] Retrying request to /chat/completions in 0.373000 seconds
+16:50:29 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 64, in dev_node
+    code = run_developer(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/developer.py", line 84, in run_developer
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 1245. Please try again in 373ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id '32f678e1-59d3-667d-0760-25a23203846f'
+During task with name 'dev_node' and id '7ed3318e-2012-1f72-a17d-c2b1e279c58a'
+16:54:16 [INFO] Dev Team graph compiled successfully
+17:08:46 [INFO] User story: Implement a stack-based calculator that supports +, -, *, / and parentheses with
+17:08:46 [INFO] Workspace cleaned
+17:08:46 [INFO] BA Agent: analyzing user story
+17:08:48 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+17:08:53 [INFO] BA Agent: produced spec 'Stack-Based Calculator with Basic Arithmetic and Parentheses' (medium)
+17:08:53 [INFO] BA Agent: tokens: 936 (in: 637, out: 299) | cost: $0.0037 | calls: 1
+17:08:54 [INFO] HITL decision: approved=True feedback=
+17:08:54 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+17:08:54 [INFO] HITL gate: APPROVED
+17:08:54 [INFO] Developer Agent: writing code (iteration 0)
+17:08:56 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+17:10:05 [INFO] Developer Agent: created 2 files
+17:10:05 [INFO] Developer: tokens: 23,305 (in: 18,906, out: 4,399) | cost: $0.0730 | calls: 6
+17:10:05 [INFO] QA Agent: reviewing code (iteration 0)
+17:10:10 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+17:10:26 [INFO] QA Agent: verdict=APPROVED, score=0.90
+17:10:26 [INFO] QA: tokens: 15,220 (in: 14,562, out: 658) | cost: $0.0344 | calls: 5
+17:10:26 [INFO] QA APPROVED — proceeding to GitHub
+17:10:26 [INFO] GitHub: creating PR
+17:10:28 [WARNING] Branch dev-team/stack-based-calculator-with-basic-arithmetic-and-p already exists — appending suffix
+17:10:28 [INFO] Created branch: dev-team/stack-based-calculator-with-basic-arithmetic-and-p-07af8d
+17:10:38 [ERROR] GitHub: PR creation failed — [{'path': '.pytest_cache/CACHEDIR.TAG', 'mode': '100644', 'type': 'blob', 'sha': 'fce15ad7eaa74e5682b644c84efb75334c112f95'}, {'path': '.pytest_cache/README.md', 'mode': '100644', 'type': 'blob', 'sha': 'b89018ced91c0a8af7f3f23ce8901870da89f3a0'}, {'path': '.pytest_cache/v/cache/lastfailed', 'mode': '100644', 'type': 'blob', 'sha': 'd83a39484896c0c2a9bf7fef433ce70be3c9f3c1'}, {'path': '.pytest_cache/v/cache/nodeids', 'mode': '100644', 'type': 'blob', 'sha': '31e955d0b49b3bfef410b9c89c7a14886c6cfcb1'}, {'path': 'src/calculator.py', 'mode': '100644', 'type': 'blob', 'sha': '57883b2702aec5b397b1c320c58a8e6ee9d05dde'}, {'path': 'tests/test_calculator.py', 'mode': '100644', 'type': 'blob', 'sha': 'cfa6942d1f0be133f0059904755e9799913b1acb'}]
+17:10:38 [INFO] Pipeline total: tokens: 39,461 (in: 34,105, out: 5,356) | cost: $0.1111 | calls: 12
+17:10:38 [INFO] Results packaged to output/2026-05-01_171038_8205ff77

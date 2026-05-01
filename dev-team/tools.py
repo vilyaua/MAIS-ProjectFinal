@@ -292,7 +292,7 @@ def docs_search(library_name: str, query: str) -> str:
 
 # Allowed command prefixes for the terminal tool
 _ALLOWED_COMMANDS = [
-    "python", "python3", "pip", "pytest", "ls", "cat", "head", "tail",
+    "python", "python3", "pytest", "ls", "cat", "head", "tail",
     "wc", "diff", "find", "echo", "mkdir", "touch", "tree",
 ]
 
@@ -301,14 +301,13 @@ _ALLOWED_COMMANDS = [
 def run_command(command: str) -> str:
     """Run a shell command in the workspace/ directory. Returns stdout + stderr.
 
-    Use this to run files, execute tests, install packages, or inspect the workspace.
+    Use this to run files, execute tests, or inspect the workspace.
     Prefer this over python_repl when running existing files:
       - run_command("python src/main.py")
       - run_command("python -m pytest tests/ -v")
-      - run_command("pip install -r requirements.txt")
       - run_command("ls -la src/")
 
-    Only safe commands are allowed (python, pytest, pip, ls, cat, etc.).
+    Only safe commands are allowed (python, pytest, ls, cat, etc.).
     """
     if not command.strip():
         return "Error: empty command."
