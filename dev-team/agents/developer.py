@@ -18,7 +18,7 @@ def _get_dev_agent():
     global _dev_agent
     if _dev_agent is None:
         system_prompt = get_system_prompt("developer-prompt")
-        model = init_chat_model(settings.model_fast, max_retries=4)
+        model = init_chat_model(settings.model_powerful, max_retries=4)  # gpt-5.5
         _dev_agent = create_agent(
             model=model,
             tools=DEVELOPER_TOOLS,
@@ -66,6 +66,8 @@ def run_developer(
             prompt_parts.extend(["", "**Suggestions:**"])
             for sug in review.suggestions:
                 prompt_parts.append(f"- {sug}")
+        prompt_parts.append("")
+        prompt_parts.append("This is a REVISION. Follow the revision workflow from your instructions.")
 
     prompt = "\n".join(prompt_parts)
 

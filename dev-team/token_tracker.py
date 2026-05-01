@@ -12,8 +12,10 @@ from langchain_core.callbacks import BaseCallbackHandler
 
 logger = logging.getLogger("tokens")
 
-# Pricing per 1M tokens (as of April 2026)
+# Pricing per 1M tokens (estimated, May 2026)
 MODEL_PRICING = {
+    "gpt-5.5": {"input": 3.00, "output": 12.00},
+    "gpt-5.4": {"input": 2.50, "output": 10.00},
     "gpt-4.1": {"input": 2.00, "output": 8.00},
     "gpt-4.1-mini": {"input": 0.40, "output": 1.60},
 }
@@ -97,6 +99,12 @@ class TokenTrackingHandler(BaseCallbackHandler):
 
     def __init__(self, usage: TokenUsage):
         self.usage = usage
+        self._call_count = 0
+
+    def on_llm_start(self, serialized, prompts, **kwargs):
+        self._call_count += 1
+        model = serialized.get("kwargs", {}).get("model_name", "?")
+        logger.info("LLM call #%d started (model=%s)", self._call_count, model)
 
     def on_llm_end(self, response, **kwargs):
         # Try llm_output first (aggregated usage)
@@ -109,6 +117,10 @@ class TokenTrackingHandler(BaseCallbackHandler):
 
         if input_tokens or output_tokens:
             self.usage.add(input_tokens, output_tokens, model)
+            logger.info(
+                "LLM call #%d done: in=%d out=%d model=%s | running total: %d",
+                self._call_count, input_tokens, output_tokens, model, self.usage.total_tokens,
+            )
             return
 
         # Fallback: check per-generation info
@@ -123,6 +135,20 @@ class TokenTrackingHandler(BaseCallbackHandler):
 
                 if inp or out:
                     self.usage.add(inp, out, m)
+                    logger.info(
+                        "LLM call #%d done (gen): in=%d out=%d model=%s | running total: %d",
+                        self._call_count, inp, out, m, self.usage.total_tokens,
+                    )
+                    return
+
+        # Nothing captured
+        logger.warning(
+            "LLM call #%d done: NO token data. llm_output keys=%s",
+            self._call_count, list(llm_output.keys()),
+        )
+
+    def on_llm_error(self, error, **kwargs):
+        logger.warning("LLM call #%d ERROR: %s", self._call_count, str(error)[:100])
 
 
 # Global usage tracker — reset per pipeline run

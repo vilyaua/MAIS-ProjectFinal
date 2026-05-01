@@ -4,7 +4,7 @@ import logging
 import re
 from pathlib import Path
 
-from github import Auth, Github
+from github import Auth, Github, InputGitTreeElement
 
 from config import Settings
 from schemas import CodeOutput, ReviewOutput, SpecOutput
@@ -61,19 +61,24 @@ def create_pr(
         logger.warning("Workspace directory not found")
         return None
 
+    # Skip cache/temp directories
+    skip_dirs = {".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"}
+
     tree_items = []
     for filepath in sorted(workspace.rglob("*")):
         if not filepath.is_file() or filepath.name.startswith("."):
             continue
+        if any(part in skip_dirs for part in filepath.relative_to(workspace).parts):
+            continue
         rel_path = str(filepath.relative_to(workspace))
         content = filepath.read_text(encoding="utf-8", errors="replace")
         blob = repo.create_git_blob(content, "utf-8")
-        tree_items.append({
-            "path": rel_path,
-            "mode": "100644",
-            "type": "blob",
-            "sha": blob.sha,
-        })
+        tree_items.append(InputGitTreeElement(
+            path=rel_path,
+            mode="100644",
+            type="blob",
+            sha=blob.sha,
+        ))
 
     if not tree_items:
         logger.warning("No files to commit")

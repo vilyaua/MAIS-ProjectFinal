@@ -3511,3 +3511,1495 @@ During task with name 'dev_node' and id '7ed3318e-2012-1f72-a17d-c2b1e279c58a'
 17:10:38 [ERROR] GitHub: PR creation failed — [{'path': '.pytest_cache/CACHEDIR.TAG', 'mode': '100644', 'type': 'blob', 'sha': 'fce15ad7eaa74e5682b644c84efb75334c112f95'}, {'path': '.pytest_cache/README.md', 'mode': '100644', 'type': 'blob', 'sha': 'b89018ced91c0a8af7f3f23ce8901870da89f3a0'}, {'path': '.pytest_cache/v/cache/lastfailed', 'mode': '100644', 'type': 'blob', 'sha': 'd83a39484896c0c2a9bf7fef433ce70be3c9f3c1'}, {'path': '.pytest_cache/v/cache/nodeids', 'mode': '100644', 'type': 'blob', 'sha': '31e955d0b49b3bfef410b9c89c7a14886c6cfcb1'}, {'path': 'src/calculator.py', 'mode': '100644', 'type': 'blob', 'sha': '57883b2702aec5b397b1c320c58a8e6ee9d05dde'}, {'path': 'tests/test_calculator.py', 'mode': '100644', 'type': 'blob', 'sha': 'cfa6942d1f0be133f0059904755e9799913b1acb'}]
 17:10:38 [INFO] Pipeline total: tokens: 39,461 (in: 34,105, out: 5,356) | cost: $0.1111 | calls: 12
 17:10:38 [INFO] Results packaged to output/2026-05-01_171038_8205ff77
+17:22:31 [INFO] Dev Team graph compiled successfully
+17:23:44 [INFO] User story: Write a Python script that generates ASCII art from text input
+17:23:44 [INFO] Workspace cleaned
+17:23:44 [INFO] BA Agent: analyzing user story
+17:23:45 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+17:23:52 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input in Python' (simple)
+17:23:52 [INFO] BA Agent: tokens: 906 (in: 631, out: 275) | cost: $0.0035 | calls: 1
+17:23:56 [INFO] HITL decision: approved=True feedback=
+17:23:56 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+17:23:56 [INFO] HITL gate: APPROVED
+17:23:56 [INFO] Developer Agent: writing code (iteration 0)
+17:23:57 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+17:24:06 [INFO] response: https://grokipedia.com/api/typeahead?query=pyfiglet+font+styles+list&limit=1 200
+17:24:06 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=pyfiglet%20font%20styles%20list 200
+17:24:07 [INFO] response: https://search.brave.com/search?q=pyfiglet+font+styles+list&source=web 200
+17:24:52 [INFO] Developer Agent: created 3 files
+17:24:52 [INFO] Developer: tokens: 41,934 (in: 39,639, out: 2,295) | cost: $0.0976 | calls: 13
+17:24:52 [INFO] QA Agent: reviewing code (iteration 0)
+17:24:53 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+17:25:01 [INFO] QA Agent: verdict=APPROVED, score=0.90
+17:25:01 [INFO] QA: tokens: 9,779 (in: 9,492, out: 287) | cost: $0.0213 | calls: 4
+17:25:01 [INFO] QA APPROVED — proceeding to GitHub
+17:25:01 [INFO] GitHub: creating PR
+17:25:04 [INFO] Created branch: dev-team/ascii-art-generator-from-text-input-in-python
+17:25:14 [ERROR] GitHub: PR creation failed — [{'path': '.pytest_cache/CACHEDIR.TAG', 'mode': '100644', 'type': 'blob', 'sha': 'fce15ad7eaa74e5682b644c84efb75334c112f95'}, {'path': '.pytest_cache/README.md', 'mode': '100644', 'type': 'blob', 'sha': 'b89018ced91c0a8af7f3f23ce8901870da89f3a0'}, {'path': '.pytest_cache/v/cache/lastfailed', 'mode': '100644', 'type': 'blob', 'sha': 'd83a39484896c0c2a9bf7fef433ce70be3c9f3c1'}, {'path': '.pytest_cache/v/cache/nodeids', 'mode': '100644', 'type': 'blob', 'sha': 'b86f63fd53125e741b8b8875f041990121039314'}, {'path': 'requirements.txt', 'mode': '100644', 'type': 'blob', 'sha': '6cd8397fa48597950189c38c90763e00aa1b10d4'}, {'path': 'src/ascii_art_generator.py', 'mode': '100644', 'type': 'blob', 'sha': '62acf04b430882aa04da5dd650636bf063b2f614'}, {'path': 'tests/test_ascii_art_generator.py', 'mode': '100644', 'type': 'blob', 'sha': 'd3c04b388998bffc2e2733f3db8affb234a5a9de'}]
+17:25:14 [INFO] Pipeline total: tokens: 52,619 (in: 49,762, out: 2,857) | cost: $0.1224 | calls: 18
+17:25:14 [INFO] Results packaged to output/2026-05-01_172514_f805f56e
+17:31:26 [INFO] Dev Team graph compiled successfully
+17:32:07 [INFO] User story: Write a Python script that generates ASCII art from text input
+17:32:07 [INFO] Workspace cleaned
+17:32:07 [INFO] BA Agent: analyzing user story
+17:32:08 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+17:32:14 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input' (simple)
+17:32:14 [INFO] BA Agent: tokens: 899 (in: 631, out: 268) | cost: $0.0034 | calls: 1
+17:33:49 [INFO] HITL decision: approved=True feedback=
+17:33:49 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+17:33:49 [INFO] HITL gate: APPROVED
+17:33:49 [INFO] Developer Agent: writing code (iteration 0)
+17:33:50 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+17:33:57 [INFO] response: https://grokipedia.com/api/typeahead?query=pyfiglet+usage+example+with+font+style&limit=1 200
+17:33:57 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=pyfiglet%20usage%20example%20with%20font%20style 200
+17:33:58 [INFO] response: https://search.brave.com/search?q=pyfiglet+usage+example+with+font+style&source=web 200
+17:34:42 [INFO] Retrying request to /chat/completions in 1.104000 seconds
+17:34:43 [INFO] Retrying request to /chat/completions in 1.104000 seconds
+17:34:44 [INFO] Retrying request to /chat/completions in 1.104000 seconds
+17:34:46 [INFO] Retrying request to /chat/completions in 1.104000 seconds
+17:34:47 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 64, in dev_node
+    code = run_developer(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/developer.py", line 76, in run_developer
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 3682. Please try again in 1.104s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id '9dcb41e7-30b7-1ece-9f24-82d440e540f9'
+During task with name 'dev_node' and id 'b0d3ce29-f715-2275-06fb-2fd30cab185d'
+19:29:48 [INFO] User story: Write a Python script that generates ASCII art from text input
+19:29:48 [INFO] Workspace cleaned
+19:29:48 [INFO] BA Agent: analyzing user story
+19:29:54 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input' (simple)
+19:29:54 [INFO] BA Agent: tokens: 893 (in: 631, out: 262) | cost: $0.0034 | calls: 1
+19:31:08 [INFO] Dev Team graph compiled successfully
+19:31:11 [INFO] User story: Write a Python script that generates ASCII art from text input
+19:31:11 [INFO] Workspace cleaned
+19:31:11 [INFO] BA Agent: analyzing user story
+19:31:12 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+19:31:19 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input' (simple)
+19:31:19 [INFO] BA Agent: tokens: 893 (in: 631, out: 262) | cost: $0.0034 | calls: 1
+19:31:22 [INFO] HITL decision: approved=True feedback=
+19:31:22 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+19:31:22 [INFO] HITL gate: APPROVED
+19:31:22 [INFO] Developer Agent: writing code (iteration 0)
+19:31:23 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+19:32:04 [INFO] Developer Agent: created 2 files
+19:32:04 [INFO] Developer: tokens: 16,451 (in: 14,709, out: 1,742) | cost: $0.0434 | calls: 7
+19:32:04 [INFO] QA Agent: reviewing code (iteration 0)
+19:32:06 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+19:32:17 [INFO] QA Agent: verdict=REVISION_NEEDED, score=0.30
+19:32:17 [INFO] QA: tokens: 12,177 (in: 11,757, out: 420) | cost: $0.0269 | calls: 5
+19:32:17 [INFO] QA REVISION_NEEDED — returning to Developer (iteration 1)
+19:32:17 [INFO] Developer Agent: writing code (iteration 1)
+19:32:38 [INFO] Developer Agent: created 3 files
+19:32:38 [INFO] Developer: tokens: 8,000 (in: 6,288, out: 1,712) | cost: $0.0263 | calls: 3
+19:32:38 [INFO] QA Agent: reviewing code (iteration 1)
+19:32:43 [INFO] Retrying request to /chat/completions in 0.416000 seconds
+19:32:44 [INFO] Retrying request to /chat/completions in 0.416000 seconds
+19:32:45 [INFO] Retrying request to /chat/completions in 0.849000 seconds
+19:32:46 [INFO] Retrying request to /chat/completions in 0.849000 seconds
+19:32:47 [INFO] Retrying request to /chat/completions in 0.087000 seconds
+19:32:48 [INFO] Retrying request to /chat/completions in 0.197000 seconds
+19:32:48 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 84, in qa_node
+    review = run_qa(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/qa.py", line 87, in run_qa
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 199187, Requested 2830. Please try again in 605ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id '2ecd6b47-d07b-d5f3-f843-7b779ab0610e'
+During task with name 'qa_node' and id 'a8731b5f-02c8-77ce-23b2-9c9ccaef7151'
+19:44:02 [INFO] Dev Team graph compiled successfully
+19:46:34 [INFO] Dev Team graph compiled successfully
+19:46:46 [INFO] User story: Write a Python script that generates ASCII art from text input
+19:46:46 [INFO] Workspace cleaned
+19:46:46 [INFO] BA Agent: analyzing user story
+19:46:48 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+19:46:51 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+19:46:59 [INFO] LLM call #1 done: in=631 out=280 model=gpt-4.1-mini-2025-04-14 | running total: 911
+19:46:59 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input' (simple)
+19:46:59 [INFO] BA Agent: tokens: 911 (in: 631, out: 280) | cost: $0.0035 | calls: 1
+19:47:04 [INFO] HITL decision: approved=True feedback=
+19:47:04 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+19:47:04 [INFO] HITL gate: APPROVED
+19:47:04 [INFO] Developer Agent: writing code (iteration 0)
+19:47:06 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+19:47:06 [INFO] LLM call #1 started (model=gpt-4.1)
+19:47:12 [INFO] LLM call #1 done: in=1045 out=523 model=gpt-4.1-2025-04-14 | running total: 2479
+19:47:12 [INFO] LLM call #2 started (model=gpt-4.1)
+19:47:14 [INFO] LLM call #2 done: in=1589 out=25 model=gpt-4.1-2025-04-14 | running total: 4093
+19:47:14 [INFO] LLM call #3 started (model=gpt-4.1)
+19:47:19 [INFO] LLM call #3 done: in=1633 out=324 model=gpt-4.1-2025-04-14 | running total: 6050
+19:47:19 [INFO] LLM call #4 started (model=gpt-4.1)
+19:47:20 [INFO] LLM call #4 done: in=1979 out=21 model=gpt-4.1-2025-04-14 | running total: 8050
+19:47:23 [INFO] LLM call #5 started (model=gpt-4.1)
+19:47:24 [INFO] LLM call #5 done: in=2060 out=19 model=gpt-4.1-2025-04-14 | running total: 10129
+19:47:24 [INFO] LLM call #6 started (model=gpt-4.1)
+19:47:25 [INFO] LLM call #6 done: in=2130 out=21 model=gpt-4.1-2025-04-14 | running total: 12280
+19:47:38 [INFO] LLM call #7 started (model=gpt-4.1)
+19:47:46 [INFO] LLM call #7 done: in=2416 out=640 model=gpt-4.1-2025-04-14 | running total: 15336
+19:47:46 [INFO] Developer Agent: created 3 files
+19:47:46 [INFO] Developer: tokens: 14,425 (in: 12,852, out: 1,573) | cost: $0.0383 | calls: 7
+19:47:46 [INFO] QA Agent: reviewing code (iteration 0)
+19:47:48 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+19:47:48 [INFO] LLM call #8 started (model=gpt-4.1-mini)
+19:47:49 [INFO] LLM call #8 done: in=1163 out=64 model=gpt-4.1-mini-2025-04-14 | running total: 16563
+19:47:49 [INFO] LLM call #9 started (model=gpt-4.1-mini)
+19:47:50 [INFO] LLM call #9 done: in=2429 out=23 model=gpt-4.1-mini-2025-04-14 | running total: 19015
+19:47:55 [INFO] LLM call #10 started (model=gpt-4.1-mini)
+19:47:58 [INFO] LLM call #10 done: in=2719 out=91 model=gpt-4.1-mini-2025-04-14 | running total: 21825
+19:47:58 [INFO] QA Agent: verdict=REVISION_NEEDED, score=0.50
+19:47:58 [INFO] QA: tokens: 6,489 (in: 6,311, out: 178) | cost: $0.0140 | calls: 3
+19:47:58 [INFO] QA REVISION_NEEDED — returning to Developer (iteration 1)
+19:47:58 [INFO] Developer Agent: writing code (iteration 1)
+19:47:59 [INFO] LLM call #11 started (model=gpt-4.1)
+19:48:17 [INFO] LLM call #11 done: in=1133 out=534 model=gpt-4.1-2025-04-14 | running total: 23492
+19:48:17 [INFO] LLM call #12 started (model=gpt-4.1)
+19:48:23 [INFO] LLM call #12 done: in=1702 out=443 model=gpt-4.1-2025-04-14 | running total: 25637
+19:48:23 [INFO] LLM call #13 started (model=gpt-4.1)
+19:48:24 [INFO] LLM call #13 done: in=2167 out=19 model=gpt-4.1-2025-04-14 | running total: 27823
+19:48:24 [INFO] LLM call #14 started (model=gpt-4.1)
+19:48:25 [INFO] LLM call #14 done: in=2237 out=21 model=gpt-4.1-2025-04-14 | running total: 30081
+19:48:30 [INFO] LLM call #15 started (model=gpt-4.1)
+19:48:36 [INFO] LLM call #15 done: in=3593 out=481 model=gpt-4.1-2025-04-14 | running total: 34155
+19:48:36 [INFO] LLM call #16 started (model=gpt-4.1)
+19:48:36 [INFO] LLM call #16 done: in=4096 out=21 model=gpt-4.1-2025-04-14 | running total: 38272
+19:48:40 [INFO] LLM call #17 started (model=gpt-4.1)
+19:48:46 [INFO] LLM call #17 done: in=4306 out=659 model=gpt-4.1-2025-04-14 | running total: 43237
+19:48:46 [INFO] Developer Agent: created 3 files
+19:48:46 [INFO] Developer: tokens: 21,412 (in: 19,234, out: 2,178) | cost: $0.0559 | calls: 7
+19:48:46 [INFO] QA Agent: reviewing code (iteration 1)
+19:48:46 [INFO] LLM call #18 started (model=gpt-4.1-mini)
+19:48:49 [INFO] LLM call #18 done: in=1210 out=64 model=gpt-4.1-mini-2025-04-14 | running total: 44511
+19:48:49 [INFO] LLM call #19 started (model=gpt-4.1-mini)
+19:48:52 [INFO] LLM call #19 done: in=2671 out=120 model=gpt-4.1-mini-2025-04-14 | running total: 47302
+19:48:57 [INFO] LLM call #20 started (model=gpt-4.1-mini)
+19:48:58 [INFO] LLM call #20 done: in=3093 out=61 model=gpt-4.1-mini-2025-04-14 | running total: 50456
+19:48:59 [INFO] LLM call #21 started (model=gpt-4.1-mini)
+19:49:00 [INFO] LLM call #21 done: in=3198 out=19 model=gpt-4.1-mini-2025-04-14 | running total: 53673
+19:49:00 [INFO] LLM call #22 started (model=gpt-4.1-mini)
+19:49:03 [INFO] LLM call #22 done: in=3270 out=163 model=gpt-4.1-mini-2025-04-14 | running total: 57106
+19:49:03 [INFO] QA Agent: verdict=APPROVED, score=0.90
+19:49:03 [INFO] QA: tokens: 13,869 (in: 13,442, out: 427) | cost: $0.0303 | calls: 5
+19:49:03 [INFO] QA APPROVED — proceeding to GitHub
+19:49:03 [INFO] GitHub: creating PR
+19:49:06 [INFO] Created branch: dev-team/ascii-art-generator-from-text-input
+19:49:16 [INFO] Committed 3 files to dev-team/ascii-art-generator-from-text-input (single commit)
+19:49:18 [INFO] Created PR #14: https://github.com/vilyaua/MAIS-ProjectFinal/pull/14
+19:49:18 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/14
+19:49:18 [INFO] Pipeline total: tokens: 57,106 (in: 52,470, out: 4,636) | cost: $0.1420 | calls: 23
+19:49:18 [INFO] Results packaged to output/2026-05-01_194918_4de6a56f
+19:59:09 [INFO] Dev Team graph compiled successfully
+19:59:18 [INFO] User story: Write a Python script that generates ASCII art from text input
+19:59:18 [INFO] Workspace cleaned
+19:59:18 [INFO] BA Agent: analyzing user story
+19:59:19 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+19:59:21 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+19:59:27 [INFO] LLM call #1 done: in=631 out=306 model=gpt-4.1-mini-2025-04-14 | running total: 937
+19:59:27 [INFO] BA Agent: produced spec 'ASCII Art Generator Script' (simple)
+19:59:27 [INFO] BA Agent: tokens: 937 (in: 631, out: 306) | cost: $0.0037 | calls: 1
+19:59:40 [INFO] HITL decision: approved=True feedback=
+19:59:40 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+19:59:40 [INFO] HITL gate: APPROVED
+19:59:40 [INFO] Developer Agent: writing code (iteration 0)
+19:59:41 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+19:59:41 [INFO] LLM call #1 started (model=gpt-4.1)
+19:59:42 [INFO] LLM call #1 done: in=1073 out=24 model=gpt-4.1-2025-04-14 | running total: 2034
+19:59:44 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=python%20ascii%20art%20library%20support%2C%20font%20selection%2C%20input%20validation 200
+19:59:44 [INFO] response: https://grokipedia.com/api/typeahead?query=python+ascii+art+library+support%2C+font+selection%2C+input+validation&limit=1 200
+19:59:46 [INFO] response: https://www.mojeek.com/search?q=python+ascii+art+library+support%2C+font+selection%2C+input+validation 200
+19:59:46 [INFO] LLM call #2 started (model=gpt-4.1)
+19:59:47 [INFO] LLM call #2 done: in=1471 out=28 model=gpt-4.1-2025-04-14 | running total: 3533
+19:59:53 [INFO] LLM call #3 started (model=gpt-4.1)
+19:59:55 [INFO] LLM call #3 done: in=1582 out=28 model=gpt-4.1-2025-04-14 | running total: 5143
+19:59:57 [INFO] LLM call #4 started (model=gpt-4.1)
+20:00:05 [INFO] LLM call #4 done: in=1751 out=660 model=gpt-4.1-2025-04-14 | running total: 7554
+20:00:05 [INFO] LLM call #5 started (model=gpt-4.1)
+20:00:10 [INFO] LLM call #5 done: in=2432 out=347 model=gpt-4.1-2025-04-14 | running total: 10333
+20:00:10 [INFO] LLM call #6 started (model=gpt-4.1)
+20:00:11 [INFO] LLM call #6 done: in=2801 out=24 model=gpt-4.1-2025-04-14 | running total: 13158
+20:00:11 [INFO] LLM call #7 started (model=gpt-4.1)
+20:00:12 [INFO] LLM call #7 done: in=2844 out=26 model=gpt-4.1-2025-04-14 | running total: 16028
+20:00:13 [INFO] LLM call #8 started (model=gpt-4.1)
+20:00:14 [INFO] LLM call #8 done: in=2942 out=16 model=gpt-4.1-2025-04-14 | running total: 18986
+20:00:14 [INFO] LLM call #9 started (model=gpt-4.1)
+20:00:26 [INFO] LLM call #9 done: in=3808 out=660 model=gpt-4.1-2025-04-14 | running total: 23454
+20:00:26 [INFO] LLM call #10 started (model=gpt-4.1)
+20:00:27 [INFO] LLM call #10 done: in=4489 out=26 model=gpt-4.1-2025-04-14 | running total: 27969
+20:00:27 [INFO] LLM call #11 started (model=gpt-4.1)
+20:00:28 [INFO] LLM call #11 done: in=4543 out=19 model=gpt-4.1-2025-04-14 | running total: 32531
+20:00:28 [INFO] LLM call #12 started (model=gpt-4.1)
+20:00:29 [INFO] LLM call #12 done: in=4613 out=21 model=gpt-4.1-2025-04-14 | running total: 37165
+20:00:38 [INFO] LLM call #13 started (model=gpt-4.1)
+20:00:48 [INFO] LLM call #13 done: in=5967 out=799 model=gpt-4.1-2025-04-14 | running total: 43931
+20:00:48 [INFO] Developer Agent: created 3 files
+20:00:48 [INFO] Developer: tokens: 42,994 (in: 40,316, out: 2,678) | cost: $0.1021 | calls: 13
+20:00:48 [INFO] QA Agent: reviewing code (iteration 0)
+20:00:49 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+20:00:50 [INFO] LLM call #14 started (model=gpt-4.1-mini)
+20:00:50 [INFO] Retrying request to /chat/completions in 0.315000 seconds
+20:00:51 [INFO] Retrying request to /chat/completions in 0.315000 seconds
+20:00:51 [INFO] Retrying request to /chat/completions in 0.315000 seconds
+20:00:52 [INFO] Retrying request to /chat/completions in 0.315000 seconds
+20:00:54 [INFO] LLM call #14 done: in=1220 out=64 model=gpt-4.1-mini-2025-04-14 | running total: 45215
+20:00:54 [INFO] LLM call #15 started (model=gpt-4.1-mini)
+20:00:56 [INFO] LLM call #15 done: in=2722 out=77 model=gpt-4.1-mini-2025-04-14 | running total: 48014
+20:01:01 [INFO] LLM call #16 started (model=gpt-4.1-mini)
+20:01:01 [INFO] Retrying request to /chat/completions in 0.412000 seconds
+20:01:02 [INFO] Retrying request to /chat/completions in 0.412000 seconds
+20:01:03 [WARNING] LLM call #16 ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV
+20:01:03 [INFO] LLM call #17 started (model=gpt-4.1-mini)
+20:01:03 [INFO] Retrying request to /chat/completions in 0.849000 seconds
+20:01:04 [INFO] Retrying request to /chat/completions in 0.849000 seconds
+20:01:05 [INFO] Retrying request to /chat/completions in 0.849000 seconds
+20:01:06 [INFO] Retrying request to /chat/completions in 0.268000 seconds
+20:01:10 [INFO] LLM call #17 done: in=3802 out=149 model=gpt-4.1-mini-2025-04-14 | running total: 51965
+20:01:10 [INFO] QA Agent: verdict=REVISION_NEEDED, score=0.30
+20:01:10 [INFO] QA: tokens: 8,034 (in: 7,744, out: 290) | cost: $0.0178 | calls: 3
+20:01:10 [INFO] QA REVISION_NEEDED — returning to Developer (iteration 1)
+20:01:10 [INFO] Developer Agent: writing code (iteration 1)
+20:01:10 [INFO] LLM call #18 started (model=gpt-4.1)
+20:01:11 [INFO] LLM call #18 done: in=1270 out=64 model=gpt-4.1-2025-04-14 | running total: 53299
+20:01:11 [INFO] LLM call #19 started (model=gpt-4.1)
+20:01:12 [INFO] LLM call #19 done: in=2771 out=21 model=gpt-4.1-2025-04-14 | running total: 56091
+20:01:13 [INFO] LLM call #20 started (model=gpt-4.1)
+20:01:14 [INFO] LLM call #20 done: in=2819 out=21 model=gpt-4.1-2025-04-14 | running total: 58931
+20:01:22 [INFO] LLM call #21 started (model=gpt-4.1)
+20:01:23 [INFO] LLM call #21 done: in=3075 out=21 model=gpt-4.1-2025-04-14 | running total: 62027
+20:01:29 [INFO] LLM call #22 started (model=gpt-4.1)
+20:01:30 [INFO] LLM call #22 done: in=3799 out=16 model=gpt-4.1-2025-04-14 | running total: 65842
+20:01:30 [INFO] LLM call #23 started (model=gpt-4.1)
+20:01:31 [INFO] LLM call #23 done: in=4664 out=17 model=gpt-4.1-2025-04-14 | running total: 70523
+20:01:32 [INFO] LLM call #24 started (model=gpt-4.1)
+20:01:39 [INFO] LLM call #24 done: in=5122 out=628 model=gpt-4.1-2025-04-14 | running total: 76273
+20:01:39 [INFO] LLM call #25 started (model=gpt-4.1)
+20:01:41 [INFO] LLM call #25 done: in=5772 out=21 model=gpt-4.1-2025-04-14 | running total: 82066
+20:01:47 [INFO] LLM call #26 started (model=gpt-4.1)
+20:01:49 [INFO] LLM call #26 done: in=6752 out=16 model=gpt-4.1-2025-04-14 | running total: 88834
+20:01:49 [INFO] LLM call #27 started (model=gpt-4.1)
+20:01:56 [INFO] LLM call #27 done: in=7617 out=605 model=gpt-4.1-2025-04-14 | running total: 97056
+20:01:56 [INFO] LLM call #28 started (model=gpt-4.1)
+20:01:57 [INFO] Retrying request to /chat/completions in 5.474000 seconds
+20:02:04 [INFO] LLM call #28 done: in=8244 out=21 model=gpt-4.1-2025-04-14 | running total: 105321
+20:02:14 [INFO] LLM call #29 started (model=gpt-4.1)
+20:02:15 [INFO] Retrying request to /chat/completions in 3.966000 seconds
+20:02:22 [INFO] LLM call #29 done: in=8472 out=116 model=gpt-4.1-2025-04-14 | running total: 113909
+20:02:22 [INFO] Developer Agent: created 2 files
+20:02:22 [INFO] Developer: tokens: 61,944 (in: 60,377, out: 1,567) | cost: $0.1333 | calls: 12
+20:02:22 [INFO] QA Agent: reviewing code (iteration 1)
+20:02:22 [INFO] LLM call #30 started (model=gpt-4.1-mini)
+20:02:24 [INFO] LLM call #30 done: in=1182 out=48 model=gpt-4.1-mini-2025-04-14 | running total: 115139
+20:02:24 [INFO] LLM call #31 started (model=gpt-4.1-mini)
+20:02:25 [INFO] LLM call #31 done: in=2056 out=20 model=gpt-4.1-mini-2025-04-14 | running total: 117215
+20:02:29 [INFO] LLM call #32 started (model=gpt-4.1-mini)
+20:02:30 [INFO] LLM call #32 done: in=2346 out=16 model=gpt-4.1-mini-2025-04-14 | running total: 119577
+20:02:30 [INFO] LLM call #33 started (model=gpt-4.1-mini)
+20:02:30 [INFO] Retrying request to /chat/completions in 0.777000 seconds
+20:02:31 [INFO] Retrying request to /chat/completions in 0.777000 seconds
+20:02:32 [INFO] Retrying request to /chat/completions in 0.777000 seconds
+20:02:33 [INFO] Retrying request to /chat/completions in 0.777000 seconds
+20:02:34 [WARNING] LLM call #33 ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV
+20:02:34 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 84, in qa_node
+    review = run_qa(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/qa.py", line 87, in run_qa
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 2593. Please try again in 777ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id 'e4309f75-adb0-d014-ab74-05a433edd57c'
+During task with name 'qa_node' and id 'fc441d2a-b08a-33af-d45c-4b2acce4dace'
+20:03:59 [INFO] Dev Team graph compiled successfully
+20:07:45 [INFO] User story: Write a Python script that generates ASCII art from text input
+20:07:46 [INFO] Workspace cleaned
+20:07:46 [INFO] BA Agent: analyzing user story
+20:07:47 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 1)
+20:07:49 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+20:07:57 [INFO] LLM call #1 done: in=631 out=349 model=gpt-4.1-mini-2025-04-14 | running total: 980
+20:07:57 [INFO] BA Agent: produced spec 'ASCII Art Text Generator Script' (medium)
+20:07:57 [INFO] BA Agent: tokens: 980 (in: 631, out: 349) | cost: $0.0041 | calls: 1
+20:08:03 [INFO] HITL decision: approved=True feedback=
+20:08:03 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+20:08:03 [INFO] HITL gate: APPROVED
+20:08:03 [INFO] Developer Agent: writing code (iteration 0)
+20:08:05 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 1)
+20:08:05 [INFO] LLM call #1 started (model=gpt-4.1)
+20:08:07 [INFO] LLM call #1 done: in=1074 out=20 model=gpt-4.1-2025-04-14 | running total: 2074
+20:08:08 [INFO] response: https://grokipedia.com/api/typeahead?query=python+ASCII+art+font+libraries+multiple+fonts&limit=1 200
+20:08:08 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=python%20ASCII%20art%20font%20libraries%20multiple%20fonts 200
+20:08:10 [INFO] response: https://www.mojeek.com/search?q=python+ASCII+art+font+libraries+multiple+fonts 200
+20:08:10 [INFO] LLM call #2 started (model=gpt-4.1)
+20:08:11 [INFO] LLM call #2 done: in=1531 out=31 model=gpt-4.1-2025-04-14 | running total: 3636
+20:08:15 [INFO] LLM call #3 started (model=gpt-4.1)
+20:08:17 [INFO] LLM call #3 done: in=1703 out=69 model=gpt-4.1-2025-04-14 | running total: 5408
+20:08:19 [INFO] LLM call #4 started (model=gpt-4.1)
+20:08:21 [INFO] LLM call #4 done: in=1940 out=22 model=gpt-4.1-2025-04-14 | running total: 7370
+20:08:21 [INFO] LLM call #5 started (model=gpt-4.1)
+20:08:30 [INFO] LLM call #5 done: in=1981 out=837 model=gpt-4.1-2025-04-14 | running total: 10188
+20:08:30 [INFO] LLM call #6 started (model=gpt-4.1)
+20:08:35 [INFO] LLM call #6 done: in=2839 out=385 model=gpt-4.1-2025-04-14 | running total: 13412
+20:08:35 [INFO] LLM call #7 started (model=gpt-4.1)
+20:08:36 [INFO] LLM call #7 done: in=3246 out=21 model=gpt-4.1-2025-04-14 | running total: 16679
+20:08:40 [INFO] LLM call #8 started (model=gpt-4.1)
+20:08:41 [INFO] LLM call #8 done: in=3641 out=19 model=gpt-4.1-2025-04-14 | running total: 20339
+20:08:41 [INFO] LLM call #9 started (model=gpt-4.1)
+20:08:43 [INFO] LLM call #9 done: in=3711 out=19 model=gpt-4.1-2025-04-14 | running total: 24069
+20:08:43 [INFO] LLM call #10 started (model=gpt-4.1)
+20:08:51 [INFO] LLM call #10 done: in=3786 out=951 model=gpt-4.1-2025-04-14 | running total: 28806
+20:08:51 [INFO] Developer Agent: created 3 files
+20:08:51 [INFO] Developer: tokens: 27,826 (in: 25,452, out: 2,374) | cost: $0.0699 | calls: 10
+20:08:51 [INFO] QA Agent: reviewing code (iteration 0)
+20:08:52 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 1)
+20:08:52 [INFO] LLM call #11 started (model=gpt-4.1-mini)
+20:08:54 [INFO] LLM call #11 done: in=1201 out=64 model=gpt-4.1-mini-2025-04-14 | running total: 30071
+20:08:54 [INFO] LLM call #12 started (model=gpt-4.1-mini)
+20:08:56 [INFO] LLM call #12 done: in=3052 out=20 model=gpt-4.1-mini-2025-04-14 | running total: 33143
+20:09:00 [INFO] LLM call #13 started (model=gpt-4.1-mini)
+20:09:01 [INFO] Retrying request to /chat/completions in 0.788000 seconds
+20:09:02 [INFO] Retrying request to /chat/completions in 0.788000 seconds
+20:09:03 [INFO] Retrying request to /chat/completions in 0.788000 seconds
+20:09:04 [INFO] Retrying request to /chat/completions in 0.188000 seconds
+20:09:05 [INFO] LLM call #13 done: in=3342 out=38 model=gpt-4.1-mini-2025-04-14 | running total: 36523
+20:09:05 [INFO] LLM call #14 started (model=gpt-4.1-mini)
+20:09:09 [INFO] LLM call #14 done: in=3516 out=270 model=gpt-4.1-mini-2025-04-14 | running total: 40309
+20:09:09 [INFO] QA Agent: verdict=REVISION_NEEDED, score=0.60
+20:09:09 [INFO] QA: tokens: 11,503 (in: 11,111, out: 392) | cost: $0.0254 | calls: 4
+20:09:09 [INFO] QA REVISION_NEEDED — returning to Developer (iteration 1)
+20:09:09 [INFO] Developer Agent: writing code (iteration 1)
+20:09:09 [INFO] LLM call #15 started (model=gpt-4.1)
+20:09:11 [INFO] LLM call #15 done: in=1395 out=64 model=gpt-4.1-2025-04-14 | running total: 41768
+20:09:11 [INFO] LLM call #16 started (model=gpt-4.1)
+20:09:28 [INFO] LLM call #16 done: in=3243 out=1291 model=gpt-4.1-2025-04-14 | running total: 46302
+20:09:28 [INFO] LLM call #17 started (model=gpt-4.1)
+20:09:30 [INFO] LLM call #17 done: in=4582 out=21 model=gpt-4.1-2025-04-14 | running total: 50905
+20:09:33 [INFO] LLM call #18 started (model=gpt-4.1)
+20:09:35 [INFO] LLM call #18 done: in=4885 out=18 model=gpt-4.1-2025-04-14 | running total: 55808
+20:09:35 [INFO] LLM call #19 started (model=gpt-4.1)
+20:09:39 [INFO] LLM call #19 done: in=4954 out=465 model=gpt-4.1-2025-04-14 | running total: 61227
+20:09:39 [INFO] LLM call #20 started (model=gpt-4.1)
+20:09:41 [INFO] LLM call #20 done: in=5441 out=21 model=gpt-4.1-2025-04-14 | running total: 66689
+20:09:45 [INFO] LLM call #21 started (model=gpt-4.1)
+20:09:49 [INFO] LLM call #21 done: in=5744 out=187 model=gpt-4.1-2025-04-14 | running total: 72620
+20:09:49 [INFO] Developer Agent: created 3 files
+20:09:49 [INFO] Developer: tokens: 32,311 (in: 30,244, out: 2,067) | cost: $0.0770 | calls: 7
+20:09:49 [INFO] QA Agent: reviewing code (iteration 1)
+20:09:49 [INFO] LLM call #22 started (model=gpt-4.1-mini)
+20:09:49 [INFO] Retrying request to /chat/completions in 0.322000 seconds
+20:09:50 [INFO] Retrying request to /chat/completions in 0.322000 seconds
+20:09:51 [INFO] Retrying request to /chat/completions in 0.322000 seconds
+20:09:51 [INFO] Retrying request to /chat/completions in 0.322000 seconds
+20:09:52 [WARNING] LLM call #22 ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV
+20:09:52 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 84, in qa_node
+    review = run_qa(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/qa.py", line 87, in run_qa
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 1076. Please try again in 322ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id '4f4cbc61-2782-e42a-0ee4-814ec6d0536b'
+During task with name 'qa_node' and id '25d40da7-6d8b-063c-55de-b98946f571d4'
+20:11:14 [INFO] Dev Team graph compiled successfully
+20:34:43 [INFO] Dev Team graph compiled successfully
+20:35:12 [INFO] User story: Write a Python script that generates ASCII art from text input
+20:35:12 [INFO] Workspace cleaned
+20:35:12 [INFO] BA Agent: analyzing user story
+20:35:14 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 2)
+20:35:24 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+20:35:29 [INFO] LLM call #1 done: in=606 out=79 model=gpt-4.1-mini-2025-04-14 | running total: 685
+20:35:35 [INFO] response: https://grokipedia.com/api/typeahead?query=Python+libraries+for+generating+ASCII+art+from+text&limit=1 200
+20:35:35 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Python%20libraries%20for%20generating%20ASCII%20art%20from%20text 200
+20:35:37 [INFO] response: https://search.brave.com/search?q=Python+libraries+for+generating+ASCII+art+from+text&source=web 200
+20:35:42 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+20:35:59 [INFO] LLM call #2 done: in=1290 out=306 model=gpt-4.1-mini-2025-04-14 | running total: 2281
+20:35:59 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input' (simple)
+20:35:59 [INFO] BA Agent: tokens: 2,281 (in: 1,896, out: 385) | cost: $0.0069 | calls: 2
+20:36:12 [INFO] HITL decision: approved=True feedback=
+20:36:12 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+20:36:12 [INFO] HITL gate: APPROVED
+20:36:12 [INFO] Developer Agent: writing code (iteration 0)
+20:36:13 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 2)
+20:36:13 [INFO] LLM call #1 started (model=gpt-4.1)
+20:36:15 [INFO] LLM call #1 done: in=1072 out=23 model=gpt-4.1-2025-04-14 | running total: 3376
+20:36:16 [INFO] response: https://grokipedia.com/api/typeahead?query=pyfiglet+usage+and+how+to+get+available+fonts&limit=1 200
+20:36:16 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=pyfiglet%20usage%20and%20how%20to%20get%20available%20fonts 200
+20:36:18 [INFO] response: https://www.mojeek.com/search?q=pyfiglet+usage+and+how+to+get+available+fonts 200
+20:36:18 [INFO] LLM call #2 started (model=gpt-4.1)
+20:36:19 [INFO] LLM call #2 done: in=1447 out=25 model=gpt-4.1-2025-04-14 | running total: 4848
+20:36:22 [INFO] LLM call #3 started (model=gpt-4.1)
+20:36:22 [INFO] LLM call #3 done: in=1555 out=32 model=gpt-4.1-2025-04-14 | running total: 6435
+20:36:24 [INFO] LLM call #4 started (model=gpt-4.1)
+20:36:26 [INFO] LLM call #4 done: in=1728 out=65 model=gpt-4.1-2025-04-14 | running total: 8228
+20:36:28 [INFO] LLM call #5 started (model=gpt-4.1)
+20:36:29 [INFO] LLM call #5 done: in=1961 out=22 model=gpt-4.1-2025-04-14 | running total: 10211
+20:36:29 [INFO] LLM call #6 started (model=gpt-4.1)
+20:36:36 [INFO] LLM call #6 done: in=2002 out=906 model=gpt-4.1-2025-04-14 | running total: 13119
+20:36:36 [INFO] LLM call #7 started (model=gpt-4.1)
+20:36:43 [INFO] LLM call #7 done: in=2929 out=273 model=gpt-4.1-2025-04-14 | running total: 16321
+20:36:43 [INFO] LLM call #8 started (model=gpt-4.1)
+20:36:44 [INFO] LLM call #8 done: in=3223 out=26 model=gpt-4.1-2025-04-14 | running total: 19570
+20:36:45 [INFO] LLM call #9 started (model=gpt-4.1)
+20:36:47 [INFO] LLM call #9 done: in=3309 out=19 model=gpt-4.1-2025-04-14 | running total: 22898
+20:36:47 [INFO] LLM call #10 started (model=gpt-4.1)
+20:36:49 [INFO] LLM call #10 done: in=3379 out=41 model=gpt-4.1-2025-04-14 | running total: 26318
+20:36:49 [INFO] LLM call #11 started (model=gpt-4.1)
+20:36:51 [INFO] LLM call #11 done: in=3476 out=156 model=gpt-4.1-2025-04-14 | running total: 29950
+20:36:51 [INFO] Developer Agent: created 3 files
+20:36:51 [INFO] Developer: tokens: 27,669 (in: 26,081, out: 1,588) | cost: $0.0649 | calls: 11
+20:36:51 [INFO] QA Agent: reviewing code (iteration 0)
+20:36:52 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 2)
+20:36:53 [INFO] LLM call #12 started (model=gpt-4.1-mini)
+20:36:54 [INFO] LLM call #12 done: in=1102 out=64 model=gpt-4.1-mini-2025-04-14 | running total: 31116
+20:36:54 [INFO] LLM call #13 started (model=gpt-4.1-mini)
+20:36:57 [INFO] LLM call #13 done: in=2861 out=174 model=gpt-4.1-mini-2025-04-14 | running total: 34151
+20:36:57 [INFO] LLM call #14 started (model=gpt-4.1-mini)
+20:36:59 [INFO] LLM call #14 done: in=3089 out=167 model=gpt-4.1-mini-2025-04-14 | running total: 37407
+20:36:59 [INFO] LLM call #15 started (model=gpt-4.1-mini)
+20:37:00 [INFO] Retrying request to /chat/completions in 0.687000 seconds
+20:37:01 [INFO] Retrying request to /chat/completions in 0.687000 seconds
+20:37:02 [INFO] Retrying request to /chat/completions in 0.687000 seconds
+20:37:03 [INFO] Retrying request to /chat/completions in 0.687000 seconds
+20:37:04 [WARNING] LLM call #15 ERROR: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV
+20:37:04 [ERROR] Resume error
+Traceback (most recent call last):
+  File "/app/app.py", line 264, in _run
+    for event in _sync_stream(thread_id, Command(resume=resume_data), handler):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app.py", line 127, in _sync_stream
+    for chunk in graph.stream(input_data, config=config, stream_mode="updates"):
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/app/nodes.py", line 84, in qa_node
+    review = run_qa(
+        spec=state["spec"],
+    ...<2 lines>...
+        callbacks=callbacks,
+    )
+  File "/app/agents/qa.py", line 81, in run_qa
+    result = agent.invoke(
+        {"messages": [("user", prompt)]},
+        config=config,
+    )
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 3365, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/main.py", line 2759, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/pregel/_retry.py", line 126, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1317, in model_node
+    model_response = _execute_model_sync(request)
+  File "/usr/local/lib/python3.13/site-packages/langchain/agents/factory.py", line 1289, in _execute_model_sync
+    output = model_.invoke(messages)
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/runnables/base.py", line 5739, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 471, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1749, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1556, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py", line 1896, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1655, in _generate
+    _handle_openai_api_error(e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/langchain_openai/chat_models/base.py", line 1650, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/usr/local/lib/python3.13/site-packages/openai/_legacy_response.py", line 367, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1211, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<47 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1314, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/openai/_base_client.py", line 1087, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4.1-mini in organization org-8CV8HrMIolkDhT5ciChfqWAo on tokens per min (TPM): Limit 200000, Used 200000, Requested 2292. Please try again in 687ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+During task with name 'model' and id '71473b18-800f-5242-84f5-5515cf4a182c'
+During task with name 'qa_node' and id '0a398a74-e571-b822-447e-5ef7126128e1'
+20:41:28 [INFO] Dev Team graph compiled successfully
+20:42:00 [INFO] User story: Write a Python script that generates ASCII art from text input
+20:42:00 [INFO] Workspace cleaned
+20:42:00 [INFO] BA Agent: analyzing user story
+20:42:02 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 2)
+20:42:05 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+20:42:08 [INFO] LLM call #1 done: in=606 out=53 model=gpt-4.1-mini-2025-04-14 | running total: 659
+20:42:09 [INFO] response: https://grokipedia.com/api/typeahead?query=Python+ASCII+art+generation+examples&limit=1 200
+20:42:09 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Python%20ASCII%20art%20generation%20examples 200
+20:42:11 [INFO] response: https://html.duckduckgo.com/html/ 200
+20:42:11 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+20:42:21 [INFO] LLM call #2 done: in=1139 out=311 model=gpt-4.1-mini-2025-04-14 | running total: 2109
+20:42:21 [INFO] BA Agent: produced spec 'ASCII Art Generator from Text Input' (simple)
+20:42:21 [INFO] BA Agent: tokens: 2,109 (in: 1,745, out: 364) | cost: $0.0064 | calls: 2
+20:42:27 [INFO] HITL decision: approved=True feedback=
+20:42:27 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+20:42:27 [INFO] HITL gate: APPROVED
+20:42:27 [INFO] Developer Agent: writing code (iteration 0)
+20:42:28 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 2)
+20:42:28 [INFO] LLM call #1 started (model=gpt-4.1)
+20:42:30 [INFO] LLM call #1 done: in=1078 out=20 model=gpt-4.1-2025-04-14 | running total: 3207
+20:42:31 [INFO] response: https://grokipedia.com/api/typeahead?query=art+python+library+usage+font+style+decoration&limit=1 200
+20:42:31 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=art%20python%20library%20usage%20font%20style%20decoration 200
+20:42:32 [INFO] response: https://search.brave.com/search?q=art+python+library+usage+font+style+decoration&source=web 200
+20:42:32 [INFO] LLM call #2 started (model=gpt-4.1)
+20:42:34 [INFO] LLM call #2 done: in=2029 out=29 model=gpt-4.1-2025-04-14 | running total: 5265
+20:42:48 [INFO] LLM call #3 started (model=gpt-4.1)
+20:42:50 [INFO] LLM call #3 done: in=2198 out=30 model=gpt-4.1-2025-04-14 | running total: 7493
+20:42:53 [INFO] LLM call #4 started (model=gpt-4.1)
+20:42:54 [INFO] LLM call #4 done: in=2323 out=24 model=gpt-4.1-2025-04-14 | running total: 9840
+20:42:54 [INFO] LLM call #5 started (model=gpt-4.1)
+20:43:00 [INFO] LLM call #5 done: in=2366 out=765 model=gpt-4.1-2025-04-14 | running total: 12971
+20:43:00 [INFO] LLM call #6 started (model=gpt-4.1)
+20:43:03 [INFO] LLM call #6 done: in=3152 out=527 model=gpt-4.1-2025-04-14 | running total: 16650
+20:43:04 [INFO] LLM call #7 started (model=gpt-4.1)
+20:43:05 [INFO] LLM call #7 done: in=3701 out=18 model=gpt-4.1-2025-04-14 | running total: 20369
+20:43:05 [INFO] LLM call #8 started (model=gpt-4.1)
+20:43:06 [INFO] LLM call #8 done: in=3785 out=19 model=gpt-4.1-2025-04-14 | running total: 24173
+20:43:06 [INFO] LLM call #9 started (model=gpt-4.1)
+20:43:10 [INFO] LLM call #9 done: in=3855 out=930 model=gpt-4.1-2025-04-14 | running total: 28958
+20:43:10 [INFO] Developer Agent: created 3 files
+20:43:10 [INFO] Developer: tokens: 26,849 (in: 24,487, out: 2,362) | cost: $0.0679 | calls: 9
+20:43:10 [INFO] QA Agent: reviewing code (iteration 0)
+20:43:12 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 2)
+20:43:12 [INFO] LLM call #10 started (model=gpt-4.1-mini)
+20:43:13 [INFO] LLM call #10 done: in=1167 out=64 model=gpt-4.1-mini-2025-04-14 | running total: 30189
+20:43:13 [INFO] LLM call #11 started (model=gpt-4.1-mini)
+20:43:17 [INFO] LLM call #11 done: in=3114 out=332 model=gpt-4.1-mini-2025-04-14 | running total: 33635
+20:43:17 [INFO] LLM call #12 started (model=gpt-4.1-mini)
+20:43:21 [INFO] LLM call #12 done: in=3477 out=318 model=gpt-4.1-mini-2025-04-14 | running total: 37430
+20:43:21 [INFO] LLM call #13 started (model=gpt-4.1-mini)
+20:43:23 [INFO] LLM call #13 done: in=3915 out=193 model=gpt-4.1-mini-2025-04-14 | running total: 41538
+20:43:23 [INFO] QA Agent: verdict=REVISION_NEEDED, score=0.50
+20:43:23 [INFO] QA: tokens: 12,580 (in: 11,673, out: 907) | cost: $0.0306 | calls: 4
+20:43:23 [INFO] QA REVISION_NEEDED — returning to Developer (iteration 1)
+20:43:23 [INFO] Developer Agent: writing code (iteration 1)
+20:43:23 [INFO] LLM call #14 started (model=gpt-4.1)
+20:43:36 [INFO] LLM call #14 done: in=1285 out=1629 model=gpt-4.1-2025-04-14 | running total: 44452
+20:43:36 [INFO] LLM call #15 started (model=gpt-4.1)
+20:43:37 [INFO] LLM call #15 done: in=2962 out=24 model=gpt-4.1-2025-04-14 | running total: 47438
+20:43:37 [INFO] LLM call #16 started (model=gpt-4.1)
+20:43:38 [INFO] LLM call #16 done: in=3016 out=21 model=gpt-4.1-2025-04-14 | running total: 50475
+20:43:42 [INFO] LLM call #17 started (model=gpt-4.1)
+20:43:49 [INFO] LLM call #17 done: in=4212 out=1100 model=gpt-4.1-2025-04-14 | running total: 55787
+20:43:49 [INFO] LLM call #18 started (model=gpt-4.1)
+20:43:50 [INFO] LLM call #18 done: in=5333 out=21 model=gpt-4.1-2025-04-14 | running total: 61141
+20:43:53 [INFO] LLM call #19 started (model=gpt-4.1)
+20:43:57 [INFO] LLM call #19 done: in=6629 out=671 model=gpt-4.1-2025-04-14 | running total: 68441
+20:43:57 [INFO] LLM call #20 started (model=gpt-4.1)
+20:43:58 [INFO] LLM call #20 done: in=7322 out=21 model=gpt-4.1-2025-04-14 | running total: 75784
+20:44:01 [INFO] LLM call #21 started (model=gpt-4.1)
+20:44:08 [INFO] LLM call #21 done: in=8628 out=1154 model=gpt-4.1-2025-04-14 | running total: 85566
+20:44:08 [INFO] LLM call #22 started (model=gpt-4.1)
+20:44:08 [INFO] Retrying request to /chat/completions in 5.766000 seconds
+20:44:19 [INFO] LLM call #22 done: in=9803 out=721 model=gpt-4.1-2025-04-14 | running total: 96090
+20:44:19 [INFO] LLM call #23 started (model=gpt-4.1)
+20:44:19 [INFO] Retrying request to /chat/completions in 4.017000 seconds
+20:44:24 [INFO] Retrying request to /chat/completions in 9.540000 seconds
+20:44:34 [INFO] Retrying request to /chat/completions in 1.152000 seconds
+20:44:36 [INFO] LLM call #23 done: in=10546 out=21 model=gpt-4.1-2025-04-14 | running total: 106657
+20:44:39 [INFO] LLM call #24 started (model=gpt-4.1)
+20:44:39 [INFO] Retrying request to /chat/completions in 12.062000 seconds
+20:44:52 [INFO] Retrying request to /chat/completions in 7.012000 seconds
+20:45:05 [INFO] LLM call #24 done: in=11910 out=1116 model=gpt-4.1-2025-04-14 | running total: 119683
+20:45:05 [INFO] LLM call #25 started (model=gpt-4.1)
+20:45:06 [INFO] Retrying request to /chat/completions in 4.740000 seconds
+20:45:11 [INFO] Retrying request to /chat/completions in 12.086000 seconds
+20:45:24 [INFO] Retrying request to /chat/completions in 0.886000 seconds
+20:45:29 [INFO] LLM call #25 done: in=13047 out=670 model=gpt-4.1-2025-04-14 | running total: 133400
+20:45:29 [INFO] LLM call #26 started (model=gpt-4.1)
+20:45:29 [INFO] Retrying request to /chat/completions in 12.112000 seconds
+20:45:42 [INFO] Retrying request to /chat/completions in 10.416000 seconds
+20:45:53 [INFO] LLM call #26 done: in=13739 out=21 model=gpt-4.1-2025-04-14 | running total: 147160
+20:45:56 [INFO] LLM call #27 started (model=gpt-4.1)
+20:45:56 [INFO] Retrying request to /chat/completions in 14.038000 seconds
+20:46:11 [INFO] Retrying request to /chat/completions in 10.792000 seconds
+20:46:23 [INFO] LLM call #27 done: in=14732 out=16 model=gpt-4.1-2025-04-14 | running total: 161908
+20:46:23 [INFO] LLM call #28 started (model=gpt-4.1)
+20:46:23 [INFO] Retrying request to /chat/completions in 14.934000 seconds
+20:46:39 [INFO] Retrying request to /chat/completions in 14.560000 seconds
+20:46:55 [INFO] LLM call #28 done: in=16172 out=17 model=gpt-4.1-2025-04-14 | running total: 178097
+20:46:55 [INFO] LLM call #29 started (model=gpt-4.1)
+20:46:55 [INFO] Retrying request to /chat/completions in 16.221000 seconds
+20:47:12 [INFO] Retrying request to /chat/completions in 15.334000 seconds
+20:47:34 [INFO] LLM call #29 done: in=17048 out=1101 model=gpt-4.1-2025-04-14 | running total: 196246
+20:47:34 [INFO] LLM call #30 started (model=gpt-4.1)
+20:47:35 [INFO] Retrying request to /chat/completions in 10.192000 seconds
+20:47:45 [INFO] Retrying request to /chat/completions in 17.802000 seconds
+20:48:09 [INFO] LLM call #30 done: in=18170 out=718 model=gpt-4.1-2025-04-14 | running total: 215134
+20:48:09 [INFO] LLM call #31 started (model=gpt-4.1)
+20:48:09 [INFO] Retrying request to /chat/completions in 12.306000 seconds
+20:48:22 [INFO] Retrying request to /chat/completions in 17.828000 seconds
+20:48:40 [INFO] Retrying request to /chat/completions in 0.884000 seconds
+20:48:43 [INFO] LLM call #31 done: in=18910 out=21 model=gpt-4.1-2025-04-14 | running total: 234065
+20:48:45 [INFO] LLM call #32 started (model=gpt-4.1)
+20:48:45 [INFO] Retrying request to /chat/completions in 18.586000 seconds
+20:49:04 [INFO] Retrying request to /chat/completions in 15.700000 seconds
+20:49:21 [INFO] LLM call #32 done: in=19302 out=16 model=gpt-4.1-2025-04-14 | running total: 253383
+20:49:21 [INFO] LLM call #33 started (model=gpt-4.1)
+20:49:21 [INFO] Retrying request to /chat/completions in 19.412000 seconds
+20:49:41 [INFO] Retrying request to /chat/completions in 19.542000 seconds
+20:50:09 [INFO] LLM call #33 done: in=20721 out=1068 model=gpt-4.1-2025-04-14 | running total: 275172
+20:50:09 [INFO] LLM call #34 started (model=gpt-4.1)
+20:50:09 [INFO] Retrying request to /chat/completions in 12.812000 seconds
+20:50:23 [INFO] Retrying request to /chat/completions in 20.976000 seconds
+20:50:46 [INFO] LLM call #34 done: in=21810 out=21 model=gpt-4.1-2025-04-14 | running total: 297003
+20:50:49 [INFO] LLM call #35 started (model=gpt-4.1)
+20:50:49 [INFO] Retrying request to /chat/completions in 21.734000 seconds
+20:51:12 [INFO] Retrying request to /chat/completions in 17.404000 seconds
+20:51:36 [INFO] LLM call #35 done: in=22202 out=1067 model=gpt-4.1-2025-04-14 | running total: 320272
+20:51:36 [INFO] LLM call #36 started (model=gpt-4.1)
+20:51:37 [INFO] Retrying request to /chat/completions in 14.206000 seconds
+20:51:54 [INFO] Retrying request to /chat/completions in 21.610000 seconds
+20:52:19 [INFO] LLM call #36 done: in=23290 out=21 model=gpt-4.1-2025-04-14 | running total: 343583
+20:52:21 [INFO] LLM call #37 started (model=gpt-4.1)
+20:52:22 [INFO] Retrying request to /chat/completions in 22.514000 seconds
+20:53:34 [INFO] Dev Team graph compiled successfully
+20:55:12 [INFO] Dev Team graph compiled successfully
+20:56:22 [INFO] Dev Team graph compiled successfully
+20:57:40 [INFO] Dev Team graph compiled successfully
+21:09:08 [INFO] Dev Team graph compiled successfully
+21:09:42 [INFO] User story: Write a Python script that generates ASCII art from text input
+21:09:42 [INFO] Workspace cleaned
+21:09:42 [INFO] BA Agent: analyzing user story
+21:09:43 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 2)
+21:09:45 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+21:09:48 [INFO] LLM call #1 done: in=606 out=57 model=gpt-4.1-mini-2025-04-14 | running total: 663
+21:09:49 [INFO] response: https://grokipedia.com/api/typeahead?query=Python+library+for+ASCII+art+generation+from+text&limit=1 200
+21:09:49 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Python%20library%20for%20ASCII%20art%20generation%20from%20text 200
+21:09:51 [INFO] response: https://www.mojeek.com/search?q=Python+library+for+ASCII+art+generation+from+text 200
+21:09:51 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+21:09:53 [INFO] LLM call #2 done: in=1050 out=25 model=gpt-4.1-mini-2025-04-14 | running total: 1738
+21:10:00 [INFO] LLM call #3 started (model=gpt-4.1-mini)
+21:10:01 [INFO] LLM call #3 done: in=1218 out=22 model=gpt-4.1-mini-2025-04-14 | running total: 2978
+21:10:04 [INFO] LLM call #4 started (model=gpt-4.1-mini)
+21:10:05 [INFO] LLM call #4 done: in=1383 out=20 model=gpt-4.1-mini-2025-04-14 | running total: 4381
+21:10:06 [INFO] response: https://grokipedia.com/api/typeahead?query=python+art+library+text2art+example&limit=1 200
+21:10:06 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=python%20art%20library%20text2art%20example 200
+21:10:07 [INFO] response: https://html.duckduckgo.com/html/ 200
+21:10:07 [INFO] LLM call #5 started (model=gpt-4.1-mini)
+21:10:12 [INFO] LLM call #5 done: in=1903 out=307 model=gpt-4.1-mini-2025-04-14 | running total: 6591
+21:10:13 [INFO] BA Agent: produced spec 'Python ASCII Art Generator Script' (simple)
+21:10:13 [INFO] BA Agent: tokens: 6,591 (in: 6,160, out: 431) | cost: $0.0158 | calls: 5
+21:14:07 [INFO] HITL decision: approved=True feedback=
+21:14:07 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+21:14:07 [INFO] HITL gate: APPROVED
+21:14:07 [INFO] Developer Agent: writing code (iteration 0)
+21:14:09 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 2)
+21:14:09 [INFO] LLM call #1 started (model=gpt-5.5)
+21:14:44 [INFO] LLM call #1 done: in=1159 out=2775 model=gpt-5.5-2026-04-23 | running total: 10525
+21:14:44 [INFO] LLM call #2 started (model=gpt-5.5)
+21:14:48 [INFO] LLM call #2 done: in=3485 out=98 model=gpt-5.5-2026-04-23 | running total: 14108
+21:14:59 [INFO] LLM call #3 started (model=gpt-5.5)
+21:15:03 [INFO] LLM call #3 done: in=4013 out=22 model=gpt-5.5-2026-04-23 | running total: 18143
+21:15:03 [INFO] LLM call #4 started (model=gpt-5.5)
+21:15:08 [INFO] LLM call #4 done: in=5976 out=242 model=gpt-5.5-2026-04-23 | running total: 24361
+21:15:08 [INFO] Developer Agent: created 4 files
+21:15:08 [INFO] Developer: tokens: 17,770 (in: 14,633, out: 3,137) | cost: $0.0815 | calls: 4
+21:15:08 [INFO] QA Agent: reviewing code (iteration 0)
+21:15:09 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 2)
+21:15:09 [INFO] LLM call #5 started (model=gpt-5.4)
+21:15:12 [INFO] LLM call #5 done: in=1253 out=90 model=gpt-5.4-2026-03-05 | running total: 25704
+21:15:12 [INFO] LLM call #6 started (model=gpt-5.4)
+21:15:15 [INFO] LLM call #6 done: in=4570 out=239 model=gpt-5.4-2026-03-05 | running total: 30513
+21:15:18 [INFO] LLM call #7 started (model=gpt-5.4)
+21:15:21 [INFO] LLM call #7 done: in=5032 out=108 model=gpt-5.4-2026-03-05 | running total: 35653
+21:15:21 [INFO] LLM call #8 started (model=gpt-5.4)
+21:15:22 [INFO] LLM call #8 done: in=5244 out=114 model=gpt-5.4-2026-03-05 | running total: 41011
+21:15:22 [INFO] QA Agent: verdict=APPROVED, score=0.92
+21:15:22 [INFO] QA: tokens: 16,650 (in: 16,099, out: 551) | cost: $0.0458 | calls: 4
+21:15:22 [INFO] QA APPROVED — proceeding to GitHub
+21:15:22 [INFO] GitHub: creating PR
+21:15:27 [INFO] Created branch: dev-team/python-ascii-art-generator-script
+21:15:39 [INFO] Committed 4 files to dev-team/python-ascii-art-generator-script (single commit)
+21:15:41 [INFO] Created PR #15: https://github.com/vilyaua/MAIS-ProjectFinal/pull/15
+21:15:41 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/15
+21:15:41 [INFO] Pipeline total: tokens: 41,011 (in: 36,892, out: 4,119) | cost: $0.1431 | calls: 13
+21:15:41 [INFO] Results packaged to output/2026-05-01_211541_96e2b2e6
+21:21:40 [INFO] Dev Team graph compiled successfully
+21:21:50 [INFO] User story: Write a Python script that generates ASCII art from text input
+21:21:50 [INFO] Workspace cleaned
+21:21:50 [INFO] BA Agent: analyzing user story
+21:21:51 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 2)
+21:21:52 [INFO] LLM call #1 started (model=gpt-5.4-mini)
+21:21:54 [INFO] LLM call #1 done: in=690 out=68 model=gpt-5.4-mini-2026-03-17 | running total: 758
+21:21:55 [INFO] response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Python%20ASCII%20art%20text%20generator%20library%20documentation%20examples%20CLI 200
+21:21:55 [INFO] response: https://grokipedia.com/api/typeahead?query=Python+ASCII+art+text+generator+library+documentation+examples+CLI&limit=1 200
+21:21:56 [INFO] response: https://html.duckduckgo.com/html/ 200
+21:21:56 [INFO] LLM call #2 started (model=gpt-5.4-mini)
+21:21:58 [INFO] LLM call #2 done: in=1274 out=37 model=gpt-5.4-mini-2026-03-17 | running total: 2069
+21:22:02 [INFO] LLM call #3 started (model=gpt-5.4-mini)
+21:22:02 [INFO] LLM call #3 done: in=1457 out=39 model=gpt-5.4-mini-2026-03-17 | running total: 3565
+21:22:05 [INFO] LLM call #4 started (model=gpt-5.4-mini)
+21:22:06 [INFO] LLM call #4 done: in=1642 out=43 model=gpt-5.4-mini-2026-03-17 | running total: 5250
+21:22:09 [INFO] LLM call #5 started (model=gpt-5.4-mini)
+21:22:10 [INFO] LLM call #5 done: in=1831 out=42 model=gpt-5.4-mini-2026-03-17 | running total: 7123
+21:22:13 [INFO] LLM call #6 started (model=gpt-5.4-mini)
+21:22:16 [INFO] LLM call #6 done: in=1974 out=389 model=gpt-5.4-mini-2026-03-17 | running total: 9486
+21:22:16 [INFO] BA Agent: produced spec 'ASCII Art Text Generator Script' (simple)
+21:22:16 [INFO] BA Agent: tokens: 9,486 (in: 8,868, out: 618) | cost: $0.0284 | calls: 6
+21:22:19 [INFO] HITL decision: approved=True feedback=
+21:22:19 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+21:22:19 [INFO] HITL gate: APPROVED
+21:22:19 [INFO] Developer Agent: writing code (iteration 0)
+21:22:20 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 2)
+21:22:20 [INFO] LLM call #1 started (model=gpt-5.5)
+21:22:33 [INFO] LLM call #1 done: in=1235 out=543 model=gpt-5.5-2026-04-23 | running total: 11264
+21:22:33 [INFO] LLM call #2 started (model=gpt-5.5)
+21:23:39 [INFO] LLM call #2 done: in=1285 out=4797 model=gpt-5.5-2026-04-23 | running total: 17346
+21:23:39 [INFO] LLM call #3 started (model=gpt-5.5)
+21:23:41 [INFO] LLM call #3 done: in=5631 out=50 model=gpt-5.5-2026-04-23 | running total: 23027
+21:23:43 [INFO] LLM call #4 started (model=gpt-5.5)
+21:23:51 [INFO] LLM call #4 done: in=5887 out=402 model=gpt-5.5-2026-04-23 | running total: 29316
+21:23:51 [INFO] Developer Agent: created 4 files
+21:23:51 [INFO] Developer: tokens: 19,830 (in: 14,038, out: 5,792) | cost: $0.1116 | calls: 4
+21:23:51 [INFO] QA Agent: reviewing code (iteration 0)
+21:23:52 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 2)
+21:23:52 [INFO] LLM call #5 started (model=gpt-5.4)
+21:23:54 [INFO] LLM call #5 done: in=1334 out=88 model=gpt-5.4-2026-03-05 | running total: 30738
+21:23:54 [INFO] LLM call #6 started (model=gpt-5.4)
+21:23:55 [INFO] LLM call #6 done: in=5668 out=24 model=gpt-5.4-2026-03-05 | running total: 36430
+21:23:58 [INFO] LLM call #7 started (model=gpt-5.4)
+21:23:59 [INFO] LLM call #7 done: in=5926 out=21 model=gpt-5.4-2026-03-05 | running total: 42377
+21:23:59 [INFO] LLM call #8 started (model=gpt-5.4)
+21:24:01 [INFO] LLM call #8 done: in=8809 out=114 model=gpt-5.4-2026-03-05 | running total: 51300
+21:24:02 [INFO] LLM call #9 started (model=gpt-5.4)
+21:24:03 [INFO] LLM call #9 done: in=9142 out=51 model=gpt-5.4-2026-03-05 | running total: 60493
+21:24:03 [INFO] LLM call #10 started (model=gpt-5.4)
+21:24:05 [INFO] LLM call #10 done: in=10996 out=65 model=gpt-5.4-2026-03-05 | running total: 71554
+21:24:05 [INFO] LLM call #11 started (model=gpt-5.4)
+21:24:09 [INFO] LLM call #11 done: in=11530 out=127 model=gpt-5.4-2026-03-05 | running total: 83211
+21:24:09 [INFO] LLM call #12 started (model=gpt-5.4)
+21:24:11 [INFO] LLM call #12 done: in=11747 out=113 model=gpt-5.4-2026-03-05 | running total: 95071
+21:24:11 [INFO] QA Agent: verdict=APPROVED, score=0.90
+21:24:11 [INFO] QA: tokens: 65,755 (in: 65,152, out: 603) | cost: $0.1689 | calls: 8
+21:24:11 [INFO] QA APPROVED — proceeding to GitHub
+21:24:11 [INFO] GitHub: creating PR
+21:24:14 [INFO] Created branch: dev-team/ascii-art-text-generator-script
+21:24:24 [INFO] Committed 4 files to dev-team/ascii-art-text-generator-script (single commit)
+21:24:26 [INFO] Created PR #16: https://github.com/vilyaua/MAIS-ProjectFinal/pull/16
+21:24:26 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/16
+21:24:26 [INFO] Pipeline total: tokens: 95,071 (in: 88,058, out: 7,013) | cost: $0.3089 | calls: 18
+21:24:26 [INFO] Results packaged to output/2026-05-01_212426_03f2f186
+21:30:18 [INFO] Dev Team graph compiled successfully
+21:30:59 [INFO] User story: Write a Python script that generates ASCII art from text input
+21:30:59 [INFO] Workspace cleaned
+21:30:59 [INFO] BA Agent: analyzing user story
+21:31:00 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)
+21:31:02 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+21:31:05 [INFO] LLM call #1 done: in=426 out=253 model=gpt-4.1-mini-2025-04-14 | running total: 679
+21:31:05 [INFO] BA Agent: produced spec 'ASCII Art Text Generator' (simple)
+21:31:05 [INFO] BA Agent: tokens: 679 (in: 426, out: 253) | cost: $0.0029 | calls: 1
+21:31:16 [INFO] HITL decision: approved=True feedback=
+21:31:16 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+21:31:16 [INFO] HITL gate: APPROVED
+21:31:16 [INFO] Developer Agent: writing code (iteration 0)
+21:31:17 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 3)
+21:31:17 [INFO] LLM call #1 started (model=gpt-5.5)
+21:31:53 [INFO] LLM call #1 done: in=1122 out=2979 model=gpt-5.5-2026-04-23 | running total: 4780
+21:31:53 [INFO] LLM call #2 started (model=gpt-5.5)
+21:31:55 [INFO] LLM call #2 done: in=3861 out=36 model=gpt-5.5-2026-04-23 | running total: 8677
+21:31:55 [INFO] LLM call #3 started (model=gpt-5.5)
+21:32:04 [INFO] LLM call #3 done: in=3922 out=713 model=gpt-5.5-2026-04-23 | running total: 13312
+21:32:04 [INFO] LLM call #4 started (model=gpt-5.5)
+21:32:06 [INFO] LLM call #4 done: in=4661 out=24 model=gpt-5.5-2026-04-23 | running total: 17997
+21:32:06 [INFO] LLM call #5 started (model=gpt-5.5)
+21:32:08 [INFO] LLM call #5 done: in=4819 out=24 model=gpt-5.5-2026-04-23 | running total: 22840
+21:32:11 [INFO] LLM call #6 started (model=gpt-5.5)
+21:32:20 [INFO] LLM call #6 done: in=5328 out=875 model=gpt-5.5-2026-04-23 | running total: 29043
+21:32:20 [INFO] LLM call #7 started (model=gpt-5.5)
+21:32:22 [INFO] LLM call #7 done: in=6067 out=24 model=gpt-5.5-2026-04-23 | running total: 35134
+21:32:24 [INFO] LLM call #8 started (model=gpt-5.5)
+21:32:28 [INFO] LLM call #8 done: in=6375 out=155 model=gpt-5.5-2026-04-23 | running total: 41664
+21:32:28 [INFO] Developer Agent: created 3 files
+21:32:28 [INFO] Developer: tokens: 40,985 (in: 36,155, out: 4,830) | cost: $0.1664 | calls: 8
+21:32:28 [INFO] QA Agent: reviewing code (iteration 0)
+21:32:29 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 3)
+21:32:29 [INFO] LLM call #9 started (model=gpt-5.4)
+21:32:30 [INFO] LLM call #9 done: in=1140 out=73 model=gpt-5.4-2026-03-05 | running total: 42877
+21:32:30 [INFO] LLM call #10 started (model=gpt-5.4)
+21:32:33 [INFO] LLM call #10 done: in=5547 out=21 model=gpt-5.4-2026-03-05 | running total: 48445
+21:32:33 [INFO] LLM call #11 started (model=gpt-5.4)
+21:32:34 [INFO] LLM call #11 done: in=8232 out=24 model=gpt-5.4-2026-03-05 | running total: 56701
+21:32:36 [INFO] LLM call #12 started (model=gpt-5.4)
+21:32:39 [INFO] LLM call #12 done: in=8542 out=94 model=gpt-5.4-2026-03-05 | running total: 65337
+21:32:39 [INFO] QA Agent: verdict=APPROVED, score=0.96
+21:32:39 [INFO] QA: tokens: 23,673 (in: 23,461, out: 212) | cost: $0.0608 | calls: 4
+21:32:39 [INFO] QA APPROVED — proceeding to GitHub
+21:32:39 [INFO] GitHub: creating PR
+21:32:42 [INFO] Created branch: dev-team/ascii-art-text-generator
+21:32:50 [INFO] Committed 3 files to dev-team/ascii-art-text-generator (single commit)
+21:32:52 [INFO] Created PR #17: https://github.com/vilyaua/MAIS-ProjectFinal/pull/17
+21:32:52 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/17
+21:32:52 [INFO] Pipeline total: tokens: 65,337 (in: 60,042, out: 5,295) | cost: $0.2301 | calls: 13
+21:32:52 [INFO] Results packaged to output/2026-05-01_213252_b50650e9
+21:45:11 [INFO] Dev Team graph compiled successfully
