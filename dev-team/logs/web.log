@@ -5195,3 +5195,45 @@ During task with name 'qa_node' and id '0a398a74-e571-b822-447e-5ef7126128e1'
 22:48:37 [INFO] Pipeline total: tokens: 30,029 (in: 26,278, out: 3,751) | cost: $0.1160 | calls: 8
 22:48:37 [INFO] Results packaged to output/2026-05-01_224837_7b719aae
 23:05:38 [INFO] Dev Team graph compiled successfully
+23:21:28 [INFO] Dev Team graph compiled successfully
+23:23:53 [INFO] Dev Team graph compiled successfully
+23:26:25 [INFO] User story: ``` Create a Python library that converts Markdown text to HTML, supporting head
+23:26:25 [INFO] Workspace cleaned
+23:26:26 [INFO] BA Agent: analyzing user story
+23:26:41 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)
+23:26:53 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+23:27:01 [INFO] Retrying request to /chat/completions in 0.470194 seconds
+23:27:10 [INFO] LLM call #1 done: in=442 out=398 model=gpt-4.1-mini-2025-04-14 | running total: 840
+23:27:10 [INFO] BA Agent: produced spec 'Markdown to HTML Converter Library' (medium)
+23:27:10 [INFO] BA Agent: tokens: 840 (in: 442, out: 398) | cost: $0.0041 | calls: 1
+23:30:40 [INFO] HITL decision: approved=True feedback=
+23:30:40 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+23:30:40 [INFO] HITL gate: APPROVED
+23:30:40 [INFO] Developer Agent: writing code (iteration 0)
+23:30:43 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 3)
+23:30:44 [INFO] LLM call #1 started (model=gpt-5.5)
+23:31:12 [INFO] LLM call #1 done: in=1271 out=2683 model=gpt-5.5-2026-04-23 | running total: 4794
+23:31:13 [INFO] LLM call #2 started (model=gpt-5.5)
+23:31:16 [INFO] LLM call #2 done: in=3806 out=24 model=gpt-5.5-2026-04-23 | running total: 8624
+23:31:33 [INFO] LLM call #3 started (model=gpt-5.5)
+23:31:37 [INFO] LLM call #3 done: in=4305 out=119 model=gpt-5.5-2026-04-23 | running total: 13048
+23:31:37 [INFO] Developer Agent: created 4 files
+23:31:37 [INFO] Developer: tokens: 12,208 (in: 9,382, out: 2,826) | cost: $0.0621 | calls: 3
+23:31:37 [INFO] QA Agent: reviewing code (iteration 0)
+23:31:40 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 3)
+23:31:41 [INFO] LLM call #4 started (model=gpt-5.4)
+23:31:44 [INFO] LLM call #4 done: in=1253 out=89 model=gpt-5.4-2026-03-05 | running total: 14390
+23:31:46 [INFO] LLM call #5 started (model=gpt-5.4)
+23:31:49 [INFO] LLM call #5 done: in=4756 out=24 model=gpt-5.4-2026-03-05 | running total: 19170
+23:32:14 [INFO] LLM call #6 started (model=gpt-5.4)
+23:32:20 [INFO] LLM call #6 done: in=5257 out=79 model=gpt-5.4-2026-03-05 | running total: 24506
+23:32:20 [INFO] QA Agent: verdict=APPROVED, score=0.97
+23:32:20 [INFO] QA: tokens: 11,458 (in: 11,266, out: 192) | cost: $0.0301 | calls: 3
+23:32:20 [INFO] QA APPROVED — proceeding to GitHub
+23:32:20 [INFO] GitHub: creating PR
+23:32:25 [INFO] Created branch: dev-team/markdown-to-html-converter-library
+23:32:35 [INFO] Committed 4 files to dev-team/markdown-to-html-converter-library (single commit)
+23:32:38 [INFO] Created PR #26: https://github.com/vilyaua/MAIS-ProjectFinal/pull/26
+23:32:39 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/26
+23:32:39 [INFO] Pipeline total: tokens: 24,506 (in: 21,090, out: 3,416) | cost: $0.0962 | calls: 7
+23:32:39 [INFO] Results packaged to output/2026-05-01_233239_55ce41db
