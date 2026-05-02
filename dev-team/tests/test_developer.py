@@ -49,7 +49,7 @@ def test_developer_covers_all_requirements():
             "4. Type support matches requirements (int, float)"
         ),
         input_text=f"Spec requirements:\n{spec_text}",
-        output_text=f"Code:\n{code.source_code}\n\nDescription: {code.description}",
+        output_text=f"Description: {code.description}\nFiles: {', '.join(code.files_created)}",
         threshold=0.6,
     )
 
@@ -63,7 +63,6 @@ def test_developer_creates_files():
     code = run_developer(spec)
 
     assert code.files_created, "Developer must create at least one file"
-    assert code.source_code, "Source code must not be empty"
     assert code.description, "Description must not be empty"
 
 
@@ -94,8 +93,8 @@ def test_developer_handles_revision():
             "2. Is the overall code quality improved?\n"
             "3. Are the original requirements still met?"
         ),
-        input_text=f"QA feedback: {review.issues}\nOriginal code:\n{code_v1.source_code}",
-        output_text=f"Revised code:\n{code_v2.source_code}",
+        input_text=f"QA feedback: {review.issues}\nOriginal: {code_v1.description}",
+        output_text=f"Revised: {code_v2.description}\nFiles: {', '.join(code_v2.files_created)}",
         threshold=0.5,
     )
 

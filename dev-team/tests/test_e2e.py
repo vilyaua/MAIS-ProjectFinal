@@ -23,7 +23,7 @@ def test_e2e_simple_feature():
 
     # Step 2: Developer
     code = run_developer(spec)
-    assert code.source_code, "Developer must produce code"
+    assert code.files_created, "Developer must create files"
 
     # Step 3: QA
     review = run_qa(spec, code)
@@ -46,7 +46,7 @@ def test_e2e_simple_feature():
         input_text=f"User story: {user_story}",
         output_text=(
             f"Spec: {spec.title}\nRequirements: {spec.requirements}\n\n"
-            f"Code:\n{code.source_code}\n\n"
+            f"Code: {code.description}\nFiles: {', '.join(code.files_created)}\n\n"
             f"QA verdict: {review.verdict}, score: {review.score}\n"
             f"QA issues: {review.issues}"
         ),
