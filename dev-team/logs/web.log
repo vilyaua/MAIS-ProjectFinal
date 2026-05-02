@@ -5237,3 +5237,221 @@ During task with name 'qa_node' and id '0a398a74-e571-b822-447e-5ef7126128e1'
 23:32:39 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/26
 23:32:39 [INFO] Pipeline total: tokens: 24,506 (in: 21,090, out: 3,416) | cost: $0.0962 | calls: 7
 23:32:39 [INFO] Results packaged to output/2026-05-01_233239_55ce41db
+09:56:32 [INFO] Dev Team graph compiled successfully
+10:00:17 [INFO] User story: Write a Python script that generates ASCII art from text input
+10:00:17 [INFO] Workspace cleaned
+10:00:17 [INFO] BA Agent: analyzing user story
+10:00:19 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)
+10:00:23 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+10:00:25 [INFO] LLM call #1 done: in=426 out=20 model=gpt-4.1-mini-2025-04-14 | running total: 446
+10:00:25 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+10:00:30 [INFO] LLM call #2 done: in=473 out=270 model=gpt-4.1-mini-2025-04-14 | running total: 1189
+10:00:30 [INFO] BA Agent: produced spec 'ASCII Art Text Generator' (simple)
+10:00:30 [INFO] BA Agent: tokens: 1,189 (in: 899, out: 290) | cost: $0.0041 | calls: 2
+10:00:31 [INFO] HITL decision: approved=True feedback=
+10:00:31 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+10:00:31 [INFO] HITL gate: APPROVED
+10:00:31 [INFO] Developer Agent: writing code (iteration 0)
+10:00:32 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 3)
+10:00:32 [INFO] LLM call #1 started (model=gpt-5.5)
+10:01:15 [INFO] LLM call #1 done: in=1136 out=4510 model=gpt-5.5-2026-04-23 | running total: 6835
+10:01:15 [INFO] LLM call #2 started (model=gpt-5.5)
+10:01:18 [INFO] LLM call #2 done: in=5438 out=101 model=gpt-5.5-2026-04-23 | running total: 12374
+10:01:18 [INFO] LLM call #3 started (model=gpt-5.5)
+10:01:20 [INFO] LLM call #3 done: in=5535 out=24 model=gpt-5.5-2026-04-23 | running total: 17933
+10:01:23 [INFO] LLM call #4 started (model=gpt-5.5)
+10:01:26 [INFO] LLM call #4 done: in=5854 out=87 model=gpt-5.5-2026-04-23 | running total: 23874
+10:01:26 [INFO] LLM call #5 started (model=gpt-5.5)
+10:01:33 [INFO] LLM call #5 done: in=6679 out=717 model=gpt-5.5-2026-04-23 | running total: 31270
+10:01:33 [INFO] LLM call #6 started (model=gpt-5.5)
+10:01:35 [INFO] LLM call #6 done: in=7367 out=21 model=gpt-5.5-2026-04-23 | running total: 38658
+10:01:36 [INFO] LLM call #7 started (model=gpt-5.5)
+10:01:37 [INFO] LLM call #7 done: in=7464 out=24 model=gpt-5.5-2026-04-23 | running total: 46146
+10:01:39 [INFO] LLM call #8 started (model=gpt-5.5)
+10:01:42 [INFO] LLM call #8 done: in=7809 out=151 model=gpt-5.5-2026-04-23 | running total: 54106
+10:01:42 [INFO] Developer Agent: created 5 files
+10:01:42 [INFO] Developer: tokens: 52,917 (in: 47,282, out: 5,635) | cost: $0.2095 | calls: 8
+10:01:42 [INFO] QA Agent: reviewing code (iteration 0)
+10:01:43 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 3)
+10:01:43 [INFO] LLM call #9 started (model=gpt-5.4)
+10:01:45 [INFO] LLM call #9 done: in=1149 out=103 model=gpt-5.4-2026-03-05 | running total: 55358
+10:01:45 [INFO] LLM call #10 started (model=gpt-5.4)
+10:01:46 [INFO] LLM call #10 done: in=6814 out=24 model=gpt-5.4-2026-03-05 | running total: 62196
+10:01:48 [INFO] LLM call #11 started (model=gpt-5.4)
+10:01:50 [INFO] LLM call #11 done: in=7161 out=93 model=gpt-5.4-2026-03-05 | running total: 69450
+10:01:50 [INFO] QA Agent: verdict=APPROVED, score=0.95
+10:01:50 [INFO] QA: tokens: 15,344 (in: 15,124, out: 220) | cost: $0.0400 | calls: 3
+10:01:50 [INFO] QA APPROVED — proceeding to GitHub
+10:01:50 [INFO] GitHub: creating PR
+10:01:53 [INFO] Created branch: dev-team/ascii-art-text-generator
+10:02:04 [INFO] Committed 5 files to dev-team/ascii-art-text-generator (single commit)
+10:02:06 [INFO] Created PR #27: https://github.com/vilyaua/MAIS-ProjectFinal/pull/27
+10:02:06 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/27
+10:02:06 [INFO] Pipeline total: tokens: 69,450 (in: 63,305, out: 6,145) | cost: $0.2536 | calls: 13
+10:02:06 [INFO] Results packaged to output/2026-05-02_100206_48753440
+10:03:07 [INFO] User story: Build a CLI password generator that supports custom length, uppercase, lowercase
+10:03:07 [INFO] Workspace cleaned
+10:03:07 [INFO] BA Agent: analyzing user story
+10:03:07 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+10:03:12 [INFO] LLM call #1 done: in=438 out=364 model=gpt-4.1-mini-2025-04-14 | running total: 802
+10:03:12 [INFO] BA Agent: produced spec 'CLI Password Generator with Strength Meter' (medium)
+10:03:12 [INFO] BA Agent: tokens: 802 (in: 438, out: 364) | cost: $0.0038 | calls: 1
+10:03:13 [INFO] HITL decision: approved=True feedback=
+10:03:13 [INFO] HITL gate: APPROVED
+10:03:13 [INFO] Developer Agent: writing code (iteration 0)
+10:03:13 [INFO] LLM call #1 started (model=gpt-5.5)
+10:03:37 [INFO] LLM call #1 done: in=1235 out=2899 model=gpt-5.5-2026-04-23 | running total: 4936
+10:03:37 [INFO] LLM call #2 started (model=gpt-5.5)
+10:03:39 [INFO] LLM call #2 done: in=4111 out=33 model=gpt-5.5-2026-04-23 | running total: 9080
+10:03:39 [INFO] LLM call #3 started (model=gpt-5.5)
+10:03:44 [INFO] LLM call #3 done: in=4179 out=24 model=gpt-5.5-2026-04-23 | running total: 13283
+10:03:45 [INFO] LLM call #4 started (model=gpt-5.5)
+10:03:48 [INFO] LLM call #4 done: in=4630 out=137 model=gpt-5.5-2026-04-23 | running total: 18050
+10:03:48 [INFO] Developer Agent: created 4 files
+10:03:48 [INFO] Developer: tokens: 17,248 (in: 14,155, out: 3,093) | cost: $0.0796 | calls: 4
+10:03:48 [INFO] QA Agent: reviewing code (iteration 0)
+10:03:48 [INFO] LLM call #5 started (model=gpt-5.4)
+10:03:50 [INFO] LLM call #5 done: in=1235 out=85 model=gpt-5.4-2026-03-05 | running total: 19370
+10:03:50 [INFO] LLM call #6 started (model=gpt-5.4)
+10:03:51 [INFO] LLM call #6 done: in=5485 out=24 model=gpt-5.4-2026-03-05 | running total: 24879
+10:03:53 [INFO] LLM call #7 started (model=gpt-5.4)
+10:03:55 [INFO] LLM call #7 done: in=5938 out=88 model=gpt-5.4-2026-03-05 | running total: 30905
+10:03:55 [INFO] QA Agent: verdict=APPROVED, score=0.97
+10:03:55 [INFO] QA: tokens: 12,855 (in: 12,658, out: 197) | cost: $0.0336 | calls: 3
+10:03:55 [INFO] QA APPROVED — proceeding to GitHub
+10:03:55 [INFO] GitHub: creating PR
+10:03:58 [INFO] Created branch: dev-team/cli-password-generator-with-strength-meter
+10:04:08 [INFO] Committed 4 files to dev-team/cli-password-generator-with-strength-meter (single commit)
+10:04:10 [INFO] Created PR #28: https://github.com/vilyaua/MAIS-ProjectFinal/pull/28
+10:04:10 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/28
+10:04:10 [INFO] Pipeline total: tokens: 30,905 (in: 27,251, out: 3,654) | cost: $0.1170 | calls: 8
+10:04:10 [INFO] Results packaged to output/2026-05-02_100410_875734cc
+10:07:13 [INFO] User story: Create a Python library that converts Markdown text to HTML, supporting headers,
+10:07:13 [INFO] Workspace cleaned
+10:07:13 [INFO] BA Agent: analyzing user story
+10:07:14 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+10:07:18 [INFO] LLM call #1 done: in=440 out=374 model=gpt-4.1-mini-2025-04-14 | running total: 814
+10:07:19 [INFO] BA Agent: produced spec 'Markdown to HTML Converter Library' (medium)
+10:07:19 [INFO] BA Agent: tokens: 814 (in: 440, out: 374) | cost: $0.0039 | calls: 1
+10:07:20 [INFO] HITL decision: approved=True feedback=
+10:07:20 [INFO] HITL gate: APPROVED
+10:07:20 [INFO] Developer Agent: writing code (iteration 0)
+10:07:20 [INFO] LLM call #1 started (model=gpt-5.5)
+10:07:45 [INFO] LLM call #1 done: in=1247 out=2142 model=gpt-5.5-2026-04-23 | running total: 4203
+10:07:45 [INFO] LLM call #2 started (model=gpt-5.5)
+10:07:47 [INFO] LLM call #2 done: in=2897 out=103 model=gpt-5.5-2026-04-23 | running total: 7203
+10:07:47 [INFO] LLM call #3 started (model=gpt-5.5)
+10:07:58 [INFO] LLM call #3 done: in=2990 out=1008 model=gpt-5.5-2026-04-23 | running total: 11201
+10:07:58 [INFO] LLM call #4 started (model=gpt-5.5)
+10:08:00 [INFO] LLM call #4 done: in=4025 out=49 model=gpt-5.5-2026-04-23 | running total: 15275
+10:08:03 [INFO] LLM call #5 started (model=gpt-5.5)
+10:08:05 [INFO] LLM call #5 done: in=4836 out=86 model=gpt-5.5-2026-04-23 | running total: 20197
+10:08:05 [INFO] LLM call #6 started (model=gpt-5.5)
+10:08:21 [INFO] LLM call #6 done: in=6901 out=1900 model=gpt-5.5-2026-04-23 | running total: 28998
+10:08:21 [INFO] LLM call #7 started (model=gpt-5.5)
+10:08:24 [INFO] LLM call #7 done: in=8578 out=75 model=gpt-5.5-2026-04-23 | running total: 37651
+10:08:26 [INFO] LLM call #8 started (model=gpt-5.5)
+10:08:29 [INFO] LLM call #8 done: in=9101 out=139 model=gpt-5.5-2026-04-23 | running total: 46891
+10:08:29 [INFO] Developer Agent: created 3 files
+10:08:29 [INFO] Developer: tokens: 46,077 (in: 40,575, out: 5,502) | cost: $0.1877 | calls: 8
+10:08:29 [INFO] QA Agent: reviewing code (iteration 0)
+10:08:29 [INFO] LLM call #9 started (model=gpt-5.4)
+10:08:31 [INFO] LLM call #9 done: in=1249 out=74 model=gpt-5.4-2026-03-05 | running total: 48214
+10:08:31 [INFO] LLM call #10 started (model=gpt-5.4)
+10:08:34 [INFO] LLM call #10 done: in=5080 out=24 model=gpt-5.4-2026-03-05 | running total: 53318
+10:08:36 [INFO] LLM call #11 started (model=gpt-5.4)
+10:08:39 [INFO] LLM call #11 done: in=5605 out=83 model=gpt-5.4-2026-03-05 | running total: 59006
+10:08:39 [INFO] QA Agent: verdict=APPROVED, score=0.96
+10:08:39 [INFO] QA: tokens: 12,115 (in: 11,934, out: 181) | cost: $0.0316 | calls: 3
+10:08:39 [INFO] QA APPROVED — proceeding to GitHub
+10:08:39 [INFO] GitHub: creating PR
+10:08:42 [INFO] Created branch: dev-team/markdown-to-html-converter-library
+10:08:51 [INFO] Committed 3 files to dev-team/markdown-to-html-converter-library (single commit)
+10:08:53 [INFO] Created PR #29: https://github.com/vilyaua/MAIS-ProjectFinal/pull/29
+10:08:53 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/29
+10:08:53 [INFO] Pipeline total: tokens: 59,006 (in: 52,949, out: 6,057) | cost: $0.2233 | calls: 12
+10:08:53 [INFO] Results packaged to output/2026-05-02_100853_6ecc63f1
+10:11:56 [INFO] User story: Write a Python CLI tool that reads a CSV file and generates a statistical summar
+10:11:56 [INFO] Workspace cleaned
+10:11:56 [INFO] BA Agent: analyzing user story
+10:11:56 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+10:12:00 [INFO] LLM call #1 done: in=454 out=335 model=gpt-4.1-mini-2025-04-14 | running total: 789
+10:12:00 [INFO] BA Agent: produced spec 'CSV Statistical Summary CLI Tool' (medium)
+10:12:00 [INFO] BA Agent: tokens: 789 (in: 454, out: 335) | cost: $0.0036 | calls: 1
+10:12:01 [INFO] HITL decision: approved=True feedback=
+10:12:01 [INFO] HITL gate: APPROVED
+10:12:01 [INFO] Developer Agent: writing code (iteration 0)
+10:12:01 [INFO] LLM call #1 started (model=gpt-5.5)
+10:12:43 [INFO] LLM call #1 done: in=1206 out=4493 model=gpt-5.5-2026-04-23 | running total: 6488
+10:12:43 [INFO] LLM call #2 started (model=gpt-5.5)
+10:12:46 [INFO] LLM call #2 done: in=5387 out=65 model=gpt-5.5-2026-04-23 | running total: 11940
+10:12:48 [INFO] LLM call #3 started (model=gpt-5.5)
+10:12:51 [INFO] LLM call #3 done: in=5709 out=159 model=gpt-5.5-2026-04-23 | running total: 17808
+10:12:51 [INFO] Developer Agent: created 4 files
+10:12:51 [INFO] Developer: tokens: 17,019 (in: 12,302, out: 4,717) | cost: $0.0935 | calls: 3
+10:12:51 [INFO] QA Agent: reviewing code (iteration 0)
+10:12:51 [INFO] LLM call #4 started (model=gpt-5.4)
+10:12:53 [INFO] LLM call #4 done: in=1227 out=86 model=gpt-5.4-2026-03-05 | running total: 19121
+10:12:53 [INFO] LLM call #5 started (model=gpt-5.4)
+10:12:54 [INFO] LLM call #5 done: in=6072 out=21 model=gpt-5.4-2026-03-05 | running total: 25214
+10:12:54 [INFO] LLM call #6 started (model=gpt-5.4)
+10:12:55 [INFO] LLM call #6 done: in=8340 out=24 model=gpt-5.4-2026-03-05 | running total: 33578
+10:12:57 [INFO] LLM call #7 started (model=gpt-5.4)
+10:13:01 [INFO] LLM call #7 done: in=8664 out=82 model=gpt-5.4-2026-03-05 | running total: 42324
+10:13:01 [INFO] QA Agent: verdict=APPROVED, score=0.95
+10:13:01 [INFO] QA: tokens: 24,516 (in: 24,303, out: 213) | cost: $0.0629 | calls: 4
+10:13:01 [INFO] QA APPROVED — proceeding to GitHub
+10:13:01 [INFO] GitHub: creating PR
+10:13:04 [INFO] Created branch: dev-team/csv-statistical-summary-cli-tool
+10:13:14 [INFO] Committed 4 files to dev-team/csv-statistical-summary-cli-tool (single commit)
+10:13:16 [INFO] Created PR #30: https://github.com/vilyaua/MAIS-ProjectFinal/pull/30
+10:13:16 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/30
+10:13:16 [INFO] Pipeline total: tokens: 42,324 (in: 37,059, out: 5,265) | cost: $0.1600 | calls: 8
+10:13:16 [INFO] Results packaged to output/2026-05-02_101316_23f5f425
+10:16:20 [INFO] User story: Build a REST API with Flask for a task manager with SQLite persistence, user aut
+10:16:20 [INFO] Workspace cleaned
+10:16:20 [INFO] BA Agent: analyzing user story
+10:16:20 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+10:16:21 [INFO] LLM call #1 done: in=445 out=29 model=gpt-4.1-mini-2025-04-14 | running total: 474
+10:16:21 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+10:16:25 [INFO] LLM call #2 done: in=501 out=439 model=gpt-4.1-mini-2025-04-14 | running total: 1414
+10:16:25 [INFO] BA Agent: produced spec 'Task Manager REST API with Flask and SQLite' (medium)
+10:16:25 [INFO] BA Agent: tokens: 1,414 (in: 946, out: 468) | cost: $0.0056 | calls: 2
+10:16:26 [INFO] HITL decision: approved=True feedback=
+10:16:26 [INFO] HITL gate: APPROVED
+10:16:26 [INFO] Developer Agent: writing code (iteration 0)
+10:16:26 [INFO] LLM call #1 started (model=gpt-5.5)
+10:16:30 [INFO] LLM call #1 done: in=1311 out=129 model=gpt-5.5-2026-04-23 | running total: 2854
+10:16:30 [INFO] LLM call #2 started (model=gpt-5.5)
+10:17:01 [INFO] LLM call #2 done: in=1441 out=3490 model=gpt-5.5-2026-04-23 | running total: 7785
+10:17:01 [INFO] LLM call #3 started (model=gpt-5.5)
+10:17:17 [INFO] LLM call #3 done: in=4704 out=1737 model=gpt-5.5-2026-04-23 | running total: 14226
+10:17:17 [INFO] LLM call #4 started (model=gpt-5.5)
+10:17:19 [INFO] LLM call #4 done: in=6370 out=24 model=gpt-5.5-2026-04-23 | running total: 20620
+10:17:21 [INFO] LLM call #5 started (model=gpt-5.5)
+10:17:25 [INFO] LLM call #5 done: in=6663 out=169 model=gpt-5.5-2026-04-23 | running total: 27452
+10:17:36 [INFO] LLM call #6 started (model=gpt-5.5)
+10:17:37 [INFO] LLM call #6 done: in=7662 out=24 model=gpt-5.5-2026-04-23 | running total: 35138
+10:17:40 [INFO] LLM call #7 started (model=gpt-5.5)
+10:17:44 [INFO] LLM call #7 done: in=8046 out=157 model=gpt-5.5-2026-04-23 | running total: 43341
+10:17:44 [INFO] Developer Agent: created 4 files
+10:17:44 [INFO] Developer: tokens: 41,927 (in: 36,197, out: 5,730) | cost: $0.1774 | calls: 7
+10:17:44 [INFO] QA Agent: reviewing code (iteration 0)
+10:17:44 [INFO] LLM call #8 started (model=gpt-5.4)
+10:17:46 [INFO] LLM call #8 done: in=1331 out=85 model=gpt-5.4-2026-03-05 | running total: 44757
+10:17:46 [INFO] LLM call #9 started (model=gpt-5.4)
+10:17:47 [INFO] LLM call #9 done: in=6307 out=19 model=gpt-5.4-2026-03-05 | running total: 51083
+10:17:47 [INFO] LLM call #10 started (model=gpt-5.4)
+10:17:49 [INFO] LLM call #10 done: in=8547 out=24 model=gpt-5.4-2026-03-05 | running total: 59654
+10:17:51 [INFO] LLM call #11 started (model=gpt-5.4)
+10:17:54 [INFO] LLM call #11 done: in=8933 out=86 model=gpt-5.4-2026-03-05 | running total: 68673
+10:17:54 [INFO] QA Agent: verdict=APPROVED, score=0.96
+10:17:54 [INFO] QA: tokens: 25,332 (in: 25,118, out: 214) | cost: $0.0649 | calls: 4
+10:17:54 [INFO] QA APPROVED — proceeding to GitHub
+10:17:54 [INFO] GitHub: creating PR
+10:17:57 [INFO] Created branch: dev-team/task-manager-rest-api-with-flask-and-sqlite
+10:18:09 [INFO] Committed 5 files to dev-team/task-manager-rest-api-with-flask-and-sqlite (single commit)
+10:18:11 [INFO] Created PR #31: https://github.com/vilyaua/MAIS-ProjectFinal/pull/31
+10:18:11 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/31
+10:18:11 [INFO] Pipeline total: tokens: 68,673 (in: 62,261, out: 6,412) | cost: $0.2479 | calls: 13
+10:18:11 [INFO] Results packaged to output/2026-05-02_101811_2b9c325b
