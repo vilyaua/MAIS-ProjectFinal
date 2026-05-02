@@ -113,7 +113,7 @@ docker compose build && docker compose up
 | Tool | Used By | Description |
 |------|---------|-------------|
 | `knowledge_search` | BA | Hybrid RAG (FAISS + BM25 + cross-encoder reranking) |
-| `read_notion_page` | BA | Read user stories from Notion pages |
+| `read_notion_page` | BA | Read user stories from Notion via API (headings, lists, code blocks) |
 | `web_search` | Developer | DuckDuckGo search (no API key needed) |
 | `docs_search` | Developer | Context7 MCP — up-to-date library documentation |
 | `python_repl` | Developer, QA | Sandboxed Python execution (30s timeout, dangerous ops blocked) |
@@ -136,6 +136,15 @@ After QA approval (or max iterations), the pipeline automatically:
 1. Creates a branch `dev-team/<spec-title-slug>`
 2. Commits all workspace files in a single commit (Git Trees API)
 3. Opens a pull request with spec, requirements, and QA review in the body
+
+### Notion Integration
+
+BA agent can read user stories directly from Notion pages via the Notion API.
+
+1. Create a [Notion integration](https://www.notion.so/profile/integrations) with Read access
+2. Connect it to your page (⋯ → Connections → your integration)
+3. Add `NOTION_TOKEN=ntn_...` to `.env`
+4. In the Web UI, type: `Read the user story from this Notion page: https://your.notion.site/page-id`
 
 ## Token Optimization
 
@@ -258,6 +267,7 @@ LANGFUSE_SECRET_KEY=sk-lf-...
 MODEL_FAST=openai:gpt-4.1-mini
 MODEL_MID=openai:gpt-5.4
 MODEL_POWERFUL=openai:gpt-5.5
+NOTION_TOKEN=ntn_...
 OPENAI_API_KEY=sk-...
 ```
 

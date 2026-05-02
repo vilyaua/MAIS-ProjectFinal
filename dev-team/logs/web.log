@@ -5455,3 +5455,50 @@ During task with name 'qa_node' and id '0a398a74-e571-b822-447e-5ef7126128e1'
 10:18:11 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/31
 10:18:11 [INFO] Pipeline total: tokens: 68,673 (in: 62,261, out: 6,412) | cost: $0.2479 | calls: 13
 10:18:11 [INFO] Results packaged to output/2026-05-02_101811_2b9c325b
+12:57:16 [INFO] Dev Team graph compiled successfully
+12:59:28 [INFO] Dev Team graph compiled successfully
+13:03:09 [INFO] User story: Read the user story from this Notion page: https://purring-foxtail-a89.notion.si
+13:03:09 [INFO] Workspace cleaned
+13:03:09 [INFO] BA Agent: analyzing user story
+13:03:12 [INFO] Loaded prompt 'ba-prompt' from Langfuse (version 3)
+13:03:17 [INFO] LLM call #1 started (model=gpt-4.1-mini)
+13:03:20 [INFO] LLM call #1 done: in=475 out=49 model=gpt-4.1-mini-2025-04-14 | running total: 524
+13:03:20 [INFO] LLM call #2 started (model=gpt-4.1-mini)
+13:03:26 [INFO] LLM call #2 done: in=557 out=274 model=gpt-4.1-mini-2025-04-14 | running total: 1355
+13:03:26 [INFO] BA Agent: produced spec 'Daily Expense Tracker CLI Tool' (medium)
+13:03:26 [INFO] BA Agent: tokens: 1,355 (in: 1,032, out: 323) | cost: $0.0046 | calls: 2
+13:03:27 [INFO] HITL decision: approved=True feedback=
+13:03:27 [WARNING] Deserializing unregistered type schemas.SpecOutput from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('schemas', 'SpecOutput')]
+13:03:27 [INFO] HITL gate: APPROVED
+13:03:27 [INFO] Developer Agent: writing code (iteration 0)
+13:03:28 [INFO] Loaded prompt 'developer-prompt' from Langfuse (version 3)
+13:03:28 [INFO] LLM call #1 started (model=gpt-5.5)
+13:04:10 [INFO] LLM call #1 done: in=1144 out=4878 model=gpt-5.5-2026-04-23 | running total: 7377
+13:04:10 [INFO] LLM call #2 started (model=gpt-5.5)
+13:04:13 [INFO] LLM call #2 done: in=6020 out=56 model=gpt-5.5-2026-04-23 | running total: 13453
+13:04:14 [INFO] LLM call #3 started (model=gpt-5.5)
+13:04:16 [INFO] LLM call #3 done: in=6197 out=24 model=gpt-5.5-2026-04-23 | running total: 19674
+13:04:20 [INFO] LLM call #4 started (model=gpt-5.5)
+13:04:23 [INFO] LLM call #4 done: in=6608 out=144 model=gpt-5.5-2026-04-23 | running total: 26426
+13:04:23 [INFO] Developer Agent: created 4 files
+13:04:23 [INFO] Developer: tokens: 25,071 (in: 19,969, out: 5,102) | cost: $0.1211 | calls: 4
+13:04:23 [INFO] QA Agent: reviewing code (iteration 0)
+13:04:24 [INFO] Loaded prompt 'qa-prompt' from Langfuse (version 3)
+13:04:24 [INFO] LLM call #5 started (model=gpt-5.4)
+13:04:26 [INFO] LLM call #5 done: in=1151 out=87 model=gpt-5.4-2026-03-05 | running total: 27664
+13:04:26 [INFO] LLM call #6 started (model=gpt-5.4)
+13:04:27 [INFO] LLM call #6 done: in=5502 out=21 model=gpt-5.4-2026-03-05 | running total: 33187
+13:04:27 [INFO] LLM call #7 started (model=gpt-5.4)
+13:04:31 [INFO] LLM call #7 done: in=7619 out=24 model=gpt-5.4-2026-03-05 | running total: 40830
+13:04:34 [INFO] LLM call #8 started (model=gpt-5.4)
+13:04:36 [INFO] LLM call #8 done: in=8032 out=78 model=gpt-5.4-2026-03-05 | running total: 48940
+13:04:36 [INFO] QA Agent: verdict=APPROVED, score=0.96
+13:04:36 [INFO] QA: tokens: 22,514 (in: 22,304, out: 210) | cost: $0.0579 | calls: 4
+13:04:36 [INFO] QA APPROVED — proceeding to GitHub
+13:04:36 [INFO] GitHub: creating PR
+13:04:40 [INFO] Created branch: dev-team/daily-expense-tracker-cli-tool
+13:04:51 [INFO] Committed 4 files to dev-team/daily-expense-tracker-cli-tool (single commit)
+13:04:53 [INFO] Created PR #32: https://github.com/vilyaua/MAIS-ProjectFinal/pull/32
+13:04:53 [INFO] GitHub: PR created — https://github.com/vilyaua/MAIS-ProjectFinal/pull/32
+13:04:53 [INFO] Pipeline total: tokens: 48,940 (in: 43,305, out: 5,635) | cost: $0.1836 | calls: 10
+13:04:54 [INFO] Results packaged to output/2026-05-02_130453_66fc81e9

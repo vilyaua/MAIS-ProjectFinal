@@ -18,7 +18,6 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-import trafilatura
 from config import Settings
 from ddgs import DDGS
 from langchain_core.tools import tool
@@ -368,23 +367,78 @@ def run_command(command: str) -> str:
 
 @tool
 def read_notion_page(page_url: str) -> str:
-    """Read a Notion page and return its text content.
+    """Read a Notion page and return its text content via the Notion API.
 
     Use this to fetch user stories or requirements from Notion.
-    Accepts a Notion page URL (e.g. https://www.notion.so/My-Page-abc123).
+    Accepts a Notion page URL (e.g. https://www.notion.so/My-Page-abc123
+    or https://your.notion.site/abc123).
     """
+    import httpx
+
+    if not settings.notion_token:
+        return "Notion API token not configured (NOTION_TOKEN in .env)."
+
+    # Extract page ID from URL (last 32 hex chars, with or without dashes)
+    page_id = page_url.rstrip("/").split("/")[-1].split("?")[0]
+    # Handle URLs like /Page-Title-abc123def456
+    if "-" in page_id and len(page_id) > 32:
+        page_id = page_id.split("-")[-1]
+    # Remove dashes if present, then re-format as UUID
+    page_id = page_id.replace("-", "")
+    if len(page_id) == 32:
+        page_id = f"{page_id[:8]}-{page_id[8:12]}-{page_id[12:16]}-{page_id[16:20]}-{page_id[20:]}"
+
+    token = settings.notion_token.get_secret_value()
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Notion-Version": "2022-06-28",
+    }
+
     try:
-        content = trafilatura.fetch_url(page_url)
-        if not content:
-            return f"Could not fetch Notion page: {page_url}"
-        text = trafilatura.extract(content, include_comments=False, include_tables=True)
-        if not text:
-            return f"Could not extract text from Notion page: {page_url}"
-        if len(text) > settings.max_url_content_length:
-            text = text[: settings.max_url_content_length] + "\n\n[... truncated]"
-        return text
+        # Fetch page blocks (content)
+        r = httpx.get(
+            f"https://api.notion.com/v1/blocks/{page_id}/children",
+            headers=headers,
+            timeout=15,
+        )
+        if r.status_code != 200:
+            return f"Notion API error {r.status_code}: {r.text[:200]}"
+
+        blocks = r.json().get("results", [])
+        text_parts = []
+
+        for block in blocks:
+            btype = block.get("type", "")
+            bdata = block.get(btype, {})
+
+            # Extract rich_text from common block types
+            rich_text = bdata.get("rich_text", [])
+            text = "".join(rt.get("plain_text", "") for rt in rich_text)
+
+            if btype.startswith("heading"):
+                level = btype[-1]  # heading_1, heading_2, heading_3
+                text_parts.append(f"{'#' * int(level)} {text}")
+            elif btype == "paragraph":
+                text_parts.append(text)
+            elif btype in ("bulleted_list_item", "numbered_list_item"):
+                text_parts.append(f"- {text}")
+            elif btype == "to_do":
+                checked = "x" if bdata.get("checked") else " "
+                text_parts.append(f"[{checked}] {text}")
+            elif btype == "code":
+                lang = bdata.get("language", "")
+                text_parts.append(f"```{lang}\n{text}\n```")
+            elif btype == "divider":
+                text_parts.append("---")
+
+        result = "\n".join(text_parts).strip()
+        if not result:
+            return "Notion page is empty or has no readable text blocks."
+        if len(result) > settings.max_url_content_length:
+            result = result[: settings.max_url_content_length] + "\n\n[... truncated]"
+        return result
     except Exception as e:
-        return f"Notion page error: {e}"
+        return f"Notion API error: {e}"
 
 
 # ---------------------------------------------------------------------------

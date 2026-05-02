@@ -42,6 +42,9 @@ class Settings(BaseSettings):
     max_qa_iterations: int = 5
     repl_timeout: int = 30
 
+    # Notion integration (optional)
+    notion_token: SecretStr | None = None
+
     # GitHub integration (optional)
     github_token: SecretStr | None = None
     github_repo: str | None = None  # e.g. "vilyaua/MAIS-ProjectFinal"

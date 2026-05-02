@@ -1,5 +1,13 @@
 # Dev Log
 
+## 2026-05-02, v2.3.0 — Notion API integration
+
+- `read_notion_page` rewritten to use Notion API (was trafilatura — failed on JS-rendered pages)
+- Extracts headings, paragraphs, lists, code blocks, to-dos from Notion blocks API
+- Requires `NOTION_TOKEN` in .env (Notion internal integration secret)
+- Added `notion_token` to Settings config
+- Demo: Notion page → expense tracker CLI, 48.9k tokens, $0.18, QA approved
+
 ## 2026-05-02, v2.2.0 — model upgrade + prompt tuning + polish
 
 - Model upgrade: BA=gpt-4.1-mini, Dev=gpt-5.5 (500k TPM), QA=gpt-5.4 (500k TPM)
