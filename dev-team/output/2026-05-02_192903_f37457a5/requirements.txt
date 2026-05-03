@@ -1,0 +1,2 @@
+# Runtime dependencies: none
+pytest>=8.0

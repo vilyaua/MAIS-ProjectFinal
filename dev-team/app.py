@@ -283,7 +283,10 @@ async def _sse_generator(user_story: str):
         yield f"data: {json.dumps(event)}\n\n"
 
     await task
-    yield f"data: {json.dumps({'type': 'done'})}\n\n"
+    if pending_interrupt:
+        yield f"data: {json.dumps({'type': 'waiting'})}\n\n"
+    else:
+        yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
 
 async def _sse_resume(resume_data: dict):
@@ -975,7 +978,7 @@ function run() {
   es.onmessage = e => {
     const ev = JSON.parse(e.data);
     handleEvent(ev);
-    if (ev.type === 'done' || ev.type === 'error') { es.close(); activeSource = null; }
+    if (ev.type === 'done' || ev.type === 'error' || ev.type === 'waiting') { es.close(); activeSource = null; }
   };
   es.onerror = () => { es.close(); activeSource = null; btnRun.disabled = false;
                         setStatus('idle', 'Connection lost'); };
