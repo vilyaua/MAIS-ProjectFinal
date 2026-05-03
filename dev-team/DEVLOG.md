@@ -1,5 +1,15 @@
 # Dev Log
 
+## 2026-05-03, v2.6.0 — minimal tools, best run, Langfuse evaluators
+
+- Removed all search tools from Dev (python_repl, run_command, file_write, file_read only)
+- Removed RAG from BA (read_notion_page only)
+- Best run: 5/5 demos, 218k tokens, $0.80 total
+- HITL status fix: sends `waiting` event, no more "Pipeline complete" or "Connection lost"
+- Langfuse evaluators: deactivated old research-report evaluators (were burning $17+/week)
+- Created 3 new evaluators: spec-quality, code-correctness, qa-thoroughness
+- 10/10 LLM-as-a-Judge pytest tests passing
+
 ## 2026-05-02, v2.3.0 — Notion API integration
 
 - `read_notion_page` rewritten to use Notion API (was trafilatura — failed on JS-rendered pages)
