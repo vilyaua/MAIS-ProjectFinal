@@ -11,3 +11,4 @@ build/
 workspace/
 output/demo_video.mp4
 output/demo_video.mp4
+.DS_Store
