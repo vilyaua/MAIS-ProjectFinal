@@ -1,1 +1,0 @@
-"""CSV summary CLI package."""

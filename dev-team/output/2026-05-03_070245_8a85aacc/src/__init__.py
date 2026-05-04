@@ -1,1 +1,0 @@
-"""CLI password generator package."""

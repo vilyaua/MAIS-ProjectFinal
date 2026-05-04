@@ -9,3 +9,5 @@ dist/
 build/
 .pytest_cache/
 workspace/
+output/demo_video.mp4
+output/demo_video.mp4

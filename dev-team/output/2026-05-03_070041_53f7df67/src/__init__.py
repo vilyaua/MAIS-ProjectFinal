@@ -1,1 +1,0 @@
-"""ASCII Art Generator package."""

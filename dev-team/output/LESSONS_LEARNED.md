@@ -287,20 +287,23 @@ just update in Langfuse and restart the container.
 - Total LLM calls: 1,000+
 - Total tokens: 7.8M+
 - Total spend: ~$4.80
-- Pipeline runs completed: 14+
+- Pipeline runs completed: 50+
+- Total spend: ~$12+
 - Prompt versions: 3 iterations each
-- Models tested: 6 (gpt-4.1, gpt-4.1-mini, gpt-5.4, gpt-5.4-mini, gpt-5.5, and briefly gpt-5.5-pro consideration)
+- Models tested: 6 (gpt-4.1, gpt-4.1-mini, gpt-5.4, gpt-5.4-mini, gpt-5.5)
+- 10 demo test cases (5 English + 5 Russian/logistics)
 
 ### Optimization journey
 
-| Metric | v0.1 | v2.2 | Improvement |
+| Metric | v0.1 | v2.6 | Improvement |
 |--------|------|------|-------------|
 | BA tokens | 5–9k | 800 | **-90%** |
-| Dev calls | 10–13 | 3–4 | **-70%** |
-| QA calls | 8 | 3 | **-63%** |
+| Dev calls | 10–13 | 3–5 | **-70%** |
+| QA calls | 8 | 3–4 | **-60%** |
 | Revisions per run | 1–2+ | 0 | **-100%** |
 | Pipeline success rate | ~30% | 100% | **+70pp** |
-| Cost per run | $0.12–crash | $0.10–0.25 | **predictable** |
+| Cost (simple) | $0.12–crash | $0.10–0.17 | **predictable** |
+| Cost (complex) | crash | $0.27–0.55 | **works** |
 
 ---
 

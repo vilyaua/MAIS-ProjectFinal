@@ -94,7 +94,7 @@ gpt-5.5 costs 3x per token but uses 70% fewer calls.
 
 ## Slide 7: Token Optimization Journey
 
-| Metric | v0.1 (start) | v2.2 (final) | Change |
+| Metric | v0.1 (start) | v2.6 (final) | Change |
 |--------|-------------|-------------|--------|
 | BA tokens | 5–9k (5-6 calls) | 800 (1 call) | **-90%** |
 | Dev calls | 10–13 | 3–4 | **-70%** |
@@ -139,27 +139,37 @@ Always log every LLM call: start, end, error, tokens.
 - **Cost tracking:** Per-model, per-run, all-time statistics
 
 **All-time stats:**
-- 1,000+ LLM calls
-- 7.8M+ tokens
-- $4.80 total spend
-- 14+ completed pipeline runs
+- 50+ pipeline runs
+- ~$12 total project spend
+- 3 Langfuse evaluators: spec-quality, code-correctness, qa-thoroughness
+- 10/10 LLM-as-a-Judge pytest tests passing
 
 ---
 
-## Slide 10: Demo Results — 5 Test Cases
+## Slide 10: Demo Results — 10 Test Cases
 
-| # | Demo | Complexity | Tokens | Cost | QA Score |
-|---|------|-----------|--------|------|----------|
-| 1 | ASCII Art Generator | simple | ~25k | ~$0.10 | 0.95+ |
-| 2 | Password Generator CLI | simple | 31k | $0.12 | 0.95+ |
-| 3 | Markdown→HTML Library | medium | 59k | $0.22 | 0.97 |
-| 4 | CSV Data Analyzer | medium | 42k | $0.16 | 0.95+ |
-| 5 | Flask REST API + SQLite | complex | 69k | $0.25 | 0.95+ |
+**English demos:**
 
-**5/5 passed. Zero revisions. Total cost: ~$0.85.**
+| # | Demo | Tokens | Cost |
+|---|------|--------|------|
+| 1 | ASCII Art Generator | 45k | $0.16 |
+| 2 | Password Generator CLI | 29k | $0.11 |
+| 3 | Markdown→HTML Library | 24k | $0.10 |
+| 4 | CSV Data Analyzer | 77k | $0.27 |
+| 5 | Flask REST API + SQLite | 43k | $0.16 |
 
-All runs produced working code with tests, auto-generated READMEs,
-and GitHub PRs.
+**Russian/logistics demos:**
+
+| # | Demo | Tokens | Cost |
+|---|------|--------|------|
+| 6 | Landed Cost Calculator | 46k | $0.17 |
+| 7 | Container Loader CLI | 50k | $0.18 |
+| 8 | Invoice/Packing Parser | 107k | $0.38 |
+| 9 | Payment Reconciliation | 156k | $0.55 |
+| 10 | Supply Chain REST API | 65k | $0.27 |
+
+**10/10 passed. Zero revisions. Multilingual. All produced working code
+with tests, READMEs, and GitHub PRs.**
 
 ---
 

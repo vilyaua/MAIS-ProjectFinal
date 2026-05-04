@@ -17,10 +17,7 @@ graph TD
     GH --> E[END]
 
     subgraph Tools
-        BA -.-> RAG[Knowledge Search / RAG]
         BA -.-> NP[Notion Page Reader]
-        DEV -.-> WS[Web Search]
-        DEV -.-> C7[Context7 MCP / Docs]
         DEV -.-> REPL[Python REPL]
         DEV -.-> CMD[Run Command]
         DEV -.-> FW[File Write]
@@ -32,7 +29,7 @@ graph TD
 
     subgraph Integrations
         GH -.-> GHA[GitHub API / PyGithub]
-        C7 -.-> MCP[MCP Protocol]
+        NP -.-> NAPI[Notion API]
     end
 
     subgraph Observability
@@ -56,8 +53,8 @@ graph TD
 
 | Agent | Role | Model | Tools | Structured Output |
 |-------|------|-------|-------|-------------------|
-| **Business Analyst** | Analyze user story, produce specification | gpt-4.1-mini | Knowledge Search, Notion Reader | `SpecOutput` |
-| **Developer** | Write code, create project files | gpt-5.5 | Web Search, Context7 Docs, Python REPL, Run Command, File I/O | `CodeOutput` |
+| **Business Analyst** | Analyze user story, produce specification | gpt-4.1-mini | Notion Reader | `SpecOutput` |
+| **Developer** | Write code, create project files | gpt-5.5 | Python REPL, Run Command, File Write, File Read | `CodeOutput` |
 | **QA Engineer** | Review code, run tests, verify quality | gpt-5.4 | Python REPL, Run Command, File Read | `ReviewOutput` |
 
 ## Quick Start
@@ -112,14 +109,16 @@ docker compose build && docker compose up
 
 | Tool | Used By | Description |
 |------|---------|-------------|
-| `knowledge_search` | BA | Hybrid RAG (FAISS + BM25 + cross-encoder reranking) |
-| `read_notion_page` | BA | Read user stories from Notion via API (headings, lists, code blocks) |
-| `web_search` | Developer | DuckDuckGo search (no API key needed) |
-| `docs_search` | Developer | Context7 MCP — up-to-date library documentation |
+| `read_notion_page` | BA | Read user stories from Notion via API |
 | `python_repl` | Developer, QA | Sandboxed Python execution (30s timeout, dangerous ops blocked) |
 | `run_command` | Developer, QA | Run shell commands in workspace (python, pytest, ls, etc.) |
 | `file_write` | Developer | Write files to `workspace/` directory |
 | `file_read` | Developer, QA | Read files from `workspace/` directory |
+
+**Available but not assigned to agents** (used in specific scenarios):
+| `knowledge_search` | — | Hybrid RAG (FAISS + BM25 + cross-encoder, 23 docs) |
+| `web_search` | — | DuckDuckGo search |
+| `docs_search` | — | Context7 MCP — live library documentation |
 
 ### Context7 MCP Integration
 
@@ -150,24 +149,32 @@ BA agent can read user stories directly from Notion pages via the Notion API.
 
 Optimized through iterative profiling with per-call token logging:
 
-- **Model selection**: gpt-5.5 for Dev (better code, fewer calls), gpt-5.4 for QA (thorough reviews), gpt-4.1-mini for BA (cheap spec generation)
-- **BA tool reduction**: removed web_search/docs_search from BA — produces specs directly in 1 LLM call (~800 tokens)
-- **QA strict process**: "read files → run tests → verdict" in 3 calls, no deviation
-- **Dev revision guidance**: reads existing files and patches instead of rewriting from scratch
-- **run_command tool**: agents run `python src/main.py` instead of pasting code inline (~10 tokens vs ~400)
-- **Token cost logging**: per-step delta tracking with model-aware pricing
+- **Model selection**: gpt-5.5 for Dev (best code quality, fewer calls), gpt-5.4 for QA (thorough reviews), gpt-4.1-mini for BA (cheap spec generation)
+- **Minimal tools for Dev**: only python_repl, run_command, file_write, file_read — no search tools. Search tools (web_search, docs_search, knowledge_search) caused context inflation and token waste
+- **BA produces specs directly**: no tools except Notion reader. Prompt says "Do NOT search"
+- **QA strict process**: "read files → run tests → verdict" in 3-4 calls, no deviation
+- **run_command tool**: agents run `python src/main.py` instead of pasting code inline
+- **Token cost logging**: per-call start/end/error + per-step delta tracking
 
 ### Benchmark
 
-| Metric | v0.1 (baseline) | v2.2 (current) |
+| Metric | v0.1 (baseline) | v2.6 (current) |
 |--------|-----------------|----------------|
 | BA tokens | 5-9k (5-6 calls) | **~800 (1 call)** |
-| Dev tokens | 14-42k (10-13 calls) | **12-18k (3-4 calls)** |
-| QA tokens | 25-66k (8 calls) | **11-12k (3 calls)** |
-| QA score | 0.30-0.60 (revisions) | **0.95-0.97 (first try)** |
-| Total | 43-147k (often crashed) | **24-30k** |
-| Cost | $0.12-crash | **$0.10-0.12** |
+| Dev calls | 10-13 | **3-5** |
+| QA calls | 8 | **3-4** |
+| QA score | 0.30-0.60 (revisions) | **0.95+ (first try)** |
 | Revisions | 1-2+ | **0** |
+| Cost (simple task) | $0.12-crash | **$0.10-0.17** |
+| Cost (complex task) | crash | **$0.27-0.55** |
+| Success rate | ~30% | **100%** |
+
+### Demo Results (10 test cases)
+
+**English demos** (5 standard dev tasks): $0.80 total best run
+**Russian demos** (5 logistics/import domain tasks): $1.55 total
+
+All 10 demos: QA approved first try, zero revision loops, GitHub PRs created.
 
 ## Structured Output Contracts
 
@@ -195,17 +202,26 @@ class ReviewOutput(BaseModel):
 - **Tracing**: Every LLM call logged with input/output, latency, tokens
 - **Session tracking**: Grouped by session ID, tagged with user ID
 - **Prompt Management**: All system prompts loaded from Langfuse (zero hardcoded)
-- **LLM-as-a-Judge**: Automated evaluators score spec/code quality
+- **LLM-as-a-Judge**: 3 automated evaluators (spec-quality, code-correctness, qa-thoroughness)
+- **Token cost logging**: per-call start/end/error with model-aware pricing
 
 ### Langfuse Prompts
 
-All prompts managed in Langfuse (label: `production`). Upload with `python upload_prompts.py`.
+All prompts managed in Langfuse (label: `production`, version 3). Upload with `python upload_prompts.py`.
 
 | Prompt Name | Agent | Template Variables |
 |-------------|-------|--------------------|
 | `ba-prompt` | Business Analyst | — |
 | `developer-prompt` | Developer | — |
 | `qa-prompt` | QA Engineer | `{{max_iterations}}` |
+
+### Langfuse Evaluators
+
+| Evaluator | What it checks |
+|-----------|---------------|
+| `spec-quality` | Title, 3+ requirements, 3+ acceptance criteria, complexity, edge cases |
+| `code-correctness` | Source + test files, requirements addressed, Python best practices |
+| `qa-thoroughness` | Files reviewed, score, verdict, specific issues, score-verdict consistency |
 
 ## LLM-as-a-Judge Tests
 
