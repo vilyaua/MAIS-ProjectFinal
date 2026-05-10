@@ -15,13 +15,20 @@ from tests.conftest import llm_judge
 settings = Settings()
 
 
-def _write_code_to_workspace(code: CodeOutput) -> None:
-    """Write code files to workspace/ so QA can read/run them."""
+def _write_code_to_workspace(code: CodeOutput, file_contents: dict[str, str] | None = None) -> None:
+    """Write code files to workspace/ so QA can read/run them.
+
+    Args:
+        code: CodeOutput with files_created list.
+        file_contents: Optional mapping of filepath -> content. If not provided,
+            falls back to code.source_code for all files (single-file only).
+    """
     for filepath in code.files_created:
         full_path = os.path.join(settings.workspace_dir, filepath)
         os.makedirs(os.path.dirname(full_path), exist_ok=True)
+        content = (file_contents or {}).get(filepath, code.source_code)
         with open(full_path, "w") as f:
-            f.write(code.source_code)
+            f.write(content)
 
 
 def _clean_workspace() -> None:
@@ -126,3 +133,119 @@ def test_qa_approves_good_code():
     print(f"\n  Verdict: {review.verdict}, Score: {review.score:.2f}")
     if review.suggestions:
         print(f"  Suggestions: {review.suggestions}")
+
+
+def test_qa_catches_hardcoded_values():
+    """QA should flag hardcoded magic values and missing configurability."""
+    spec = SpecOutput(
+        title="Temperature Converter",
+        requirements=[
+            "Convert Celsius to Fahrenheit and vice versa",
+            "Support Kelvin conversions",
+            "Handle invalid inputs gracefully",
+        ],
+        acceptance_criteria=[
+            "celsius_to_fahrenheit(0) returns 32.0",
+            "fahrenheit_to_celsius(212) returns 100.0",
+            "Invalid input like 'abc' raises ValueError",
+        ],
+        estimated_complexity="simple",
+    )
+
+    bad_code = CodeOutput(
+        source_code=(
+            "def convert(value):\n"
+            "    # Only C->F, no Kelvin, no error handling\n"
+            "    return value * 1.8 + 32\n"
+        ),
+        description="Basic temperature converter",
+        files_created=["converter.py"],
+    )
+
+    _clean_workspace()
+    _write_code_to_workspace(bad_code)
+    review = run_qa(spec, bad_code)
+
+    assert review.verdict == "REVISION_NEEDED", (
+        f"QA should reject incomplete implementation, got {review.verdict}"
+    )
+    assert len(review.issues) > 0, "QA should find issues in incomplete code"
+
+    result = llm_judge(
+        criteria=(
+            "The code is missing Kelvin support, error handling, and reverse conversion.\n"
+            "Evaluate QA's review:\n"
+            "1. Did QA identify the missing Kelvin conversions?\n"
+            "2. Did QA identify missing error handling?\n"
+            "3. Did QA note the missing reverse (F->C) conversion?\n"
+            "4. Are suggestions actionable?"
+        ),
+        input_text=f"Bad code:\n{bad_code.source_code}\nSpec: {spec.requirements}",
+        output_text=f"QA issues: {review.issues}\nSuggestions: {review.suggestions}",
+        threshold=0.6,
+    )
+
+    print(f"\n  Score: {result.score:.2f} | {result.reasoning}")
+    assert result.passed, f"QA review quality too low: {result.reasoning}"
+
+
+def test_qa_multi_file_review():
+    """QA should review code spread across multiple files."""
+    spec = SpecOutput(
+        title="Key-Value Store",
+        requirements=[
+            "Implement get, set, delete operations",
+            "Persist data to a JSON file",
+            "Handle missing keys with KeyError",
+        ],
+        acceptance_criteria=[
+            "set('key', 'value') followed by get('key') returns 'value'",
+            "delete('key') removes the key",
+            "get('missing') raises KeyError",
+        ],
+        estimated_complexity="simple",
+    )
+
+    store_code = (
+        "import json\n"
+        "from pathlib import Path\n\n"
+        "class KVStore:\n"
+        "    def __init__(self, path: str = 'store.json'):\n"
+        "        self.path = Path(path)\n"
+        "        self.data = {}\n"
+        "        if self.path.exists():\n"
+        "            self.data = json.loads(self.path.read_text())\n\n"
+        "    def get(self, key: str) -> str:\n"
+        "        return self.data[key]\n\n"
+        "    def set(self, key: str, value: str) -> None:\n"
+        "        self.data[key] = value\n"
+        "        self.path.write_text(json.dumps(self.data))\n\n"
+        "    def delete(self, key: str) -> None:\n"
+        "        del self.data[key]\n"
+        "        self.path.write_text(json.dumps(self.data))\n"
+    )
+
+    test_code = (
+        "from store import KVStore\n\n"
+        "def test_set_get():\n"
+        "    s = KVStore('/tmp/test_store.json')\n"
+        "    s.set('a', '1')\n"
+        "    assert s.get('a') == '1'\n"
+    )
+
+    code = CodeOutput(
+        source_code="",
+        description="Key-value store with JSON persistence and tests",
+        files_created=["src/store.py", "tests/test_store.py"],
+    )
+
+    _clean_workspace()
+    _write_code_to_workspace(
+        code,
+        file_contents={"src/store.py": store_code, "tests/test_store.py": test_code},
+    )
+    review = run_qa(spec, code)
+
+    assert review.score > 0, "QA must return a score"
+    print(f"\n  Verdict: {review.verdict}, Score: {review.score:.2f}")
+    print(f"  Issues: {review.issues}")

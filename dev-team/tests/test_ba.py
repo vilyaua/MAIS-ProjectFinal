@@ -16,8 +16,10 @@ from tests.conftest import llm_judge
         "As a user, I want to register via email so that I can create an account",
         "As a user, I want to reset my password via email link",
         "As a user, I want to see a list of my orders sorted by date",
+        "As a developer, I want a CLI tool that validates JSON files against a schema",
+        "As a user, I want to upload a CSV file and get summary statistics",
     ],
-    ids=["registration", "password-reset", "order-list"],
+    ids=["registration", "password-reset", "order-list", "json-validator", "csv-summary"],
 )
 def test_ba_spec_completeness(user_story: str):
     """BA should produce a spec with clear requirements and testable acceptance criteria."""

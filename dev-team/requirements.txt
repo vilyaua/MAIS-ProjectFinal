@@ -16,5 +16,6 @@ httpx>=0.28.0
 fastapi>=0.115.0
 uvicorn>=0.35.0
 pytest>=8.0.0
+deepeval>=0.21.0
 mcp>=1.9.0
 PyGithub>=2.6.0

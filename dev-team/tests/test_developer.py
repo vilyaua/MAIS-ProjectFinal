@@ -3,6 +3,7 @@
 Tests that Developer produces code matching the specification.
 """
 
+import pytest
 from agents.developer import run_developer
 from schemas import SpecOutput
 
@@ -64,6 +65,66 @@ def test_developer_creates_files():
 
     assert code.files_created, "Developer must create at least one file"
     assert code.description, "Description must not be empty"
+
+
+@pytest.mark.parametrize(
+    "title,requirements,acceptance_criteria",
+    [
+        (
+            "URL Shortener",
+            [
+                "Accept a long URL and return a short alias",
+                "Redirect short alias to the original URL",
+                "Return 404 for unknown aliases",
+            ],
+            [
+                "shorten('https://example.com/very/long') returns a short string",
+                "resolve(short) returns the original URL",
+                "resolve('unknown') raises KeyError or returns None",
+            ],
+        ),
+        (
+            "Markdown to HTML Converter",
+            [
+                "Convert headings (# to ######) to <h1>-<h6>",
+                "Convert bold (**text**) and italic (*text*) to HTML tags",
+                "Handle plain text paragraphs",
+            ],
+            [
+                "'# Hello' converts to '<h1>Hello</h1>'",
+                "'**bold**' converts to '<strong>bold</strong>'",
+                "Plain line wraps in <p> tags",
+            ],
+        ),
+    ],
+    ids=["url-shortener", "markdown-converter"],
+)
+def test_developer_covers_varied_specs(title, requirements, acceptance_criteria):
+    """Developer should implement code for diverse specification types."""
+    spec = _make_spec(
+        title=title,
+        requirements=requirements,
+        acceptance_criteria=acceptance_criteria,
+    )
+    code = run_developer(spec)
+
+    spec_text = "\n".join(f"- {r}" for r in spec.requirements)
+    result = llm_judge(
+        criteria=(
+            "Evaluate whether the code implements ALL the specified requirements:\n"
+            f"{spec_text}\n\n"
+            "Check:\n"
+            "1. Each requirement has a corresponding implementation\n"
+            "2. The code is syntactically valid Python\n"
+            "3. Edge cases from acceptance criteria are handled"
+        ),
+        input_text=f"Spec requirements:\n{spec_text}",
+        output_text=f"Description: {code.description}\nFiles: {', '.join(code.files_created)}",
+        threshold=0.6,
+    )
+
+    print(f"\n  [{title}] Score: {result.score:.2f} | {result.reasoning}")
+    assert result.passed, f"Developer missed requirements for {title}: {result.reasoning}"
 
 
 def test_developer_handles_revision():

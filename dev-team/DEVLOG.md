@@ -1,5 +1,19 @@
 # Dev Log
 
+## 2026-05-10, v2.7.0 — DeepEval metrics, expanded test golden dataset
+
+- Fixed `_write_code_to_workspace` in test_qa.py — was writing same `source_code` to every file; now accepts per-file content mapping for multi-file scenarios
+- Expanded golden dataset for LLM-as-a-Judge tests:
+  - test_ba: 4 → 6 scenarios (+json-validator, +csv-summary)
+  - test_developer: 3 → 5 scenarios (+url-shortener, +markdown-converter parametrized)
+  - test_qa: 2 → 5 scenarios (+hardcoded-values, +multi-file-review)
+  - Total: ~7 → ~17 unique test scenarios
+- Added `test_deepeval.py` with native DeepEval metrics:
+  - GEval "Spec Completeness" — evaluates BA output quality (5 golden examples)
+  - GEval "Code-Spec Alignment" — evaluates Developer code vs spec (5 golden examples)
+  - AnswerRelevancyMetric — end-to-end pipeline relevance
+- Added `deepeval>=0.21.0` to requirements.txt
+
 ## 2026-05-03, v2.6.0 — minimal tools, best run, Langfuse evaluators
 
 - Removed all search tools from Dev (python_repl, run_command, file_write, file_read only)
